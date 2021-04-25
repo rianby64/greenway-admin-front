@@ -1,20 +1,16 @@
-# OpenLayers + Webpack
+# Greenway admin front
 
-This example demonstrates how the `ol` package can be used with webpack.
+Определения:
+Point - это точка которая обозначает что-то на карте.
+        Например, кафе, усадьба, вход, и т.д.
+        Точки отностятся к категориям.
 
-Clone the project.
+Route - это маршрут. В нем указываем ломаные линий и точки.
 
-    git clone git@github.com:openlayers/ol-webpack.git
+Админка работает с маршрутами:
+- Посмотреть
+- Редактировать
+    - редактировать точку
+    - редактировать ломанные. В Route допускается наличие
+      тольно одного множества ломаных линий.
 
-Install the project dependencies.
-
-    cd ol-webpack
-    npm install
-
-Create a bundle for the browser.
-
-    npm run build
-
-Open `index.html` to see the result.
-
-    open index.html
