@@ -1,8 +1,8 @@
 import * as React from 'react';
 import { render } from 'react-dom';
-import { MyExampleOL } from './ol_example';
+import { AdminMap } from './admin-map';
 
 render(
-    (<MyExampleOL></MyExampleOL>),
+    (<AdminMap></AdminMap>),
     document.getElementById("root")
 );
