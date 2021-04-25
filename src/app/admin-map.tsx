@@ -1,10 +1,13 @@
 import * as React from 'react';
-import {Map, View} from 'ol';
+import {Map, View, MapBrowserEvent, Feature} from 'ol';
+import {Point} from 'ol/geom';
 import {Coordinate} from 'ol/coordinate'
-import TileLayer from 'ol/layer/Tile';
-import XYZ from 'ol/source/XYZ';
+import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
+import {OSM, Vector as VectorSource} from 'ol/source';
+import {fromLonLat} from 'ol/proj';
+import {Fill, RegularShape, Stroke, Style} from 'ol/style';
 
-const initialZoom = 5;
+const initialZoom = 9;
 
 export class AdminMap extends React.Component<{}> {
     mapref = React.createRef<HTMLDivElement>();
@@ -13,12 +16,15 @@ export class AdminMap extends React.Component<{}> {
         zoom: initialZoom,
     });
 
+    pointsLayer = new VectorSource()
+
     map = new Map({
         layers: [
             new TileLayer({
-                source: new XYZ({
-                url: 'https://{a-c}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-                })
+                source: new OSM(),
+            }),
+            new VectorLayer({
+                source: this.pointsLayer,
             })
         ],
         view: this.view,
@@ -28,19 +34,42 @@ export class AdminMap extends React.Component<{}> {
         super(props);
     }
 
+    addNewPoint = (e: MapBrowserEvent<UIEvent>) => {
+        const newPoint = new Feature(new Point(e.coordinate));
+        newPoint.setStyle(new Style({
+            image: new RegularShape({
+                fill: new Fill({color: 'red'}),
+                stroke: new Stroke({color: 'black', width: 2}),
+                radius: 10 / Math.SQRT2,
+                radius2: 10,
+                points: 4,
+                angle: 0,
+            }),
+          
+        }))
+        this.pointsLayer.addFeature(newPoint);
+    }
+
+    componentWillUnmount() {
+        this.map.un('click', this.addNewPoint);
+    }
+
     componentDidMount() {
         if (this.mapref != null) {            
             const successCallback: PositionCallback = (position) => {
                 const center: Coordinate = [
-                    position.coords.latitude,
                     position.coords.longitude,
+                    position.coords.latitude,
                 ];
-                this.view.setCenter(center); // I can't get this working, yet
+                
+                this.view.setCenter(fromLonLat(center));
             };
 
             navigator.geolocation.getCurrentPosition(successCallback);
 
             this.map.setTarget(this.mapref.current as HTMLElement);
+
+            this.map.on('click', this.addNewPoint);
         }
     }
 
