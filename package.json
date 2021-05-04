@@ -29,6 +29,10 @@
     "@types/react-dom": "^16.8.4",
     "ol": "^5.1.2",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "react-redux": "^7.2.4",
+    "redux": "^4.1.0",
+    "redux-devtools-extension": "^2.13.9",
+    "redux-thunk": "^2.3.0"
   }
 }

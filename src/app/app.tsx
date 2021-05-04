@@ -1,8 +1,16 @@
 import * as React from 'react';
 import { render } from 'react-dom';
-import { AdminMap } from './admin-map';
+import { Provider } from 'react-redux';
+import store from '../redux/store';
+import { AdminMapa } from './admin-map';
 
 render(
-    (<AdminMap></AdminMap>),
+    (
+    <React.StrictMode>
+        <Provider store={store}>
+            <AdminMapa></AdminMapa>
+        </Provider>
+    </React.StrictMode>
+    ),
     document.getElementById("root")
 );
