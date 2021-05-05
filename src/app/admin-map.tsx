@@ -12,7 +12,7 @@ import { useTypesSelector } from '../hooks/useTypesSelector';
 
 const initialZoom = 9;
 
-export const AdminMapa: React.FC = () => {
+export const AdminMap: React.FC = () => {
     let counter = 1;
     const dispatch = useDispatch();
     const {currentPoint, prevPoint} = useTypesSelector(store => store.pointsStore)
@@ -22,7 +22,10 @@ export const AdminMapa: React.FC = () => {
         zoom: initialZoom,
     });
 
-    const pointsLayer = new VectorSource()
+    const pointsLayer = new VectorSource();
+    const linesLayer = new VectorSource({
+        wrapX: false
+    });
 
      const map = new Map({
         layers: [
@@ -31,6 +34,17 @@ export const AdminMapa: React.FC = () => {
             }),
             new VectorLayer({
                 source: pointsLayer,
+            }),
+            new VectorLayer({
+                source:  linesLayer,
+                style: [
+                    new Style({
+                        stroke : new Stroke({
+                            color: 'red',
+                            width: 1
+                        })
+                    })
+                ]
             })
         ],
         view: view,
@@ -38,7 +52,6 @@ export const AdminMapa: React.FC = () => {
 
     const addNewPoint = (e: MapBrowserEvent<UIEvent>) => {
         const newPoint = new Feature(new Point(e.coordinate));
-        console.log(e.coordinate)
         newPoint.setStyle(new Style({
             image: new RegularShape({
                 fill: new Fill({color: 'red'}),
@@ -60,7 +73,7 @@ export const AdminMapa: React.FC = () => {
             counter = 1;
             console.log(counter);
         }
-        
+        addNewVector()
     };
 
     const addNewVector = () => {
@@ -68,23 +81,9 @@ export const AdminMapa: React.FC = () => {
         const line = new Feature(new LineString([prevPoint, currentPoint]));
         const point1 = new Feature(new Point(prevPoint));
         const point2 = new Feature(new Point(currentPoint));
-        const source = new VectorSource({
-            features: [point1, point2, line],
-            wrapX: false
-        });
-        const vector = new VectorLayer({
-            source: source,
-            style: [
-                new Style({
-                    stroke : new Stroke({
-                        color: 'red',
-                        width: 1
-                    })
-                })
-            ]
-        });
-        map.addLayer(vector);
-        console.log('drowed')
+        console.log(point1);
+        console.log(point2);
+        linesLayer.addFeatures([point1, point2, line])
     }};
 
     React.useEffect(() => {
@@ -103,7 +102,6 @@ export const AdminMapa: React.FC = () => {
             map.setTarget(mapRef.current as HTMLElement);
 
             map.on('click',addNewPoint);
-            map.on('click',addNewVector);
         }
     },[]);
 
