@@ -1,10 +1,10 @@
 import { applyMiddleware, combineReducers, createStore } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import thunkMiddleware from "redux-thunk";
-import pointsReducer from "./pointsReducer";
+import InteractionReducer from "./InteractionReducer";
 
 let reducers = combineReducers({
-  pointsStore: pointsReducer,
+  CurrentInteraction: InteractionReducer,
 });
 
 let initialState = {};
