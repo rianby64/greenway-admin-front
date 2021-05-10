@@ -1,8 +1,8 @@
 import * as React from 'react';
-import { Map, View } from 'ol';
+import { Map, MapBrowserEvent, View } from 'ol';
 import { Geometry } from 'ol/geom';
 import { Coordinate } from 'ol/coordinate'
-import { Modify, Draw } from 'ol/interaction';
+import { Modify, Draw, Select, Translate } from 'ol/interaction';
 import { Tile as TileLayer, Vector as VectorLayer } from 'ol/layer';
 import { OSM, Vector as VectorSource } from 'ol/source';
 import { fromLonLat } from 'ol/proj';
@@ -25,13 +25,16 @@ const SELECTOR_STYLES: React.CSSProperties = {
     height: 'fit-content',
 }
 export const AdminMap: React.FC = () => {
-    // const dispatch = useDispatch();
     let draw: Draw;
     const mapRef = React.createRef<HTMLDivElement>();
+    const select = new Select();
+    const translate = new Translate({
+        features: select.getFeatures(),
+    });
     const drawSource = new VectorSource();
     const modify = new Modify({
         source: new VectorSource()
-    })
+    });
     const view = new View({
         zoom: INITIAL_ZOOM,
         minZoom: MIN_ZOOM,
@@ -48,24 +51,35 @@ export const AdminMap: React.FC = () => {
         view: view,
     });
 
-    const changeInteraction = (e: any) => {
+    const removeFeature = (e: MapBrowserEvent<UIEvent>) => {
+        map.forEachFeatureAtPixel(e.pixel, (feat) => {
+            const allFeatures = drawSource.getFeatures();
+            const TypedFeatureIndex = allFeatures.findIndex((el) => {
+                if (el === feat) return true;
+                else return false;
+            })
+            drawSource.removeFeature(allFeatures[TypedFeatureIndex]);
+        })
+    }
+
+    const changeInteraction = (e: React.ChangeEvent<HTMLSelectElement>) => {
+        map.removeInteraction(draw);
+        map.un('click', removeFeature);
+        map.removeInteraction(select);
+        map.removeInteraction(translate);
         console.log(e.target.value);
         if (e.target.value === 'Point') {
-            map.removeInteraction(draw);
             addInteractions(GeometryType.POINT);
         }
         if (e.target.value === 'LineString') {
-            map.removeInteraction(draw);
             addInteractions(GeometryType.LINE_STRING);
         }
         if (e.target.value === 'Correcting') {
-            map.on('click', (e) => {
-                map.forEachFeatureAtPixel(e.pixel, (feat) => {
-                    console.log(feat);
-                    // drawSource.removeFeature(feat); Type error
-                })
-            });
-            map.removeInteraction(draw);
+            map.on('click', removeFeature)
+        }
+        if (e.target.value === 'Replace') {
+            map.addInteraction(translate);
+            map.addInteraction(select);
         }
 
     }
@@ -138,6 +152,7 @@ export const AdminMap: React.FC = () => {
             <div style={SELECTOR_STYLES} className="interaction_selector-handler">
                 <select onChange={(e) => changeInteraction(e)} id="type">
                     <option value={'Correcting'}>Correcting</option>
+                    <option value={'Replace'}> Replace</option>
                     <option value={'Point'}>Point</option>
                     <option value={'LineString'}>Line</option>
                 </select>
