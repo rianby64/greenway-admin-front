@@ -1,81 +1,63 @@
+import L from 'leaflet';
 import * as React from 'react';
-import {Map, View, MapBrowserEvent, Feature} from 'ol';
-import {Point} from 'ol/geom';
-import {Coordinate} from 'ol/coordinate'
-import {Tile as TileLayer, Vector as VectorLayer} from 'ol/layer';
-import {OSM, Vector as VectorSource} from 'ol/source';
-import {fromLonLat} from 'ol/proj';
-import {Fill, RegularShape, Stroke, Style} from 'ol/style';
+import { MapContainer, TileLayer, FeatureGroup } from 'react-leaflet';
+import { EditControl } from 'react-leaflet-draw';
 
-const initialZoom = 9;
-
-export class AdminMap extends React.Component<{}> {
-    mapref = React.createRef<HTMLDivElement>();
-    
-    view = new View({
-        zoom: initialZoom,
-    });
-
-    pointsLayer = new VectorSource()
-
-    map = new Map({
-        layers: [
-            new TileLayer({
-                source: new OSM(),
-            }),
-            new VectorLayer({
-                source: this.pointsLayer,
+export const AdminMap: React.FC = () => {
+    const _onCreated = (e) => {
+        console.log(e)
+        const layer = e.layer;
+        if (layer instanceof L.Marker) {
+            layer.addEventListener('click', () => {
+                console.log('markerClicked');
             })
-        ],
-        view: this.view,
-    });
-
-    constructor(props: {}) {
-        super(props);
-    }
-
-    addNewPoint = (e: MapBrowserEvent<UIEvent>) => {
-        const newPoint = new Feature(new Point(e.coordinate));
-        newPoint.setStyle(new Style({
-            image: new RegularShape({
-                fill: new Fill({color: 'red'}),
-                stroke: new Stroke({color: 'black', width: 2}),
-                radius: 10 / Math.SQRT2,
-                radius2: 10,
-                points: 4,
-                angle: 0,
-            }),
-          
-        }))
-        this.pointsLayer.addFeature(newPoint);
-    }
-
-    componentWillUnmount() {
-        this.map.un('click', this.addNewPoint);
-    }
-
-    componentDidMount() {
-        if (this.mapref != null) {            
-            const successCallback: PositionCallback = (position) => {
-                const center: Coordinate = [
-                    position.coords.longitude,
-                    position.coords.latitude,
-                ];
-                
-                this.view.setCenter(fromLonLat(center));
-            };
-
-            navigator.geolocation.getCurrentPosition(successCallback);
-
-            this.map.setTarget(this.mapref.current as HTMLElement);
-
-            this.map.on('click', this.addNewPoint);
+        }
+        if (layer instanceof L.Polyline) {
+            console.log(layer.getLatLngs());
         }
     }
 
-    render() {
-        return (
-            <div ref={this.mapref}></div>
-        );
+    const _onEdited = (e) => {
+        console.log(e)
+        const layers = e.layers;
+        layers.eachLayer((layer) => {
+            if (layer instanceof L.Marker) {
+                const pointPopup = L.popup();
+                pointPopup.setContent('Point popup')
+                layer.bindPopup(pointPopup)
+            }
+        })
     }
+
+    const _onDeleted = (e) => {
+        console.log(e);
+    }
+    return (
+        <MapContainer
+            center={[53.893009, 27.567444]}
+            zoom={9}
+            scrollWheelZoom={true}
+        >
+            <FeatureGroup>
+                <EditControl
+                    position='topright'
+                    onCreated={_onCreated}
+                    onEdited={_onEdited}
+                    onDeleted={_onDeleted}
+                    draw={{
+                        polygon: false,
+                        rectangle: false,
+                        polyline: true,
+                        circle: false,
+                        circlemarker: false,
+                        marker: true
+                    }}
+                />
+            </FeatureGroup>
+            <TileLayer
+                attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+            />
+        </MapContainer>
+    )
 }
