@@ -3,7 +3,7 @@ import * as React from 'react';
 import { MapContainer, TileLayer, FeatureGroup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 import { useDispatch } from 'react-redux';
-import { showSettings } from '../redux/reducer';
+import { setCurrentPoint, showSettings } from '../redux/reducer';
 import { DescriptionComponent } from './components/PointDescriptionComponent/Description';
 // import { useTypedSelector } from '../redux/useTypedSelector.hook';
 
@@ -18,7 +18,7 @@ export const AdminMap: React.FC = () => {
             layer.addEventListener('click', () => {
                 console.log('markerClicked');
                 dispatch(showSettings());
-                console.log(layer)
+                dispatch(setCurrentPoint(layer))
             })
         }
         if (layer instanceof L.Polyline) {

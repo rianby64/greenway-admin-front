@@ -32,7 +32,7 @@ export const useSettingsReducer = (state = intialState, action: UserAction): Set
         ...state,
         isSettingsShawn: false
       }
-    case ACTIONS.HIDE_SETTINGS:
+    case ACTIONS.SET_CURRENT_FEATURE:
       return {
         ...state,
         currentFeature: action.payload,
@@ -49,4 +49,9 @@ export const showSettings = () => ({
 
 export const hideSettings = () => ({
   type: ACTIONS.HIDE_SETTINGS
+})
+
+export const setCurrentPoint = (pointObj: object) => ({
+  type: ACTIONS.SET_CURRENT_FEATURE,
+  payload: pointObj
 })

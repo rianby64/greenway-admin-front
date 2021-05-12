@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { hideSettings, setCurrentPoint } from '../../../redux/reducer';
 import { useTypedSelector } from '../../../redux/useTypedSelector.hook';
 
 interface PointForm {
@@ -8,6 +10,7 @@ interface PointForm {
 }
 
 export const DescriptionComponent: React.FC = () => {
+  const dispatch = useDispatch();
   const isSettingsShawn = useTypedSelector(store => store.settings.isSettingsShawn);
   const [isShawn, setIsShawn] = useState(isSettingsShawn);
   const [form, setForm] = useState<PointForm>({
@@ -36,6 +39,8 @@ export const DescriptionComponent: React.FC = () => {
 
   const submitHandler = () => {
     console.log(form);
+    dispatch(hideSettings());
+    dispatch(setCurrentPoint({}));
   }
 
   useEffect(() => {
