@@ -1,10 +1,6 @@
 import { ACTIONS, SettingsState, UserAction } from "./reduxType"
 
 const intialState: SettingsState = {
-  currentFeature: {
-    lat: 0,
-    lng: 0
-  },
   isSettingsShawn: false
 }
 export const useSettingsReducer = (state = intialState, action: UserAction): SettingsState => {
@@ -18,11 +14,6 @@ export const useSettingsReducer = (state = intialState, action: UserAction): Set
       return {
         ...state,
         isSettingsShawn: false
-      }
-    case ACTIONS.SET_CURRENT_FEATURE:
-      return {
-        ...state,
-        currentFeature: action.payload,
       }
     default:
       return state

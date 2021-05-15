@@ -5,13 +5,12 @@ import { EditControl } from 'react-leaflet-draw';
 import { useDispatch } from 'react-redux';
 import { setCurrentFeature, showSettings } from '../redux/useSettingsreducer';
 import { DescriptionComponent } from './components/PointDescriptionComponent/Description';
-import { removePoliline, addPoliline, removePoint } from './../redux/useRoutesReducer';
+import { removePoliline, addPoliline, removePoint, editPoint } from './../redux/useRoutesReducer';
 import { useTypedSelector } from '../redux/useTypedSelector.hook';
 
 export const AdminMap: React.FC = () => {
     const dispatch = useDispatch()
-    const { points } = useTypedSelector(store => store.route)
-    const { currentFeature } = useTypedSelector(store => store.settings)
+    const { currentFeature } = useTypedSelector(store => store.route)
 
     const currentFeatureDispatcher = (e) => {
         if (e.target instanceof L.Marker) dispatch(setCurrentFeature(e.target.getLatLng()))
@@ -20,7 +19,7 @@ export const AdminMap: React.FC = () => {
 
     const _onCreated = (e: { layer: any; }) => {
         const layer = e.layer;
-        layer.addEventListener('mouseover', currentFeatureDispatcher)
+        layer.addEventListener('mousedown', currentFeatureDispatcher)
         if (layer instanceof L.Marker) {
             const pointPopup = L.popup();
             pointPopup.setContent('Нажмите на точку и добавьте описание')
@@ -39,17 +38,24 @@ export const AdminMap: React.FC = () => {
     }
 
     const _onEdited = (e: { layers: any; }) => {
+        const pointsToEdit: Array<any> = [];
         const layers = e.layers;
         layers.eachLayer((layer: { bindPopup: (arg0: L.Popup) => void; }) => {
             if (layer instanceof L.Marker) {
-                console.log('try to find this marker in array of completed point if error change current marker')
-                // editPoints(layer.getLatLng()[0], points)
-                console.log(points, layers)
-
+                pointsToEdit.push(layer)
+                dispatch(editPoint(pointsToEdit))
             }
         })
     }
-
+    const _OnEditStart = (e) => {
+        const layer = e.layer;
+        if (layer instanceof L.Marker) {
+            layer.addEventListener('mouseup', () => {
+                dispatch(editPoint(layer.getLatLng()))
+                layer.removeEventListener('mouseup')
+            })
+        }
+    }
     const _onDeleted = (e: any) => {
         const arrPoliLines: Array<any> = [];
         const arrMarkers: Array<any> = [];
@@ -79,6 +85,7 @@ export const AdminMap: React.FC = () => {
                         onCreated={_onCreated}
                         onEdited={_onEdited}
                         onDeleted={_onDeleted}
+                        onEditMove={_OnEditStart}
                         draw={{
                             polygon: false,
                             rectangle: false,

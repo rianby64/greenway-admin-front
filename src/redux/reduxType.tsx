@@ -7,6 +7,7 @@ export interface PointRouteObj {
 }
 
 export interface RoutesState {
+  currentFeature: CurrFeat;
   polilines: Array<Array<CurrFeat>>
   points: Array<PointRouteObj>
 }
@@ -17,7 +18,6 @@ export interface CurrFeat {
 }
 
 export interface SettingsState {
-  currentFeature: CurrFeat;
   isSettingsShawn: boolean;
 }
 
@@ -34,5 +34,6 @@ export enum ACTIONS {
   REMOVE_POLILINE = 'REMOVE_POLILINE',
   ADD_POINT = 'ADD_POINT',
   REMOVE_POINT = 'REMOVE_POINT',
-  CLEAR_ROUTES = 'CLEAR_ROUTES'
+  CLEAR_ROUTES = 'CLEAR_ROUTES',
+  EDIT_POINT = 'EDIT_POINT',
 }

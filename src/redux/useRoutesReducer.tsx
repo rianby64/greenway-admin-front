@@ -1,6 +1,10 @@
 import { ACTIONS, PointRouteObj, RoutesState, UserAction } from "./reduxType"
 
 const initialState: RoutesState = {
+  currentFeature: {
+    lat: 0,
+    lng: 0
+  },
   polilines: [],
   points: [],
 }
@@ -43,8 +47,27 @@ export const useRoutesReducer = (state = initialState, action: UserAction): Rout
       }
     case ACTIONS.CLEAR_ROUTES:
       return {
+        ...state,
         points: [],
         polilines: []
+      }
+    case ACTIONS.EDIT_POINT:
+      const editedArrayOfPoints = state.points;
+      editedArrayOfPoints.map((el) => {
+        if (el.lat === state.currentFeature.lat && state.currentFeature.lng) {
+          el.lat = action.payload.lat;
+          el.lng = action.payload.lng;
+        }
+      })
+      
+      return {
+        ...state,
+        points: editedArrayOfPoints
+      }
+    case ACTIONS.SET_CURRENT_FEATURE:
+      return {
+        ...state,
+        currentFeature: action.payload,
       }
     default:
       return state
@@ -64,6 +87,11 @@ export const addPoliline = (polilineToAdd: Array<object>) => ({
 export const removePoint = (pointToRemove: Array<object>) => ({
   type: ACTIONS.REMOVE_POINT,
   payload: pointToRemove
+})
+
+export const editPoint = (pointToEdit: object) => ({
+  type: ACTIONS.EDIT_POINT,
+  payload: pointToEdit
 })
 
 export const removePoliline = (sortedArr: Array<object>) => ({
