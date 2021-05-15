@@ -1,25 +1,12 @@
-
-interface SettingsState {
-  currentFeature: object;
-  isSettingsShawn: boolean;
-}
-
-interface UserAction {
-  type: String;
-  payload: any
-}
-
-enum ACTIONS  {
-  SHAW_SETTINGS = 'SHOW_SETTINGS',
-  HIDE_SETTINGS = 'HIDE_SETTINGS',
-  SET_CURRENT_FEATURE = 'SET_CURRENT_FEATURE'
-}
+import { ACTIONS, SettingsState, UserAction } from "./reduxType"
 
 const intialState: SettingsState = {
-  currentFeature: {},
+  currentFeature: {
+    lat: 0,
+    lng: 0
+  },
   isSettingsShawn: false
 }
-
 export const useSettingsReducer = (state = intialState, action: UserAction): SettingsState => {
   switch (action.type) {
     case ACTIONS.SHAW_SETTINGS:
@@ -43,15 +30,14 @@ export const useSettingsReducer = (state = intialState, action: UserAction): Set
 }
 
 export const showSettings = () => ({
-  type: ACTIONS.SHAW_SETTINGS,
-  
+  type: ACTIONS.SHAW_SETTINGS
 });
 
 export const hideSettings = () => ({
   type: ACTIONS.HIDE_SETTINGS
 })
 
-export const setCurrentPoint = (pointObj: object) => ({
+export const setCurrentFeature = (pointObj: object) => ({
   type: ACTIONS.SET_CURRENT_FEATURE,
   payload: pointObj
 })
