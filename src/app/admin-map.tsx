@@ -3,7 +3,7 @@ import * as React from 'react';
 import { MapContainer, TileLayer, FeatureGroup } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 import { useDispatch } from 'react-redux';
-import { setCurrentFeature, showSettings } from '../redux/useSettingsreducer';
+import { hideSettings, setCurrentFeature, showSettings } from '../redux/useSettingsreducer';
 import { DescriptionComponent } from './components/PointDescriptionComponent/Description';
 import { removePoliline, addPoliline, removePoint, editPoint } from './../redux/useRoutesReducer';
 import { useTypedSelector } from '../redux/useTypedSelector.hook';
@@ -17,6 +17,10 @@ export const AdminMap: React.FC = () => {
         if (e.target instanceof L.Polyline) dispatch(setCurrentFeature(e.target.getLatLngs()[0]))
     }
 
+    const showSettingsDispatcher = () => {
+        dispatch(showSettings())
+    }
+
     const _onCreated = (e: { layer: any; }) => {
         const layer = e.layer;
         layer.addEventListener('mousedown', currentFeatureDispatcher)
@@ -25,9 +29,7 @@ export const AdminMap: React.FC = () => {
             pointPopup.setContent('Нажмите на точку и добавьте описание')
             layer.bindPopup(pointPopup)
             layer.openPopup()
-            layer.addEventListener('click', () => {
-                dispatch(showSettings());
-            })
+            layer.addEventListener('click', showSettingsDispatcher)
         }
         if (layer instanceof L.Polyline) {
             layer.addEventListener('click', () => {
@@ -35,6 +37,11 @@ export const AdminMap: React.FC = () => {
             dispatch(addPoliline(layer.getLatLngs())
             )
         }
+    }
+
+    const _onEditStart = (e) => {
+        dispatch(hideSettings());
+        console.log(e)
     }
 
     const _onEdited = (e: { layers: any; }) => {
@@ -47,9 +54,10 @@ export const AdminMap: React.FC = () => {
             }
         })
     }
-    const _OnEditStart = (e) => {
+    const _OnEditMove = (e) => {
         const layer = e.layer;
         if (layer instanceof L.Marker) {
+            dispatch(hideSettings())
             layer.addEventListener('mouseup', () => {
                 dispatch(editPoint(layer.getLatLng()))
                 layer.removeEventListener('mouseup')
@@ -85,7 +93,8 @@ export const AdminMap: React.FC = () => {
                         onCreated={_onCreated}
                         onEdited={_onEdited}
                         onDeleted={_onDeleted}
-                        onEditMove={_OnEditStart}
+                        onEditStart={_onEditStart}
+                        onEditMove={_OnEditMove}
                         draw={{
                             polygon: false,
                             rectangle: false,
