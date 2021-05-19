@@ -45,6 +45,7 @@ export const AdminMap: React.FC = () => {
     }
 
     const _onEdited = (e: { layers: any; }) => {
+        console.log(e)
         const pointsToEdit: Array<any> = [];
         const layers = e.layers;
         layers.eachLayer((layer: { bindPopup: (arg0: L.Popup) => void; }) => {
@@ -52,8 +53,12 @@ export const AdminMap: React.FC = () => {
                 pointsToEdit.push(layer)
                 dispatch(editPoint(pointsToEdit))
             }
+            if (layer instanceof L.Polyline) {
+                dispatch(setCurrentFeature(layer.getLatLngs()[0]))
+            }
         })
     }
+
     const _OnEditMove = (e) => {
         const layer = e.layer;
         if (layer instanceof L.Marker) {
