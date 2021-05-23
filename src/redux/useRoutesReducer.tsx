@@ -7,6 +7,7 @@ const initialState: RoutesState = {
   },
   polilines: [],
   points: [],
+  distance: 0,
 }
 
 export const useRoutesReducer = (state = initialState, action: UserAction): RoutesState => {
@@ -17,8 +18,9 @@ export const useRoutesReducer = (state = initialState, action: UserAction): Rout
         points: action.payload
       }
     case ACTIONS.ADD_POLILNE:
-      const newArrPoli = state.polilines;
-      newArrPoli.push(action.payload)
+      const newArrPoli = action.payload
+      // const newArrPoli = state.polilines;
+      // newArrPoli.push(action.payload)
       return {
         ...state,
         polilines: newArrPoli
@@ -28,7 +30,7 @@ export const useRoutesReducer = (state = initialState, action: UserAction): Rout
       newRemovedPointArr.map((el, ind, arr) => {
         let elementExist: boolean = false;
         action.payload.forEach((e) => {
-          if (el.lat === e.lat) elementExist = true
+          if (el.position.lat === e.lat) elementExist = true
         })
         if (elementExist) arr.splice(ind, 1);
         elementExist = true;
@@ -51,18 +53,28 @@ export const useRoutesReducer = (state = initialState, action: UserAction): Rout
         points: [],
         polilines: []
       }
+    case ACTIONS.SET_DISTANCE_ZERO:
+      return {
+        ...state,
+        distance: 0
+      }
     case ACTIONS.EDIT_POINT:
       const editedArrayOfPoints = state.points;
       editedArrayOfPoints.map((el) => {
-        if (el.lat === state.currentFeature.lat && state.currentFeature.lng) {
-          el.lat = action.payload.lat;
-          el.lng = action.payload.lng;
+        if (el.position.lat === state.currentFeature.lat && state.currentFeature.lng) {
+          el.position.lat = action.payload.lat;
+          el.position.lng = action.payload.lng;
         }
       })
-      
+
       return {
         ...state,
         points: editedArrayOfPoints
+      }
+    case ACTIONS.SET_DISTANCE:
+      return {
+        ...state,
+        distance: state.distance + action.payload
       }
     case ACTIONS.SET_CURRENT_FEATURE:
       return {
@@ -101,4 +113,13 @@ export const removePoliline = (sortedArr: Array<object>) => ({
 
 export const clearRoute = () => ({
   type: ACTIONS.CLEAR_ROUTES
+})
+
+export const setRouteDistance = (dist: number) => ({
+  type: ACTIONS.SET_DISTANCE,
+  payload: dist
+})
+
+export const setDistanceZero = () => ({
+  type: ACTIONS.SET_DISTANCE_ZERO
 })

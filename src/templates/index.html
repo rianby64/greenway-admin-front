@@ -13,6 +13,11 @@
       rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
     <style>
       html,
       body {
@@ -24,6 +29,59 @@
         top: 0;
         bottom: 0;
         width: 100%;
+      }
+      /*--------------------*/
+      .input-field {
+        width: 100% !important;
+      }
+      .save-workspace {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        width: 50%;
+        height: 100%;
+        background-color: rgb(156, 154, 154);
+        z-index: 2001;
+      }
+      .save-label {
+        font-size: 25px;
+        color:rgb(22, 22, 22);
+        padding-bottom: 10px;
+        width: 80%;
+        text-align: center;
+      }
+      .save-route-form {
+        display: flex;
+        flex-flow: column;
+        align-items: center;
+        width: 100%;
+      }
+      .save-input {
+        width: 80% !important;
+        color: black;
+        margin-bottom: 30px !important;
+      }
+      .input-block {
+        width: 100%;
+        display: flex;
+        flex-flow: column;
+        justify-content: center;
+        align-items: center;
+      }
+      .distance {
+        width: 80%;
+        text-align: start;
+        font-weight: bold;
+        font-size: 15px;
+        margin-bottom: 30px;
+      }
+      label {
+        color: black;
+        font-size: 10px;
+        
+      }
+      .switch {
+        margin-bottom: 10px;
       }
     </style>
   </head>
