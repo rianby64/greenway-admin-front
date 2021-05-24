@@ -38,7 +38,7 @@ export const getRouteDifficulty = async () => {
 
 export const getRouteCategories = async () => {
   try {
-    return await axios.get(`${firebase}route_types`).then((response) => {
+    return await axios.get(`${firebase}route_categories`).then((response) => {
       return response.data;
     });
   } catch (e) {
@@ -46,7 +46,7 @@ export const getRouteCategories = async () => {
   }
 }
 
-export const postRoute = async (approved: boolean, animals: boolean, children: boolean, disabilities: boolean, minutes: number, title: string, description: string, type: Array<String>, difficulty: string, distance: number) => {
+export const postRoute = async (approved: boolean, animals: boolean, children: boolean, disabilities: boolean, minutes: number, title: string, description: string, type: Array<String>, category: Array<string>, difficulty: string, distance: number) => {
   const responseWithId = await axios.post(`${firebase}routes`, {
     approved: approved,
     animals: animals,
@@ -57,6 +57,7 @@ export const postRoute = async (approved: boolean, animals: boolean, children: b
     description: description,
     distance: distance,
     type: type,
+    categories: category,
     difficulty: difficulty
   })
   return responseWithId.data.id

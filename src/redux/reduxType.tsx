@@ -14,8 +14,8 @@ export interface SaveForm {
   children: boolean,
   disabilities: boolean,
   approved: boolean,
-  duration: Object,
-  cattegories: Array<string>,
+  durations: Object,
+  categories: Array<string>,
   type: Array<string>,
 }
 

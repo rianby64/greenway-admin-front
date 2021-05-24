@@ -2,12 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { SaveForm, SaveRouteType } from '../../../redux/reduxType';
 import { Select, Switch } from 'react-materialize'
 import { useTypedSelector } from './../../../redux/useTypedSelector.hook';
-import { getRouteTypes, postRoute, putDotsIntoRoute } from '../../../axios/requests';
+import { getRouteCategories, getRouteTypes, postRoute, putDotsIntoRoute } from '../../../axios/requests';
 import { putLinesIntoRoute, getRouteDifficulty } from './../../../axios/requests';
 
 export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isShawn, setIsShawn }: SaveRouteType) => {
   const [routeTypes, setRouteTypes] = useState<Array<any>>([]);
   const [routeDif, setRouteDif] = useState<Array<any>>([]);
+  const [routeCat, setRouteCat] = useState<Array<any>>([]);
   const { distance, polilines, points } = useTypedSelector(store => store.route)
   const [saveForm, setSaveForm] = useState<SaveForm>({
     title: '',
@@ -18,28 +19,42 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isShawn, set
     children: false,
     disabilities: false,
     approved: false,
-    duration: {},
-    cattegories: [],
+    durations: {},
+    categories: [],
     type: []
   })
   const selectHandler = (e) => {
-    if (e.target.id === 'type') {
-      const catArr: Array<string> = [];
-      for (let item of e.target.selectedOptions) {
-        catArr.push(item.value)
-      }
-      setSaveForm({
-        ...saveForm,
-        type: catArr
-      })
-    } else if (e.target.id === 'dif') {
-      setSaveForm({
-        ...saveForm,
-        difficulty: e.target.value
-      })
+    switch (e.target.id) {
+      case 'type':
+        const typeArr: Array<string> = [];
+        for (let item of e.target.selectedOptions) {
+          typeArr.push(item.value)
+        }
+        setSaveForm({
+          ...saveForm,
+          type: typeArr
+        })
+        break;
+      case 'dif':
+        setSaveForm({
+          ...saveForm,
+          difficulty: e.target.value
+        })
+        break;
+
+      case 'category':
+        const catArr: Array<string> = [];
+        for (let item of e.target.selectedOptions) {
+          catArr.push(item.value)
+        }
+        setSaveForm({
+          ...saveForm,
+          categories: catArr
+        })
+        break;
+      default:
+        alert('Form error');
     }
-    console.log(saveForm);
-    
   }
 
   const childrenHandler = () => {
@@ -78,7 +93,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isShawn, set
   const submitRoute = () => {
     console.log(saveForm);
 
-    postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.disabilities, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.difficulty, distance)
+    postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.disabilities, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.difficulty, distance)
       .then((response) => {
         putLinesIntoRoute(polilines, response)
         putDotsIntoRoute(points, response)
@@ -88,8 +103,12 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isShawn, set
   const fetchRoutetype = async () => {
     const fetchedTypes = await getRouteTypes();
     const fetchedDifficulties = await getRouteDifficulty();
-    setRouteTypes(fetchedTypes)
-    setRouteDif(fetchedDifficulties)
+    const fetchedCat = await getRouteCategories();
+    setRouteCat(fetchedCat);
+    setRouteTypes(fetchedTypes);
+    setRouteDif(fetchedDifficulties);
+    console.log(saveForm);
+
   }
 
   useEffect(() => {
@@ -164,6 +183,11 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isShawn, set
             {routeDif ? routeDif.map((el, ind) => {
               return <option key={ind} value={el.id}>{el.title}</option>
             }) : <option value='NoCategory'>Нет Сложностей</option>}
+          </Select>
+          <Select id='category' noLayout={true} multiple={true} onChange={selectHandler}>
+            {routeCat ? routeCat.map((el, ind) => {
+              return <option key={ind} value={el.id}>{el.title}</option>
+            }) : <option value='NoCategory'>Нет Категории</option>}
           </Select>
           <button type='button' className='btn pink' onClick={submitRoute}>Отправить на сервер</button>
         </form>
