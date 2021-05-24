@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { SaveForm, SaveRouteType } from '../../../redux/reduxType';
 import { Select, Switch } from 'react-materialize'
 import { useTypedSelector } from './../../../redux/useTypedSelector.hook';
@@ -9,7 +9,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isShawn, set
   const [routeTypes, setRouteTypes] = useState<Array<any>>([]);
   const [routeDif, setRouteDif] = useState<Array<any>>([]);
   const [routeCat, setRouteCat] = useState<Array<any>>([]);
-  const { distance, polilines, points } = useTypedSelector(store => store.route)
+  const { distance, polilines, points } = useTypedSelector(store => store.route);
   const [saveForm, setSaveForm] = useState<SaveForm>({
     title: '',
     description: '',
@@ -19,21 +19,42 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isShawn, set
     children: false,
     disabilities: false,
     approved: false,
-    durations: {},
+    durations: [],
     categories: [],
     type: []
-  })
+  });
   const selectHandler = (e) => {
+    console.log(saveForm);
+
     switch (e.target.id) {
       case 'type':
-        const typeArr: Array<string> = [];
+        const typeArr: Array<{
+          title: string,
+          rus: string
+        }> = [];
+        const durationArr: Array<{
+          name: string,
+          number: number
+        }> = [];
         for (let item of e.target.selectedOptions) {
-          typeArr.push(item.value)
+          typeArr.push({
+            title: item.value,
+            rus: item.innerText
+          })
+          let number: number = 0;
+          saveForm.durations.forEach((el: any) => {
+            if (el.name === item. value) number = el.number
+          })
+          durationArr.push({
+            name: item.value,
+            number: number
+          })
         }
         setSaveForm({
           ...saveForm,
+          durations: durationArr,
           type: typeArr
-        })
+        });
         break;
       case 'dif':
         setSaveForm({
@@ -46,6 +67,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isShawn, set
         const catArr: Array<string> = [];
         for (let item of e.target.selectedOptions) {
           catArr.push(item.value)
+
         }
         setSaveForm({
           ...saveForm,
@@ -93,14 +115,14 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isShawn, set
   const submitRoute = () => {
     console.log(saveForm);
 
-    postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.disabilities, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.difficulty, distance)
+    postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.disabilities, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.difficulty, saveForm.durations, distance)
       .then((response) => {
         putLinesIntoRoute(polilines, response)
         putDotsIntoRoute(points, response)
       })
   }
 
-  const fetchRoutetype = async () => {
+  const fetchRoutetype = useCallback(async () => {
     const fetchedTypes = await getRouteTypes();
     const fetchedDifficulties = await getRouteDifficulty();
     const fetchedCat = await getRouteCategories();
@@ -109,6 +131,21 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isShawn, set
     setRouteDif(fetchedDifficulties);
     console.log(saveForm);
 
+  }, [])
+
+  const durationsHandler = (e) => {
+    const newDurations = saveForm.durations;
+    newDurations.map((el: any ) => {
+      if (el.name === e.target.id) {
+        el.number = e.target.value
+      }
+    })
+    setSaveForm({
+      ...saveForm,
+      durations: newDurations
+    })
+    console.log(saveForm);
+    
   }
 
   useEffect(() => {
@@ -189,6 +226,13 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isShawn, set
               return <option key={ind} value={el.id}>{el.title}</option>
             }) : <option value='NoCategory'>Нет Категории</option>}
           </Select>
+          <div className='durations'>
+            {saveForm.type.map((el,ind) => {
+              return (
+                <input type='number' key={ind} placeholder={el.rus} id={el.title} onChange={durationsHandler} />
+              )
+            })}
+          </div>
           <button type='button' className='btn pink' onClick={submitRoute}>Отправить на сервер</button>
         </form>
       </div>

@@ -46,7 +46,26 @@ export const getRouteCategories = async () => {
   }
 }
 
-export const postRoute = async (approved: boolean, animals: boolean, children: boolean, disabilities: boolean, minutes: number, title: string, description: string, type: Array<String>, category: Array<string>, difficulty: string, distance: number) => {
+export const postRoute = async (
+  approved: boolean,
+  animals: boolean,
+  children: boolean,
+  disabilities: boolean,
+  minutes: number,
+  title: string,
+  description: string,
+  type: Array<{ title: string, rus: string }>,
+  category: Array<string>,
+  difficulty: string,
+  durations: Array<{
+    name: string,
+    number: number
+  }>,
+  distance: number) => {
+  const typesRequestArray: Array<string> = [];
+  type.forEach((el) => {
+    typesRequestArray.push(el.title)
+  })
   const responseWithId = await axios.post(`${firebase}routes`, {
     approved: approved,
     animals: animals,
@@ -56,8 +75,9 @@ export const postRoute = async (approved: boolean, animals: boolean, children: b
     title: title,
     description: description,
     distance: distance,
-    type: type,
+    type: typesRequestArray,
     categories: category,
+    durations: durations,
     difficulty: difficulty
   })
   return responseWithId.data.id

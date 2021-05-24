@@ -14,9 +14,15 @@ export interface SaveForm {
   children: boolean,
   disabilities: boolean,
   approved: boolean,
-  durations: Object,
+  durations: Array<{
+    name: string,
+    number: number
+  }>,
   categories: Array<string>,
-  type: Array<string>,
+  type: Array<{
+    title: string,
+    rus: string
+  }>,
 }
 
 export interface CurrFeat {
