@@ -5,6 +5,37 @@ export interface PointForm {
   categories: String
 }
 
+export interface DescrSelect {
+  form: PointForm,
+  setForm: React.Dispatch<React.SetStateAction<PointForm>>,
+  dotTypes: Array<any>
+}
+
+export interface DescrInput {
+  form: PointForm,
+  setForm: React.Dispatch<React.SetStateAction<PointForm>>
+}
+export interface SaveInputs {
+  saveForm: SaveForm,
+  setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>
+}
+
+export interface SaveDurations {
+  saveForm: SaveForm,
+  setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>
+}
+export interface SaveSwitches {
+  saveForm: SaveForm,
+  setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>
+}
+export interface SaveSelectors {
+  saveForm: SaveForm,
+  setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>,
+  routeTypes: Array<any>,
+  routeDif: Array<any>,
+  routeCat: Array<any>
+}
+
 export interface SaveForm {
   title: string,
   description: string,

@@ -1,4 +1,4 @@
-import { ACTIONS, SettingsState, UserAction } from "./reduxType"
+import { ACTIONS, SettingsState, UserAction } from "../types/Types"
 
 const intialState: SettingsState = {
   isSettingsShawn: false

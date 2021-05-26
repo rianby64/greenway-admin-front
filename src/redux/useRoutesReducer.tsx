@@ -1,4 +1,4 @@
-import { ACTIONS, PointRouteObj, RoutesState, UserAction } from "./reduxType"
+import { ACTIONS, PointRouteObj, RoutesState, UserAction } from "../types/Types"
 
 const initialState: RoutesState = {
   currentFeature: {
