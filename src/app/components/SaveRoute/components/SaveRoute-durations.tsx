@@ -20,7 +20,7 @@ export const SaveRouteDurations: React.FunctionComponent<SaveDurations> = ({ sav
     <div className='durations'>
       {saveForm.type.map((el, ind) => {
         return (
-          <input type='number' key={ind} placeholder={el.rus} id={el.title} onChange={durationsHandler} />
+          <input type='number' key={ind} placeholder={`Продолжительнить при типе '${el.rus}'`} id={el.title} onChange={durationsHandler} />
         )
       })}
     </div>

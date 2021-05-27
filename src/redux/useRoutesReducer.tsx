@@ -8,6 +8,7 @@ const initialState: RoutesState = {
   polilines: [],
   points: [],
   distance: 0,
+  
 }
 
 export const useRoutesReducer = (state = initialState, action: UserAction): RoutesState => {
@@ -40,12 +41,9 @@ export const useRoutesReducer = (state = initialState, action: UserAction): Rout
         points: newRemovedPointArr
       }
     case ACTIONS.REMOVE_POLILINE:
-      const newRemovedArrPoli = state.polilines.filter(function (el) {
-        return action.payload.indexOf(el) < 0;
-      });
       return {
         ...state,
-        polilines: newRemovedArrPoli
+        polilines: []
       }
     case ACTIONS.CLEAR_ROUTES:
       return {
@@ -74,7 +72,7 @@ export const useRoutesReducer = (state = initialState, action: UserAction): Rout
     case ACTIONS.SET_DISTANCE:
       return {
         ...state,
-        distance: state.distance + action.payload
+        distance: action.payload
       }
     case ACTIONS.SET_CURRENT_FEATURE:
       return {

@@ -84,9 +84,8 @@ export interface PointRouteObj {
 export interface RoutesState {
   currentFeature: CurrFeat,
   polilines: Array<CurrFeat>,
-  // polilines: Array<Array<CurrFeat>>
   points: Array<PointRouteObj>,
-  distance: number
+  distance: number,
 }
 
 export interface CurrFeat {

@@ -8,22 +8,20 @@ import L from 'leaflet';
 import { setDistanceZero } from './../../../redux/useRoutesReducer';
 
 export const MapControl: React.FunctionComponent = () => {
-
   const map = useMap()
   const dispatch = useDispatch()
-
   const currentFeatureDispatcher = (e) => {
     if (e.target instanceof L.Marker) dispatch(setCurrentFeature(e.target.getLatLng()))
     if (e.target instanceof L.Polyline) dispatch(setCurrentFeature(e.target.getLatLngs()[0]))
   }
 
   const calculateDistance = (arr: Array<any>): number => {
-    let distance = 0;
+    let distance: number = 0;
     for (let index = 0; index < arr.length - 1; index++) {
       const distanceBetweenTwo = arr[index].distanceTo(arr[index + 1])
-      distance += distanceBetweenTwo;
+      distance += distanceBetweenTwo / 1000;
     }
-    return Math.ceil(distance);
+    return parseFloat(distance.toFixed(2));
   }
 
   const showSettingsDispatcher = () => {
@@ -31,6 +29,7 @@ export const MapControl: React.FunctionComponent = () => {
   }
 
   const _onCreated = (e: { layer: any; }) => {
+    console.log(e);
     const layer = e.layer;
     layer.addEventListener('mousedown', currentFeatureDispatcher)
     if (layer instanceof L.Marker) {
@@ -41,8 +40,15 @@ export const MapControl: React.FunctionComponent = () => {
       layer.addEventListener('click', showSettingsDispatcher)
     }
     if (layer instanceof L.Polyline) {
-      dispatch(addPoliline(layer.getLatLngs()))
-      dispatch(setRouteDistance(calculateDistance(layer.getLatLngs())))
+      let counter: number = 0;
+      map.eachLayer(layer => {
+        if (counter > 1) map.removeLayer(layer)
+        if (layer instanceof L.Polyline) {
+          counter++
+          dispatch(addPoliline(layer.getLatLngs()))
+          dispatch(setRouteDistance(calculateDistance(layer.getLatLngs())))
+        }
+      })
     }
   }
 
@@ -66,11 +72,13 @@ export const MapControl: React.FunctionComponent = () => {
       }
       if (layer instanceof L.Polyline) {
         dispatch(setCurrentFeature(layer.getLatLngs()[0]))
+        layer.removeEventListener('mouseover')
       }
     })
     dispatch(setDistanceZero())
     map.eachLayer((layer) => {
       if (layer instanceof L.Polyline) {
+        dispatch(addPoliline(layer.getLatLngs()));
         dispatch(setRouteDistance(calculateDistance(layer.getLatLngs())))
       }
     })
@@ -98,7 +106,7 @@ export const MapControl: React.FunctionComponent = () => {
       if (layer instanceof L.Polyline) {
         arrPoliLines.push(layer.getLatLngs())
         dispatch(removePoliline(arrPoliLines))
-        dispatch(setRouteDistance(calculateDistance(layer.getLatLngs()) * -1))
+        dispatch(setRouteDistance(0))
       }
     })
   }

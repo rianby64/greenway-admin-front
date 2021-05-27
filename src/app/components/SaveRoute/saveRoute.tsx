@@ -1,8 +1,8 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { SaveForm, SaveRouteType } from '../../../types/Types';
 import { useTypedSelector } from './../../../redux/useTypedSelector.hook';
-import { getRouteCategories, getRouteTypes, postRoute, putDotsIntoRoute } from '../../../axios/requests';
-import { putLinesIntoRoute, getRouteDifficulty } from './../../../axios/requests';
+import { getRouteCategories, getRouteTypes, postRoute, postDotsIntoRoute } from '../../../axios/requests';
+import { postLinesIntoRoute, getRouteDifficulty } from './../../../axios/requests';
 import { SaveRouteSelectors } from './components/SaveRoute-selectors';
 import { SaveRouteSwitches } from './components/SaveRoute-switches';
 import { SaveRouteDurations } from './components/SaveRoute-durations';
@@ -28,11 +28,13 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isShawn, set
   });
 
   const submitRoute = () => {
-    postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.disabilities, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.difficulty, saveForm.durations, distance)
-      .then((response) => {
-        putLinesIntoRoute(polilines, response)
-        putDotsIntoRoute(points, response)
-      })
+    if (checkRequiredFields()) {
+      postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.disabilities, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.difficulty, saveForm.durations, distance)
+        .then((response) => {
+          postLinesIntoRoute(polilines, response)
+          postDotsIntoRoute(points, response)
+        })
+    } else alert('form is not filled')
   }
 
   const fetchRoutetype = useCallback(async () => {
@@ -43,6 +45,13 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isShawn, set
     setRouteTypes(fetchedTypes);
     setRouteDif(fetchedDifficulties);
   }, [])
+
+  const checkRequiredFields = useCallback(() => {
+    console.log(saveForm);
+    if (saveForm.categories.length === 0 || saveForm.type.length === 0 || saveForm.durations.length === 0) return false
+    else return true
+
+  }, [saveForm])
 
   useEffect(() => {
     fetchRoutetype();

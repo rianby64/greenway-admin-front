@@ -3,7 +3,15 @@ import axios from "axios";
 // export const firebase = 'http://localhost:3000/';
 export const firebase = '/api/';
 
-
+export const getAllRoutes = async () => {
+  try {
+    return await axios.get(`${firebase}routes`).then((response) => {
+      return response.data
+    })
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 export const getCategories = async () => {
   try {
@@ -83,10 +91,10 @@ export const postRoute = async (
   return responseWithId.data.id
 }
 
-export const putLinesIntoRoute = async (arrOfLines: Array<Object>, id: string) => {
+export const postLinesIntoRoute = async (arrOfLines: Array<Object>, id: string) => {
   await axios.put(`${firebase}routes/${id}/lines`, arrOfLines)
 }
 
-export const putDotsIntoRoute = async (arrOfPoints: Array<Object>, id: string) => {
+export const postDotsIntoRoute = async (arrOfPoints: Array<Object>, id: string) => {
   await axios.post(`${firebase}routes/${id}/dots`, arrOfPoints)
 }
