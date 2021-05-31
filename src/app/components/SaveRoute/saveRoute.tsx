@@ -8,11 +8,13 @@ import { SaveRouteSwitches } from './components/SaveRoute-switches';
 import { SaveRouteDurations } from './components/SaveRoute-durations';
 import { SaveRouteInputs } from './components/SaveRoute-Inputs';
 
-export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isShawn, setIsShawn }: SaveRouteType) => {
+export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, isShawn, setIsShawn }: SaveRouteType) => {
   const [routeTypes, setRouteTypes] = useState<Array<any>>([]);
   const [routeDif, setRouteDif] = useState<Array<any>>([]);
   const [routeCat, setRouteCat] = useState<Array<any>>([]);
   const { distance, polilines, points } = useTypedSelector(store => store.route);
+  const editingRoute = useTypedSelector(store => store.editing)
+  const { id, dots } = useTypedSelector(store => store.editing)
   const [saveForm, setSaveForm] = useState<SaveForm>({
     title: '',
     description: '',
@@ -29,11 +31,25 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isShawn, set
 
   const submitRoute = () => {
     if (checkRequiredFields()) {
-      postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.disabilities, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.difficulty, saveForm.durations, distance)
-        .then((response) => {
-          postLinesIntoRoute(polilines, response)
-          postDotsIntoRoute(points, response)
-        })
+      if (!isEditing) {
+        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.disabilities, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.difficulty, saveForm.durations, distance)
+          .then((response) => {
+            postLinesIntoRoute(polilines, response)
+            postDotsIntoRoute(points, response)
+          })
+          .then(() => window.location.replace('/'))
+      } else {
+        console.log('sent to edit');
+        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.disabilities, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.difficulty, saveForm.durations, distance, true, id)
+          .then(() => {
+            postLinesIntoRoute(polilines, id);
+            dots.map((el) => {
+              console.log(el, id);
+              //deleteDot(id, el.id)
+            })
+            postDotsIntoRoute(points, id)
+          }).then(() => window.location.replace('/'))
+      }
     } else alert('form is not filled')
   }
 
@@ -55,6 +71,21 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isShawn, set
 
   useEffect(() => {
     fetchRoutetype();
+    if (editingRoute.id != '') {
+      setSaveForm({
+        title: editingRoute.title,
+        description: editingRoute.description,
+        difficulty: '',
+        minutes: editingRoute.minutes,
+        animals: editingRoute.animals,
+        children: editingRoute.children,
+        disabilities: editingRoute.disabilities,
+        approved: editingRoute.approve,
+        durations: [],
+        categories: [],
+        type: []
+      })
+    }
   }, [])
 
   return (

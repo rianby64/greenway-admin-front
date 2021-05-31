@@ -1,3 +1,20 @@
+export interface RouteToEdit {
+  animals: boolean,
+  approve: boolean,
+  categories: Array<any>,
+  children: boolean,
+  description: string,
+  difficulty: any,
+  disabilities: boolean,
+  distanceFromSource: number,
+  dots: Array<any>,
+  durations: any,
+  lines: Array<CurrFeat>,
+  minutes: number,
+  title: string,
+  types: Array<any>,
+  id: string
+}
 export interface PointForm {
   name: string;
   description: string,
@@ -67,7 +84,8 @@ export type DescriptionProps = {
 
 export type SaveRouteType = {
   isShawn: Boolean;
-  setIsShawn: React.Dispatch<React.SetStateAction<boolean>>
+  setIsShawn: React.Dispatch<React.SetStateAction<boolean>>;
+  isEditing: boolean;
 }
 
 export interface PointRouteObj {
@@ -114,4 +132,8 @@ export enum ACTIONS {
   EDIT_POINT = 'EDIT_POINT',
   SET_DISTANCE = 'SET_DISTANCE',
   SET_DISTANCE_ZERO = 'SET_DISTANCE_ZERO',
+}
+
+export enum EDIT_ACTIONS {
+  SET_EDITING_ROUTE = 'SET_EDITING_ROUTE',
 }

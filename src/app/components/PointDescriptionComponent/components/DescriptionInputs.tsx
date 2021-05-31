@@ -13,7 +13,6 @@ export const DescriptionInputs: React.FunctionComponent<DescrInput> = ({form, se
     setForm({ ...form, [name]: value })
   }
 
-
   return (
     <>
       <label style={{ fontSize: '25px', fontWeight: 'bold', color: 'black' }}>Название места</label>

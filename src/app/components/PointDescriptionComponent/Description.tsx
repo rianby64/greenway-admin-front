@@ -21,24 +21,28 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
   const [dotTypes, setDotTypes] = useState<Array<any>>([]);
 
   const submitHandler = () => {
-    const pointToAdd: PointRouteObj = {
-      position: {
-        lat: currentFeature.lat,
-        lng: currentFeature.lng
-      },
-      title: form.name,
-      description: form.description,
-      type: form.categories
+    if (form.categories != '') {
+      const pointToAdd: PointRouteObj = {
+        position: {
+          lat: currentFeature.lat,
+          lng: currentFeature.lng
+        },
+        title: form.name,
+        description: form.description,
+        type: form.categories
+      }
+      dispatch(hideSettings());
+      dispatch(setCurrentFeature({}));
+      dispatch(addPoint(points.concat(pointToAdd)))
+      setForm({
+        name: '',
+        description: '',
+        // categories: [],
+        categories: ''
+      })
+    } else {
+      alert('Выберите категорию точки')
     }
-    dispatch(hideSettings());
-    dispatch(setCurrentFeature({}));
-    dispatch(addPoint(points.concat(pointToAdd)))
-    setForm({
-      name: '',
-      description: '',
-      // categories: [],
-      categories: ''
-    })
   }
 
   const fetchDottype = async () => {
@@ -49,6 +53,24 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
   useEffect(() => {
     setIsShawn(isSettingsShawn);
     fetchDottype();
+    let isPointFind: boolean = false;
+    points.map((el) => {
+      if (currentFeature.lat === el.position.lat) {
+        isPointFind = true;
+        setForm({
+          name: el.title.toString(),
+          description: el.description.toString(),
+          categories: el.type,
+        })
+      }
+    })
+    if (!isPointFind) {
+      setForm({
+        name: '',
+        description: '',
+        categories: '',
+      })
+    }
   }, [isSettingsShawn])
 
   const formHandlerStyles = {

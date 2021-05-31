@@ -35,12 +35,13 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
             onChange={changeHandler}
             className='save-input'
           >
+            {saveForm.description}
           </textarea>
         </div>
       </div>
       <div style={{ display: 'flex', width: '95%' }}>
         <div className='input-block' >
-          <label className='save-label'>Введите время прохода маршрута</label>
+          <label className='save-label'>Введите время прохода маршрута в минутах</label>
           <input
             type='number'
             placeholder='Время'
@@ -51,7 +52,7 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
           >
           </input>
         </div>
-        <p className='distance'>Длинна маршрута: {distance} м.</p>
+        <p className='distance'>Длинна маршрута: {distance} км.</p>
       </div>
     </>
   )

@@ -69,30 +69,53 @@ export const postRoute = async (
     name: string,
     number: number
   }>,
-  distance: number) => {
+  distance: number,
+  update: boolean = false,
+  id: string = '') => {
   const typesRequestArray: Array<string> = [];
   type.forEach((el) => {
     typesRequestArray.push(el.title)
   })
-  const responseWithId = await axios.post(`${firebase}routes`, {
-    approved: approved,
-    animals: animals,
-    children: children,
-    disabilities: disabilities,
-    minutes: minutes,
-    title: title,
-    description: description,
-    distance: distance,
-    type: typesRequestArray,
-    categories: category,
-    durations: durations,
-    difficulty: difficulty
-  })
-  return responseWithId.data.id
+  if (!update) {
+    const responseWithId = await axios.post(`${firebase}routes`, {
+      approved: approved,
+      animals: animals,
+      children: children,
+      disabilities: disabilities,
+      minutes: minutes,
+      title: title,
+      description: description,
+      distance: distance,
+      type: typesRequestArray,
+      categories: category,
+      durations: durations,
+      difficulty: difficulty
+    })
+    return responseWithId.data.id
+  } else {
+    await axios.put(`${firebase}routes/${id}`, {
+      approved: approved,
+      animals: animals,
+      children: children,
+      disabilities: disabilities,
+      minutes: minutes,
+      title: title,
+      description: description,
+      distance: distance,
+      type: typesRequestArray,
+      categories: category,
+      durations: durations,
+      difficulty: difficulty
+    })
+  }
 }
 
 export const postLinesIntoRoute = async (arrOfLines: Array<Object>, id: string) => {
   await axios.put(`${firebase}routes/${id}/lines`, arrOfLines)
+}
+
+export const deleteDot = async (routeId, dotId) => {
+  await axios.delete(`${firebase}routes/${routeId}/dot/${dotId}`)
 }
 
 export const postDotsIntoRoute = async (arrOfPoints: Array<Object>, id: string) => {
