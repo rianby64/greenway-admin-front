@@ -20,6 +20,15 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
   });
   const [dotTypes, setDotTypes] = useState<Array<any>>([]);
 
+  const editedPointArray = (newPoint: PointRouteObj) => {
+    const filteredArrayOfPoints = points.filter((el) => {
+      if (el.position.lat === newPoint.position.lat && el.position.lng === newPoint.position.lng) return false
+      else return true
+    });
+    filteredArrayOfPoints.push(newPoint);
+    return filteredArrayOfPoints;
+  }
+
   const submitHandler = () => {
     if (form.categories != '') {
       const pointToAdd: PointRouteObj = {
@@ -33,11 +42,10 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
       }
       dispatch(hideSettings());
       dispatch(setCurrentFeature({}));
-      dispatch(addPoint(points.concat(pointToAdd)))
+      dispatch(addPoint(editedPointArray(pointToAdd)))
       setForm({
         name: '',
         description: '',
-        // categories: [],
         categories: ''
       })
     } else {
