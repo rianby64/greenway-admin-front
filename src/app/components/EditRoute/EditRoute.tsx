@@ -6,8 +6,8 @@ import { SaveRoute } from '../SaveRoute/saveRoute'
 import { EditingMapControl } from './components/EditMapControl/EditMapControl';
 
 export const CreateEditingMap: React.FunctionComponent = () => {
-  const { currentFeature } = useTypedSelector(store => store.route)
-  const [saveRouteMenu, setSaveRouteMenu] = React.useState<boolean>(false)
+  const { currentFeature } = useTypedSelector(store => store.route);
+  const [saveRouteMenu, setSaveRouteMenu] = React.useState<boolean>(false);
   return (
     <>
       <DescriptionComponent currentFeature={currentFeature} />

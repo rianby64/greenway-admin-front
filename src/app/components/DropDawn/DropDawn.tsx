@@ -10,13 +10,10 @@ export const DropDown: React.FunctionComponent = () => {
 
   const fetchAllRoutes = async () => {
     const fetchedData = await getAllRoutes();
-    console.log(fetchedData);
     setFetchedRoutes(fetchedData);
-    console.log(fetchedRoutes);
   }
 
   const setEditingRoute = (array) => {
-    console.log(array);
     dispatch(setEditingRouteToStore(array));
   }
 

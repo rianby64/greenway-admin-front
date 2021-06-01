@@ -11,7 +11,7 @@ export const DescriptionsSelect: React.FunctionComponent<DescrSelect> = ({ form,
     // }
     if (e.target.value != '') {
       setForm({ ...form, categories: e.target.value })
-    }
+    }    
   }
 
 
@@ -19,14 +19,13 @@ export const DescriptionsSelect: React.FunctionComponent<DescrSelect> = ({ form,
   return (
     <div className='cattegories'>
       <label style={{ fontSize: '25px', fontWeight: 'bold', color: 'black' }}>Подходящие категории</label>
-      <div className='checkboxes' style={{ height: '100px', display: 'flex', alignItems: 'center' }}>
         <Select id='categories' value='category' noLayout={true} style={{ width: '100%' }} multiple={false} onChange={selectHandler}>
-          <option value={''} disabled={true}>Выберите категорию </option>
-          {dotTypes ? dotTypes.map((el, ind) =>
-            <option key={ind} value={el.id}>{el.title}</option>
+          <option selected={true} disabled={true}>Выберите категорию </option>
+          {dotTypes ? dotTypes.map((el, ind) => {
+            return <option selected={false} key={ind} value={el.id}>{el.title}</option>
+          }
           ) : <option value='NoCategory'>Нет категорий</option>}
         </Select>
       </div>
-    </div>
   )
 }

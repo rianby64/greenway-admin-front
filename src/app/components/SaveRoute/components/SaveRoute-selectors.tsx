@@ -5,8 +5,6 @@ import { SaveSelectors } from '../../../../types/Types';
 export const SaveRouteSelectors: React.FunctionComponent<SaveSelectors> = ({saveForm, setSaveForm, routeCat, routeDif, routeTypes}) => {
 
   const selectHandler = (e) => {
-    console.log(saveForm);
-
     switch (e.target.id) {
       case 'type':
         const typeArr: Array<{
@@ -60,7 +58,6 @@ export const SaveRouteSelectors: React.FunctionComponent<SaveSelectors> = ({save
     }
   }
 
-  
   return (
     <>
       <Select id='type' noLayout={true} multiple={true} onChange={selectHandler}>
@@ -69,8 +66,9 @@ export const SaveRouteSelectors: React.FunctionComponent<SaveSelectors> = ({save
         }) : <option value='NoCategory'>Нет категорий</option>}
       </Select>
       <Select id='dif' noLayout={true} multiple={false} onChange={selectHandler}>
+        <option selected={true} disabled={true}>Выберите сложность</option>
         {routeDif ? routeDif.map((el, ind) => {
-          return <option key={ind} value={el.id}>{el.title}</option>
+          return <option selected={el.id === saveForm.difficulty ? true : false} key={ind} value={el.id}>{el.title}</option>
         }) : <option value='NoCategory'>Нет Сложностей</option>}
       </Select>
       <Select id='category' noLayout={true} multiple={true} onChange={selectHandler}>

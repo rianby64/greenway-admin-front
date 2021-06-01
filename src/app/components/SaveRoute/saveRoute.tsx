@@ -75,7 +75,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
       setSaveForm({
         title: editingRoute.title,
         description: editingRoute.description,
-        difficulty: '',
+        difficulty: editingRoute.difficulty,
         minutes: editingRoute.minutes,
         animals: editingRoute.animals,
         children: editingRoute.children,

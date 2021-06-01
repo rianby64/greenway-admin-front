@@ -1,3 +1,4 @@
+
 export interface RouteToEdit {
   animals: boolean,
   approve: boolean,
@@ -79,7 +80,7 @@ export interface CurrFeat {
 }
 
 export type DescriptionProps = {
-  currentFeature: CurrFeat
+  currentFeature: CurrFeat;
 }
 
 export type SaveRouteType = {

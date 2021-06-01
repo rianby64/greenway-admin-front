@@ -44,11 +44,15 @@ export const EditingMapControl: React.FunctionComponent = () => {
     if (layer instanceof L.Polyline) {
       let counter: number = 0;
       map.eachLayer(layer => {
-        if (counter > 2) map.removeLayer(layer)
+        if (counter > 1) {
+          map.removeLayer(layer)
+        }
         if (layer instanceof L.Polyline) {
           counter++
-          dispatch(addPoliline(layer.getLatLngs()))
-          dispatch(setRouteDistance(calculateDistance(layer.getLatLngs())))
+          if (counter <= 1) {
+            dispatch(addPoliline(layer.getLatLngs()))
+            dispatch(setRouteDistance(calculateDistance(layer.getLatLngs())))
+          }
         }
       })
     }
@@ -97,8 +101,6 @@ export const EditingMapControl: React.FunctionComponent = () => {
     }
   }
   const _onDeleted = (e: any) => {
-    console.log(e);
-
     const arrPoliLines: Array<any> = [];
     const arrMarkers: Array<any> = [];
     const layers = e.layers;
@@ -131,6 +133,14 @@ export const EditingMapControl: React.FunctionComponent = () => {
     })
   }
 
+  const _onEditStop = () => {
+    map.eachLayer((layer) => {
+      if (layer instanceof L.Marker) {
+        layer.addEventListener('click', showSettingsDispatcher)
+      }
+    })
+  }
+
   React.useEffect(() => {
     dispatch(addPoliline(lines));
     let pointsArray: Array<PointRouteObj> = [];
@@ -148,8 +158,6 @@ export const EditingMapControl: React.FunctionComponent = () => {
     })
     dispatch(addPoint(pointsArray));
     map.eachLayer((layer) => {
-      console.log(layer);
-
       layer.addEventListener('mousedown', currentFeatureDispatcher)
       if (layer instanceof L.Marker) {
         const pointPopup = L.popup();
@@ -177,6 +185,7 @@ export const EditingMapControl: React.FunctionComponent = () => {
       <FeatureGroup>
         <EditControl
           position='topright'
+          onEditStop={_onEditStop}
           onDeleteStart={_onDeleteStart}
           onDeleteStop={_onDeleteStop}
           onCreated={_onCreated}

@@ -8,7 +8,7 @@ import { getCategories } from '../../../axios/requests';
 import { DescriptionInputs } from './components/DescriptionInputs';
 import { DescriptionsSelect } from './components/DescriptionSelect';
 
-export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = ({ currentFeature }: DescriptionProps) => {
+export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = ({ currentFeature}: DescriptionProps) => {
   const { points } = useTypedSelector(store => store.route);
   const dispatch = useDispatch();
   const isSettingsShawn = useTypedSelector(store => store.settings.isSettingsShawn);
@@ -78,7 +78,7 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
         description: '',
         categories: '',
       })
-    }
+    }        
   }, [isSettingsShawn])
 
   const formHandlerStyles = {

@@ -29,7 +29,6 @@ export const MapControl: React.FunctionComponent = () => {
   }
 
   const _onCreated = (e: { layer: any; }) => {
-    console.log(e);
     const layer = e.layer;
     layer.addEventListener('mousedown', currentFeatureDispatcher)
     if (layer instanceof L.Marker) {
@@ -133,12 +132,14 @@ export const MapControl: React.FunctionComponent = () => {
         <EditControl
           position='topright'
           onDeleteStart={_onDeleteStart}
-          onDrawStop={_onDeleteStop}
           onCreated={_onCreated}
           onEdited={_onEdited}
           onDeleted={_onDeleted}
           onEditStart={_onEditStart}
           onEditMove={_OnEditMove}
+          onDeleteStop={_onDeleteStop}
+          onEditStop={_onDeleteStop}
+          onDrawStop={_onDeleteStop}
           draw={{
             polygon: false,
             rectangle: false,
