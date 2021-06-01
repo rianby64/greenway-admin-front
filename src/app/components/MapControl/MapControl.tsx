@@ -111,11 +111,29 @@ export const MapControl: React.FunctionComponent = () => {
     })
   }
 
+  const _onDeleteStart = () => {
+    map.eachLayer((layer) => {
+      if (layer instanceof L.Marker) {
+        layer.removeEventListener('click', showSettingsDispatcher)
+      }
+    })
+  }
+
+  const _onDeleteStop = () => {
+    map.eachLayer((layer) => {
+      if (layer instanceof L.Marker) {
+        layer.addEventListener('click', showSettingsDispatcher)
+      }
+    })
+  }
+
   return (
     <>
       <FeatureGroup>
         <EditControl
           position='topright'
+          onDeleteStart={_onDeleteStart}
+          onDrawStop={_onDeleteStop}
           onCreated={_onCreated}
           onEdited={_onEdited}
           onDeleted={_onDeleted}

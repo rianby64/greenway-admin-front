@@ -64,7 +64,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
 
   const checkRequiredFields = useCallback(() => {
     console.log(saveForm);
-    if (saveForm.categories.length === 0 || saveForm.type.length === 0 || saveForm.durations.length === 0) return false
+    if (saveForm.categories.length === 0 || saveForm.type.length === 0 || saveForm.durations.length === 0 || saveForm.difficulty === '') return false
     else return true
 
   }, [saveForm])

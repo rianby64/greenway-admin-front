@@ -115,6 +115,22 @@ export const EditingMapControl: React.FunctionComponent = () => {
     })
   }
 
+  const _onDeleteStart = () => {
+    map.eachLayer((layer) => {
+      if (layer instanceof L.Marker) {
+        layer.removeEventListener('click', showSettingsDispatcher)
+      }
+    })
+  }
+
+  const _onDeleteStop = () => {
+    map.eachLayer((layer) => {
+      if (layer instanceof L.Marker) {
+        layer.addEventListener('click', showSettingsDispatcher)
+      }
+    })
+  }
+
   React.useEffect(() => {
     dispatch(addPoliline(lines));
     let pointsArray: Array<PointRouteObj> = [];
@@ -161,6 +177,8 @@ export const EditingMapControl: React.FunctionComponent = () => {
       <FeatureGroup>
         <EditControl
           position='topright'
+          onDeleteStart={_onDeleteStart}
+          onDeleteStop={_onDeleteStop}
           onCreated={_onCreated}
           onEdited={_onEdited}
           onDeleted={_onDeleted}
