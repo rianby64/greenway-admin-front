@@ -3,7 +3,7 @@ import { TileLayer, FeatureGroup, useMap } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 import { useDispatch } from 'react-redux';
 import { hideSettings, setCurrentFeature, showSettings } from '../../../redux/useSettingsreducer';
-import { removePoliline, addPoliline, removePoint, editPoint, setRouteDistance } from '../../../redux/useRoutesReducer';
+import { removePoliline, addPoliline, removePoint, editPoint, setRouteDistance, addPoint } from '../../../redux/useRoutesReducer';
 import L from 'leaflet';
 import { setDistanceZero } from './../../../redux/useRoutesReducer';
 
@@ -125,6 +125,12 @@ export const MapControl: React.FunctionComponent = () => {
       }
     })
   }
+
+  React.useEffect(() => {
+    dispatch(addPoliline([]));
+    dispatch(setCurrentFeature({}));
+    dispatch(addPoint([]))
+  }, [])
 
   return (
     <>
