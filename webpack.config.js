@@ -14,12 +14,23 @@ module.exports = {
         filename: 'build/[name].[contenthash].js'
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js']
+        extensions: ['.ts', '.tsx', '.js', '.css']
     },
     module: {
         rules: [
-            { test: /\.tsx?$/, loader: 'ts-loader' }
+            { test: /\.tsx?$/, loader: 'ts-loader' },
+            {
+                test: /\.css$/i,
+                use: ["style-loader", "css-loader"],
+            },
         ]
-    }
+    },
+    devServer: {
+      proxy: {
+        '/api': {
+          target: 'http://localhost:3000'
+        },
+      },
+    },
 }
 
