@@ -23,7 +23,7 @@ export const DropDown: React.FunctionComponent = () => {
   return (
     <div className='route-listblock'>
       <ul className='route-list'>
-        {fetchedRoutes ? fetchedRoutes.map((el, ind) => {
+      {fetchedRoutes ? fetchedRoutes.map((el, ind) => {
           return <li key={ind} className='route-list-li'>
             <NavLink onClick={() => setEditingRoute(el)} to={`/route/${el.id}`} className='route-list-li-a'>
               {el.title}
