@@ -2,7 +2,7 @@ import React from 'react';
 import { Select } from 'react-materialize';
 import { SaveSelectors } from '../../../../types/Types';
 
-export const SaveRouteSelectors: React.FunctionComponent<SaveSelectors> = ({saveForm, setSaveForm, routeCat, routeDif, routeTypes}) => {
+export const SaveRouteSelectors: React.FunctionComponent<SaveSelectors> = ({ saveForm, setSaveForm, routeCat, routeDif, routeTypes }) => {
 
   const selectHandler = (e) => {
     switch (e.target.id) {
@@ -22,7 +22,7 @@ export const SaveRouteSelectors: React.FunctionComponent<SaveSelectors> = ({save
           })
           let number: number = 0;
           saveForm.durations.forEach((el: any) => {
-            if (el.name === item. value) number = el.number
+            if (el.name === item.value) number = el.number
           })
           durationArr.push({
             name: item.value,
@@ -60,6 +60,7 @@ export const SaveRouteSelectors: React.FunctionComponent<SaveSelectors> = ({save
 
   return (
     <>
+      <label className='save-label'>Способы перемещения</label>
       <Select id='type' noLayout={true} multiple={true} onChange={selectHandler}>
         {routeTypes ? routeTypes.map((el, ind) => {
           return <option key={ind} value={el.id}>{el.title}</option>
@@ -71,10 +72,11 @@ export const SaveRouteSelectors: React.FunctionComponent<SaveSelectors> = ({save
           return <option selected={el.id === saveForm.difficulty ? true : false} key={ind} value={el.id}>{el.title}</option>
         }) : <option value='NoCategory'>Нет Сложностей</option>}
       </Select>
+      <label className='save-label'>Категории маршрута</label>
       <Select id='category' noLayout={true} multiple={true} onChange={selectHandler}>
         {routeCat ? routeCat.map((el, ind) => {
           return <option key={ind} value={el.id}>{el.title}</option>
-        }) : <option value='NoCategory'>Нет Категории</option>}
+        }) : <option value='NoCategory'>Нет категории</option>}
       </Select>
     </>
   )
