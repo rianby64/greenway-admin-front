@@ -25,7 +25,7 @@ export const useEditReducer = (state = initialSate, action: UserAction): RouteTo
       return {
         ...state,
         animals: action.payload.animals,
-        approve: action.payload.approve,
+        approve: action.payload.approved,
         categories: action.payload.categories,
         children: action.payload.children,
         description: action.payload.description,
