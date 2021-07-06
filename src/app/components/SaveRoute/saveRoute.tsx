@@ -22,7 +22,8 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
     minutes: 0,
     animals: false,
     children: false,
-    disabilities: false,
+    wheelChair: false,
+    visuallyImpaired: false,
     approved: false,
     durations: [],
     categories: [],
@@ -32,7 +33,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   const submitRoute = () => {
     if (checkRequiredFields()) {
       if (!isEditing) {
-        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.disabilities, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.difficulty, saveForm.durations, distance)
+        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.difficulty, saveForm.durations, distance)
           .then((response) => {
             postLinesIntoRoute(polilines, response)
             postDotsIntoRoute(points, response)
@@ -40,7 +41,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
           .then(() => window.location.replace('/'))
       } else {
         console.log('sent to edit');
-        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.disabilities, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.difficulty, saveForm.durations, distance, true, id)
+        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.difficulty, saveForm.durations, distance, true, id)
           .then(() => {
             postLinesIntoRoute(polilines, id);
             dots.map((el) => {
@@ -79,7 +80,8 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
         minutes: editingRoute.minutes,
         animals: editingRoute.animals,
         children: editingRoute.children,
-        disabilities: editingRoute.disabilities,
+        wheelChair: editingRoute.wheelChair,
+        visuallyImpaired: editingRoute.visuallyImpaired,
         approved: editingRoute.approve,
         durations: [],
         categories: [],

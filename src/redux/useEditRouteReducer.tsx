@@ -8,7 +8,8 @@ const initialSate: RouteToEdit = {
   children: false,
   description: '',
   difficulty: {},
-  disabilities: false,
+  wheelChair: false,
+  visuallyImpaired: false,
   distanceFromSource: 0,
   dots: [],
   durations: {},
@@ -30,7 +31,8 @@ export const useEditReducer = (state = initialSate, action: UserAction): RouteTo
         children: action.payload.children,
         description: action.payload.description,
         difficulty: action.payload.difficulty,
-        disabilities: action.payload.disabilities,
+        wheelChair: action.payload.wheelChair,
+        visuallyImpaired: action.payload.visuallyImpaired,
         distanceFromSource: action.payload.distance,
         dots: action.payload.dots,
         durations: action.payload.durations,
@@ -40,8 +42,8 @@ export const useEditReducer = (state = initialSate, action: UserAction): RouteTo
         types: action.payload.types,
         id: action.payload.id
       }
-      default:
-        return state
+    default:
+      return state
   }
 }
 
