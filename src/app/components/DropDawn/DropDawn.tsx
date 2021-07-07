@@ -14,13 +14,6 @@ export const DropDown: React.FunctionComponent = () => {
   }
 
   const setEditingRoute = (array) => {
-    array.districts = array.districts.map((el) => {
-      return {
-        title: el.title,
-        id: el.id,
-        checked: true
-      }
-    })
     dispatch(setEditingRouteToStore(array));
   }
 

@@ -41,6 +41,7 @@ export interface SaveInputs {
 }
 
 export interface SaveDurations {
+  array: Array<any>
   saveForm: SaveForm,
   setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>
 }
@@ -49,10 +50,8 @@ export interface SaveSwitches {
   setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>
 }
 
-export interface Districts {
-  saveForm: SaveForm,
-  setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>
-  districts: Array<any>
+export interface Checkboxes {
+  array: Array<any>
 }
 export interface SaveSelectors {
   saveForm: SaveForm,

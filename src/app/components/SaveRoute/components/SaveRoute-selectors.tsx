@@ -2,7 +2,7 @@ import React from 'react';
 import { Select } from 'react-materialize';
 import { SaveSelectors } from '../../../../types/Types';
 
-export const SaveRouteSelectors: React.FunctionComponent<SaveSelectors> = ({ saveForm, setSaveForm, routeCat, routeDif, routeTypes }) => {
+export const SaveRouteSelectors: React.FunctionComponent<SaveSelectors> = ({ saveForm, setSaveForm, routeDif, routeTypes }) => {
 
   const selectHandler = (e) => {
     switch (e.target.id) {
@@ -71,12 +71,6 @@ export const SaveRouteSelectors: React.FunctionComponent<SaveSelectors> = ({ sav
         {routeDif ? routeDif.map((el, ind) => {
           return <option selected={el.id === saveForm.difficulty ? true : false} key={ind} value={el.id}>{el.title}</option>
         }) : <option value='NoCategory'>Нет Сложностей</option>}
-      </Select>
-      <label className='save-label'>Категории маршрута</label>
-      <Select id='category' noLayout={true} multiple={true} onChange={selectHandler}>
-        {routeCat ? routeCat.map((el, ind) => {
-          return <option key={ind} value={el.id}>{el.title}</option>
-        }) : <option value='NoCategory'>Нет категории</option>}
       </Select>
     </>
   )

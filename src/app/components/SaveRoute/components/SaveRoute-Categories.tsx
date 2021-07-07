@@ -2,7 +2,7 @@ import React from "react"
 import { Checkbox } from 'react-materialize'
 import { Checkboxes } from "../../../../types/Types"
 
-export const DistrictsCheckboxes: React.FunctionComponent<Checkboxes> = ({ array }) => {
+export const CategoriesCheckboxes: React.FunctionComponent<Checkboxes> = ({ array }) => {
 
   const checkBoxHandler = (elem: any) => {
     elem.checked = !elem.checked;
@@ -10,7 +10,7 @@ export const DistrictsCheckboxes: React.FunctionComponent<Checkboxes> = ({ array
 
   return (
     <>
-      <label className='save-label'>Районы</label>
+      <label className='save-label'>Категории</label>
       <div className='district__checkBoxes'>
         {array ? array.map((el) => {
           return (
