@@ -23,6 +23,16 @@ export const getCategories = async () => {
   }
 }
 
+export const getDistricts = async () => {
+  try {
+    return await axios.get(`${firebase}districts`).then((response) => {
+      return response.data;
+    });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 
 export const getRouteTypes = async () => {
   try {
@@ -65,6 +75,7 @@ export const postRoute = async (
   description: string,
   type: Array<{ title: string, rus: string }>,
   category: Array<string>,
+  districts: Array<string>,
   difficulty: string,
   durations: Array<{
     name: string,
@@ -90,6 +101,7 @@ export const postRoute = async (
       distance: distance,
       type: typesRequestArray,
       categories: category,
+      districts: districts,
       durations: durations,
       difficulty: difficulty
     })
@@ -107,6 +119,7 @@ export const postRoute = async (
       distance: distance,
       type: typesRequestArray,
       categories: category,
+      districts: districts,
       durations: durations,
       difficulty: difficulty
     })

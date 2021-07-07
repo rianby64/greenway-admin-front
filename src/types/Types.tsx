@@ -3,6 +3,7 @@ export interface RouteToEdit {
   animals: boolean,
   approve: boolean,
   categories: Array<any>,
+  districts: Array<any>,
   children: boolean,
   description: string,
   difficulty: any,
@@ -47,6 +48,12 @@ export interface SaveSwitches {
   saveForm: SaveForm,
   setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>
 }
+
+export interface Districts {
+  saveForm: SaveForm,
+  setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>
+  districts: Array<any>
+}
 export interface SaveSelectors {
   saveForm: SaveForm,
   setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>,
@@ -70,6 +77,7 @@ export interface SaveForm {
     number: number
   }>,
   categories: Array<string>,
+  districts: Array<string>,
   type: Array<{
     title: string,
     rus: string
@@ -139,4 +147,5 @@ export enum ACTIONS {
 
 export enum EDIT_ACTIONS {
   SET_EDITING_ROUTE = 'SET_EDITING_ROUTE',
+  REMOVE_EDITING_ROUTE = 'REMOVE_EDITING_ROUTE'
 }

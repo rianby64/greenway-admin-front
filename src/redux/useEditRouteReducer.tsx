@@ -5,6 +5,7 @@ const initialSate: RouteToEdit = {
   animals: false,
   approve: false,
   categories: [],
+  districts: [],
   children: false,
   description: '',
   difficulty: {},
@@ -28,6 +29,7 @@ export const useEditReducer = (state = initialSate, action: UserAction): RouteTo
         animals: action.payload.animals,
         approve: action.payload.approved,
         categories: action.payload.categories,
+        districts: action.payload.districts,
         children: action.payload.children,
         description: action.payload.description,
         difficulty: action.payload.difficulty,
@@ -42,6 +44,10 @@ export const useEditReducer = (state = initialSate, action: UserAction): RouteTo
         types: action.payload.types,
         id: action.payload.id
       }
+    case EDIT_ACTIONS.REMOVE_EDITING_ROUTE:
+      return {
+        ...initialSate
+      }
     default:
       return state
   }
@@ -50,4 +56,8 @@ export const useEditReducer = (state = initialSate, action: UserAction): RouteTo
 export const setEditingRouteToStore = (array) => ({
   type: EDIT_ACTIONS.SET_EDITING_ROUTE,
   payload: array
+})
+
+export const setDefaultState = () => ({
+  type: EDIT_ACTIONS.REMOVE_EDITING_ROUTE
 })
