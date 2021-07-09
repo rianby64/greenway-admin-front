@@ -84,10 +84,6 @@ export const postRoute = async (
   distance: number,
   update: boolean = false,
   id: string = '') => {
-  const typesRequestArray: Array<string> = [];
-  type.forEach((el) => {
-    typesRequestArray.push(el.title)
-  })
   if (!update) {
     const responseWithId = await axios.post(`${firebase}routes`, {
       approved: approved,
@@ -99,7 +95,7 @@ export const postRoute = async (
       title: title,
       description: description,
       distance: distance,
-      type: typesRequestArray,
+      type: type,
       categories: category,
       districts: districts,
       durations: durations,
@@ -117,7 +113,7 @@ export const postRoute = async (
       title: title,
       description: description,
       distance: distance,
-      type: typesRequestArray,
+      type: type,
       categories: category,
       districts: districts,
       durations: durations,

@@ -53,6 +53,7 @@ export interface SaveSwitches {
 export interface Checkboxes {
   array: Array<any>
 }
+
 export interface SaveSelectors {
   saveForm: SaveForm,
   setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>,
@@ -71,18 +72,18 @@ export interface SaveForm {
   wheelChair: boolean,
   visuallyImpaired: boolean,
   approved: boolean,
-  durations: Array<{
-    name: string,
-    number: number
-  }>,
+  durations: Array<any>,
   categories: Array<string>,
-  districts: Array<string>,
-  type: Array<{
-    title: string,
-    rus: string
-  }>,
+  districts: Array<any>,
+  type: Array<any>,
 }
 
+export interface TypesCheckboxesInterface {
+  array: Array<any>,
+  seter: React.Dispatch<React.SetStateAction<any[]>>
+  setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>,
+  saveForm: SaveForm,
+}
 export interface CurrFeat {
   lat: number;
   lng: number
