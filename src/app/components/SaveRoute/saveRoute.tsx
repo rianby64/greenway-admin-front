@@ -132,7 +132,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
         minutes: editingRoute.minutes,
         animals: editingRoute.animals,
         children: editingRoute.children,
-        wheelChair: editingRoute.wheelChair,
+        wheelChair: editingRoute.wheelchair,
         visuallyImpaired: editingRoute.visuallyImpaired,
         approved: editingRoute.approve,
         durations: editingRoute.durations,

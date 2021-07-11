@@ -7,7 +7,7 @@ export interface RouteToEdit {
   children: boolean,
   description: string,
   difficulty: any,
-  wheelChair: boolean,
+  wheelchair: boolean,
   visuallyImpaired: boolean,
   distanceFromSource: number,
   dots: Array<any>,
