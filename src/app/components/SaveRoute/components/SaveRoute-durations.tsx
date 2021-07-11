@@ -15,7 +15,6 @@ export const SaveRouteDurations: React.FunctionComponent<SaveDurations> = ({ arr
     <div className='durations'>
       {array.filter((el) => el.checked).map((el) => {
         if (el.checked) {
-          console.log(el);
           return (
             <input type='number' key={el.id} placeholder={`Продолжительнить при типе '${el.title}'`} id={el.title} onChange={(ev) => durationsHandler(el, ev)} value={el.duration} />
           )
