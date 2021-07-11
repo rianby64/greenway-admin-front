@@ -60,6 +60,7 @@ export const SaveRouteSelectors: React.FunctionComponent<SaveSelectors> = ({ sav
 
   return (
     <>
+     <label className='save-label'>Выберите сложность</label>
       <Select id='dif' noLayout={true} multiple={false} onChange={selectHandler}>
         <option selected={true} disabled={true}>Выберите сложность</option>
         {routeDif ? routeDif.map((el, ind) => {

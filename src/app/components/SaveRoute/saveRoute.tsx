@@ -49,7 +49,6 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
         number: el.duration != '' ? el.duration : 0
       })
     })
-    console.log(saveForm, durationArr);
     if (checkRequiredFields()) {
       if (!isEditing) {
         postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance)
@@ -117,12 +116,10 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   }, [editingRoute.id])
 
   const checkRequiredFields = useCallback(() => {
-    console.log(saveForm);
     if (saveForm.categories.length === 0 || saveForm.type.length === 0 || saveForm.difficulty === '' || saveForm.districts.length === 0) return false
     else return true
   }, [saveForm])
   useEffect(() => {
-    console.log(saveForm);
     fetchRoutetype();
     mapDistricts(routeDistricts);
     mapRouteCat(routeCat);

@@ -11,7 +11,6 @@ export const TypesCheckboxes: React.FunctionComponent<TypesCheckboxesInterface> 
       ...saveForm,
       type: array.filter(el => el.checked),
     })
-    console.log(saveForm);
   }
 
   return (
