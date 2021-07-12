@@ -3,10 +3,12 @@ export interface RouteToEdit {
   animals: boolean,
   approve: boolean,
   categories: Array<any>,
+  districts: Array<any>,
   children: boolean,
   description: string,
   difficulty: any,
-  disabilities: boolean,
+  wheelchair: boolean,
+  visuallyImpaired: boolean,
   distanceFromSource: number,
   dots: Array<any>,
   durations: any,
@@ -39,6 +41,7 @@ export interface SaveInputs {
 }
 
 export interface SaveDurations {
+  array: Array<any>
   saveForm: SaveForm,
   setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>
 }
@@ -46,6 +49,11 @@ export interface SaveSwitches {
   saveForm: SaveForm,
   setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>
 }
+
+export interface Checkboxes {
+  array: Array<any>
+}
+
 export interface SaveSelectors {
   saveForm: SaveForm,
   setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>,
@@ -61,19 +69,21 @@ export interface SaveForm {
   minutes: number,
   animals: boolean,
   children: boolean,
-  disabilities: boolean,
+  wheelChair: boolean,
+  visuallyImpaired: boolean,
   approved: boolean,
-  durations: Array<{
-    name: string,
-    number: number
-  }>,
+  durations: Array<any>,
   categories: Array<string>,
-  type: Array<{
-    title: string,
-    rus: string
-  }>,
+  districts: Array<any>,
+  type: Array<any>,
 }
 
+export interface TypesCheckboxesInterface {
+  array: Array<any>,
+  seter: React.Dispatch<React.SetStateAction<any[]>>
+  setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>,
+  saveForm: SaveForm,
+}
 export interface CurrFeat {
   lat: number;
   lng: number
@@ -137,4 +147,5 @@ export enum ACTIONS {
 
 export enum EDIT_ACTIONS {
   SET_EDITING_ROUTE = 'SET_EDITING_ROUTE',
+  REMOVE_EDITING_ROUTE = 'REMOVE_EDITING_ROUTE'
 }

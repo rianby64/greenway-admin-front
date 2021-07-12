@@ -11,10 +11,16 @@ export const SaveRouteSwitches: React.FunctionComponent<SaveSwitches> = ({ saveF
           children: !saveForm.children
         });
         break;
-      case 'disabilities':
+      case 'wheelChair':
         setSaveForm({
           ...saveForm,
-          disabilities: !saveForm.disabilities
+          wheelChair: !saveForm.wheelChair
+        });
+        break;
+      case 'visuallyImpaired':
+        setSaveForm({
+          ...saveForm,
+          visuallyImpaired: !saveForm.visuallyImpaired
         });
         break;
       case 'approved':
@@ -36,12 +42,15 @@ export const SaveRouteSwitches: React.FunctionComponent<SaveSwitches> = ({ saveF
 
   return (
     <div className='switches_handler' style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '95%' }}>
-      <div className='switches_pair' style={{ display: 'flex', flexFlow: 'column', justifyContent: 'center', alignItems: 'center'}}>
-        <Switch id='animals' checked={saveForm.animals}  onChange={switchHandler} onLabel='С животными' offLabel='Без животных' />
+      <div className='switches_pair' style={{ display: 'flex', flexFlow: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        <Switch id='animals' checked={saveForm.animals} onChange={switchHandler} onLabel='С животными' offLabel='Без животных' />
         <Switch id='children' checked={saveForm.children} onChange={switchHandler} onLabel='С детьми' offLabel='Без детей' />
       </div>
-      <div className='switches_pair' style={{ display: 'flex', flexFlow: 'column', justifyContent: 'center', alignItems: 'center'}}>
-        <Switch id='disabilities' checked={saveForm.disabilities} onChange={switchHandler} onLabel='Подходит инвалидам' offLabel='Не подходит инвалидам' />
+      <div className='switches_pair' style={{ display: 'flex', flexFlow: 'column', justifyContent: 'center', alignItems: 'center' }}>
+        <Switch id='wheelChair' checked={saveForm.wheelChair} onChange={switchHandler} onLabel='Подходит людям на коляске' offLabel='Не подходит людям на коляске' />
+        <Switch id='visuallyImpaired' checked={saveForm.visuallyImpaired} onChange={switchHandler} onLabel='Доступно с нарушенем зрения' offLabel='Не доступно с нарушенем зрения' />
+      </div>
+      <div className='switches_pair' style={{ display: 'flex', flexFlow: 'column', justifyContent: 'center', alignItems: 'center' }}>
         <Switch id='approved' checked={saveForm.approved} onChange={switchHandler} onLabel='Проверен' offLabel='Не проверен' />
       </div>
     </div>

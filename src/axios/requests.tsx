@@ -23,6 +23,16 @@ export const getCategories = async () => {
   }
 }
 
+export const getDistricts = async () => {
+  try {
+    return await axios.get(`${firebase}districts`).then((response) => {
+      return response.data;
+    });
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 
 export const getRouteTypes = async () => {
   try {
@@ -58,12 +68,14 @@ export const postRoute = async (
   approved: boolean,
   animals: boolean,
   children: boolean,
-  disabilities: boolean,
+  wheelChair: boolean,
+  visuallyImpaired: boolean,
   minutes: number,
   title: string,
   description: string,
   type: Array<{ title: string, rus: string }>,
   category: Array<string>,
+  districts: Array<string>,
   difficulty: string,
   durations: Array<{
     name: string,
@@ -72,22 +84,20 @@ export const postRoute = async (
   distance: number,
   update: boolean = false,
   id: string = '') => {
-  const typesRequestArray: Array<string> = [];
-  type.forEach((el) => {
-    typesRequestArray.push(el.title)
-  })
   if (!update) {
     const responseWithId = await axios.post(`${firebase}routes`, {
       approved: approved,
       animals: animals,
       children: children,
-      disabilities: disabilities,
+      wheelChair: wheelChair,
+      visuallyImpaired: visuallyImpaired,
       minutes: minutes,
       title: title,
       description: description,
       distance: distance,
-      type: typesRequestArray,
+      type: type,
       categories: category,
+      districts: districts,
       durations: durations,
       difficulty: difficulty
     })
@@ -97,13 +107,15 @@ export const postRoute = async (
       approved: approved,
       animals: animals,
       children: children,
-      disabilities: disabilities,
+      wheelChair: wheelChair,
+      visuallyImpaired: visuallyImpaired,
       minutes: minutes,
       title: title,
       description: description,
       distance: distance,
-      type: typesRequestArray,
+      type: type,
       categories: category,
+      districts: districts,
       durations: durations,
       difficulty: difficulty
     })

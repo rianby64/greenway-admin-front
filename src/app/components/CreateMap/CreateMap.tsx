@@ -5,10 +5,19 @@ import { DropDown } from '../DropDawn/DropDawn'
 import { MapControl } from '../MapControl/MapControl'
 import { DescriptionComponent } from '../PointDescriptionComponent/Description'
 import { SaveRoute } from '../SaveRoute/saveRoute'
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setDefaultState } from '../../../redux/useEditRouteReducer'
 
 export const CreateMap: React.FunctionComponent = () => {
   const { currentFeature } = useTypedSelector(store => store.route)
   const [saveRouteMenu, setSaveRouteMenu] = React.useState<boolean>(false)
+  const dispatch = useDispatch();
+  
+  useEffect(() => {
+    dispatch(setDefaultState())
+  }, [])
+
   return (
     <>
       <DescriptionComponent currentFeature={currentFeature} />
@@ -24,7 +33,7 @@ export const CreateMap: React.FunctionComponent = () => {
         style={{ zIndex: 1999, position: 'absolute', bottom: 0, left: '45%' }}
         onClick={() => { setSaveRouteMenu(true) }}>
         СОХРАНИТЬ
-                        </button>
+      </button>
       <DropDown />
       <SaveRoute isEditing={false} isShawn={saveRouteMenu} setIsShawn={setSaveRouteMenu} />
     </>

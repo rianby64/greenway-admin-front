@@ -1,27 +1,24 @@
 import React from 'react';
 import { SaveDurations } from '../../../../types/Types';
 
-export const SaveRouteDurations: React.FunctionComponent<SaveDurations> = ({ saveForm, setSaveForm }) => {
+export const SaveRouteDurations: React.FunctionComponent<SaveDurations> = ({ array, setSaveForm, saveForm }) => {
 
-  const durationsHandler = (e) => {
-    const newDurations = saveForm.durations;
-    newDurations.map((el: any) => {
-      if (el.name === e.target.id) {
-        el.number = e.target.value
-      }
-    })
+  const durationsHandler = (el, ev) => {
+    el.duration = ev.target.value;
     setSaveForm({
       ...saveForm,
-      durations: newDurations
+      durations: array
     })
   }
 
   return (
     <div className='durations'>
-      {saveForm.type.map((el, ind) => {
-        return (
-          <input type='number' key={ind} placeholder={`Продолжительнить при типе '${el.rus}'`} id={el.title} onChange={durationsHandler} />
-        )
+      {array.filter((el) => el.checked).map((el) => {
+        if (el.checked) {
+          return (
+            <input type='number' key={el.id} placeholder={`Продолжительнить при типе '${el.title}'`} id={el.title} onChange={(ev) => durationsHandler(el, ev)} value={el.duration} />
+          )
+        } else return null
       })}
     </div>
   )
