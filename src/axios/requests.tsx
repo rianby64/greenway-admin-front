@@ -6,6 +6,11 @@ export const firebase = '/api/';
 export const getAllRoutes = async () => {
   try {
     return await axios.get(`${firebase}routes`).then((response) => {
+      response.data.map((route) => {
+        route.dots.filter((el) => {
+          el != null
+        })
+      })
       return response.data
     })
   } catch (e) {
