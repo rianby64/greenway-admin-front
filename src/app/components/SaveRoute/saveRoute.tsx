@@ -55,13 +55,13 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
           .then((response) => {
             postLinesIntoRoute(polilines, response)
             postDotsIntoRoute(points, response)
-          })
-          .then(() => window.location.replace('/'))
+          }).then(() => window.location.replace('/'))
+
       } else {
         postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, true, id)
           .then(() => {
             postLinesIntoRoute(polilines, id);
-            postDotsIntoRoute(points, id)
+            postDotsIntoRoute(points, id);
           }).then(() => window.location.replace('/'))
       }
     } else alert('form is not filled')

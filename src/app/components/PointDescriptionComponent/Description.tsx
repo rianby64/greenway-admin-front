@@ -14,6 +14,7 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
   const isSettingsShawn = useTypedSelector(store => store.settings.isSettingsShawn);
   const [isShawn, setIsShawn] = useState(isSettingsShawn);
   const [form, setForm] = useState<PointForm>({
+    id: '',
     name: '',
     description: '',
     categories: ''
@@ -32,6 +33,7 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
   const submitHandler = () => {
     if (form.categories != '') {
       const pointToAdd: PointRouteObj = {
+        id: form.id,
         position: {
           lat: currentFeature.lat,
           lng: currentFeature.lng
@@ -44,6 +46,7 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
       dispatch(setCurrentFeature({}));
       dispatch(addPoint(editedPointArray(pointToAdd)))
       setForm({
+        id: '',
         name: '',
         description: '',
         categories: ''
@@ -66,6 +69,7 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
       if (currentFeature.lat === el.position.lat) {
         isPointFind = true;
         setForm({
+          id: el.id,
           name: el.title.toString(),
           description: el.description.toString(),
           categories: el.type,
@@ -74,6 +78,7 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
     })
     if (!isPointFind) {
       setForm({
+        id: '',
         name: '',
         description: '',
         categories: '',

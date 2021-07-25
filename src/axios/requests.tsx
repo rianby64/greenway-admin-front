@@ -6,9 +6,9 @@ export const firebase = '/api/';
 export const getAllRoutes = async () => {
   try {
     return await axios.get(`${firebase}routes`).then((response) => {
-      response.data.map((route) => {
-        route.dots.filter((el) => {
-          el != null
+      response.data.forEach((route) => {
+        route.dots = route.dots.filter((dot) => {
+          return dot != null
         })
       })
       return response.data
@@ -131,8 +131,21 @@ export const postLinesIntoRoute = async (arrOfLines: Array<Object>, id: string) 
   await axios.put(`${firebase}routes/${id}/lines`, arrOfLines)
 }
 
-export const deleteDot = async (routeId, dotId) => {
-  await axios.delete(`${firebase}routes/${routeId}/dot/${dotId}`)
+export const deleteDots = async (before, after) => {
+  const beforeIds = before.map((el) => {
+    return el.id
+  })
+  const afterIds = after.map((el) => {
+    return el.id
+  }).filter((el) => el != '')
+  if (beforeIds.length != 0) {
+    beforeIds.forEach(async (idToCheck) => {
+      console.log(idToCheck);
+
+      if (afterIds.indexOf(idToCheck) === -1) await axios.delete(`${firebase}/dot/${idToCheck}`)
+    })
+
+  }
 }
 
 export const postDotsIntoRoute = async (arrOfPoints: Array<Object>, id: string) => {
