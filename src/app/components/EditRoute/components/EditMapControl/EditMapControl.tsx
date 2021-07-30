@@ -146,6 +146,7 @@ export const EditingMapControl: React.FunctionComponent = () => {
     let pointsArray: Array<PointRouteObj> = [];
     dots.map((el) => {
       const pointToAdd: PointRouteObj = {
+        id: el.id,
         position: {
           lat: el.position.lat,
           lng: el.position.lng

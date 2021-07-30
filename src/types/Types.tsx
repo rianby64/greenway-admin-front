@@ -19,10 +19,11 @@ export interface RouteToEdit {
   id: string
 }
 export interface PointForm {
+  id: string;
   name: string;
-  description: string,
+  description: string;
   // categories: Array<String>;
-  categories: String
+  categories: String;
 }
 
 export interface DescrSelect {
@@ -100,6 +101,7 @@ export type SaveRouteType = {
 }
 
 export interface PointRouteObj {
+  id: string,
   position: {
     lat: number,
     lng: number
