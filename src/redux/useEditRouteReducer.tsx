@@ -18,32 +18,48 @@ const initialSate: RouteToEdit = {
   minutes: 0,
   title: '',
   types: [],
-  id: ''
+  id: '',
+  images: [],
+  creator: {
+    email: '',
+    logo: '',
+    name: '',
+    phone: '',
+    url: ''
+  }
 }
 
 export const useEditReducer = (state = initialSate, action: UserAction): RouteToEdit => {
   switch (action.type) {
     case EDIT_ACTIONS.SET_EDITING_ROUTE:
-      return {
-        ...state,
-        animals: action.payload.animals,
-        approve: action.payload.approved,
-        categories: action.payload.categories,
-        districts: action.payload.districts,
-        children: action.payload.children,
-        description: action.payload.description,
-        difficulty: action.payload.difficulty,
-        wheelchair: action.payload.wheelchair,
-        visuallyImpaired: action.payload.visuallyImpaired,
-        distanceFromSource: action.payload.distance,
-        dots: action.payload.dots,
-        durations: action.payload.durations,
-        lines: action.payload.lines,
-        minutes: action.payload.minutes,
-        title: action.payload.title,
-        types: action.payload.types,
-        id: action.payload.id
-      }
+        return {
+          ...state,
+          animals: action.payload.animals,
+          approve: action.payload.approved,
+          categories: action.payload.categories,
+          districts: action.payload.districts,
+          children: action.payload.children,
+          description: action.payload.description,
+          difficulty: action.payload.difficulty,
+          wheelchair: action.payload.wheelchair,
+          visuallyImpaired: action.payload.visuallyImpaired,
+          distanceFromSource: action.payload.distance,
+          dots: action.payload.dots,
+          durations: action.payload.durations,
+          lines: action.payload.lines,
+          minutes: action.payload.minutes,
+          title: action.payload.title,
+          types: action.payload.types,
+          id: action.payload.id,
+          images: action.payload.images === undefined ? initialSate.images : action.payload.images,
+          creator: action.payload.creator !== undefined ? {
+            email: action.payload.creator.email,
+            logo: action.payload.creator.logo,
+            name: action.payload.creator.name,
+            phone: action.payload.creator.phone,
+            url: action.payload.creator.url
+          } : initialSate.creator
+        }
     case EDIT_ACTIONS.REMOVE_EDITING_ROUTE:
       return {
         ...initialSate

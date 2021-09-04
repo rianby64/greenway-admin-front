@@ -87,8 +87,17 @@ export const postRoute = async (
     number: number
   }>,
   distance: number,
+  images: Array<any>,
+  creator: {
+    email: string
+    logo: string
+    name: string
+    phone: string
+    url: string
+  },
   update: boolean = false,
-  id: string = '') => {
+  id: string = '',
+) => {
   if (!update) {
     const responseWithId = await axios.post(`${firebase}routes`, {
       approved: approved,
@@ -104,7 +113,9 @@ export const postRoute = async (
       categories: category,
       districts: districts,
       durations: durations,
-      difficulty: difficulty
+      difficulty: difficulty,
+      images: images,
+      creator: creator
     })
     return responseWithId.data.id
   } else {
@@ -122,7 +133,9 @@ export const postRoute = async (
       categories: category,
       districts: districts,
       durations: durations,
-      difficulty: difficulty
+      difficulty: difficulty,
+      images: images,
+      creator: creator
     })
   }
 }

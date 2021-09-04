@@ -10,6 +10,7 @@ import { SaveRouteInputs } from './components/SaveRoute-Inputs';
 import { DistrictsCheckboxes } from './components/SaveRoute-Districts';
 import { CategoriesCheckboxes } from './components/SaveRoute-Categories';
 import { TypesCheckboxes } from './components/SaveRoute-Types';
+import { SaveRouteCreator } from './components/SaveRoute-Creator';
 
 export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, isShawn, setIsShawn }: SaveRouteType) => {
   const [routeTypes, setRouteTypes] = useState<Array<any>>([]);
@@ -32,7 +33,15 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
     durations: [],
     categories: [],
     districts: [],
-    type: []
+    type: [],
+    images: [''],
+    creator: {
+      email: '',
+      logo: '',
+      name: '',
+      phone: '',
+      url: '',
+    }
   });
 
   const submitRoute = () => {
@@ -51,14 +60,14 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
     })
     if (checkRequiredFields()) {
       if (!isEditing) {
-        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance)
+        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator)
           .then((response) => {
             postLinesIntoRoute(polilines, response)
             postDotsIntoRoute(points, response)
           }).then(() => window.location.replace('/'))
 
       } else {
-        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, true, id)
+        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, true, id)
           .then(() => {
             postLinesIntoRoute(polilines, id);
             postDotsIntoRoute(points, id);
@@ -89,6 +98,26 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
         })
       }
     }))
+  }
+
+  const imagesInputChange = (e, ind) => {
+    const editedImages = saveForm.images;
+    editedImages[ind] = e.target.value;
+    setSaveForm({
+      ...saveForm,
+      images: editedImages
+    })
+  }
+
+  const addImageElem = () => {
+    const newImages = saveForm.images;
+    newImages.push('');
+    setSaveForm({
+      ...saveForm,
+      images: newImages
+    })
+    console.log(saveForm.images);
+
   }
 
   const mapRouteTypes = (arr) => {
@@ -138,7 +167,9 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
         durations: editingRoute.durations,
         categories: editingRoute.categories,
         districts: editingRoute.districts,
-        type: editingRoute.types
+        type: editingRoute.types,
+        images: editingRoute.images.length ? editingRoute.images : [''],
+        creator: editingRoute.creator
       })
     }
   }, [editingRoute])
@@ -159,6 +190,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
     >
       <div onClick={(e) => e.stopPropagation()} className='save-workspace'>
         <form className='save-route-form'>
+          <SaveRouteCreator saveForm={saveForm} setSaveForm={setSaveForm} />
           <SaveRouteInputs saveForm={saveForm} setSaveForm={setSaveForm} />
           <SaveRouteSwitches saveForm={saveForm} setSaveForm={setSaveForm} />
           <DistrictsCheckboxes array={routeDistricts} />
@@ -172,6 +204,19 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
           />
           <TypesCheckboxes saveForm={saveForm} setSaveForm={setSaveForm} array={routeTypes} seter={setRouteTypes} />
           <SaveRouteDurations array={routeTypes} saveForm={saveForm} setSaveForm={setSaveForm} />
+          <div className='images'>
+            {saveForm.images.map((el, index) => {
+              console.log(el, index);
+              return (
+                <div className="images-input">
+                  <div className='inputs'>
+                    <input className='image-input' type='text' placeholder='Вставьте ссылку на фотографию' value={el} onChange={(e) => imagesInputChange(e, index)} />
+                    <p className='add-image' onClick={addImageElem}>Add image</p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
           <button type='button' className='btn pink' onClick={submitRoute}>Отправить на сервер</button>
         </form>
       </div>
