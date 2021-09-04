@@ -12,7 +12,7 @@ export const SaveRouteDurations: React.FunctionComponent<SaveDurations> = ({ arr
   }
 
   return (
-    <div className='durations'>
+    <div className='durations' style={{borderBottom: '1px solid black', marginBottom: '10px'}}>
       {array.filter((el) => el.checked).map((el) => {
         if (el.checked) {
           return (

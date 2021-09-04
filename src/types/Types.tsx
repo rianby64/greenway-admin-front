@@ -16,7 +16,15 @@ export interface RouteToEdit {
   minutes: number,
   title: string,
   types: Array<any>,
-  id: string
+  id: string,
+  images: Array<any>,
+  creator: {
+    email: string
+    logo: string
+    name: string
+    phone: string
+    url: string
+  }
 }
 export interface PointForm {
   id: string;
@@ -77,6 +85,14 @@ export interface SaveForm {
   categories: Array<string>,
   districts: Array<any>,
   type: Array<any>,
+  images: Array<any>,
+  creator: {
+    email: string
+    logo: string
+    name: string
+    phone: string
+    url: string
+  }
 }
 
 export interface TypesCheckboxesInterface {
