@@ -8,7 +8,7 @@ import { getCategories } from '../../../axios/requests';
 import { DescriptionInputs } from './components/DescriptionInputs';
 import { DescriptionsSelect } from './components/DescriptionSelect';
 
-export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = ({ currentFeature}: DescriptionProps) => {
+export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = ({ currentFeature }: DescriptionProps) => {
   const { points } = useTypedSelector(store => store.route);
   const dispatch = useDispatch();
   const isSettingsShawn = useTypedSelector(store => store.settings.isSettingsShawn);
@@ -97,7 +97,7 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
           name: el.title.toString(),
           description: el.description.toString(),
           categories: el.type,
-          images: el.images,
+          images: el.images && el.images.length ? el.images : [''],
         })
       }
     })
@@ -109,7 +109,7 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
         categories: '',
         images: ['']
       })
-    }        
+    }
   }, [isSettingsShawn])
 
   const formHandlerStyles = {
@@ -133,7 +133,7 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
     // height: '550px',
   }
 
-   const imagesDotsStyles = {
+  const imagesDotsStyles = {
     marginBottom: "20px",
     width: "95%"
   }
