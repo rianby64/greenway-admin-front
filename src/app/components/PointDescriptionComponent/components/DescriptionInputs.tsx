@@ -5,7 +5,7 @@ export const DescriptionInputs: React.FunctionComponent<DescrInput> = ({form, se
   const textArea = {
     width: '90%',
     paddingTop: '25px',
-    height: '100px'
+    minHeight: '100px'
   }
 
   const changeHandler = (e: any) => {

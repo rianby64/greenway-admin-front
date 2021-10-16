@@ -32,6 +32,7 @@ export interface PointForm {
   description: string;
   // categories: Array<String>;
   categories: String;
+  images: any[];
 }
 
 export interface DescrSelect {
@@ -126,6 +127,7 @@ export interface PointRouteObj {
   description: String,
   // categories: Array<String>
   type: String;
+  images: any[]
 }
 
 export interface RoutesState {
