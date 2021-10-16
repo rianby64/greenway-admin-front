@@ -8,7 +8,7 @@ import { getCategories } from '../../../axios/requests';
 import { DescriptionInputs } from './components/DescriptionInputs';
 import { DescriptionsSelect } from './components/DescriptionSelect';
 
-export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = ({ currentFeature}: DescriptionProps) => {
+export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = ({ currentFeature }: DescriptionProps) => {
   const { points } = useTypedSelector(store => store.route);
   const dispatch = useDispatch();
   const isSettingsShawn = useTypedSelector(store => store.settings.isSettingsShawn);
@@ -17,7 +17,8 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
     id: '',
     name: '',
     description: '',
-    categories: ''
+    categories: '',
+    images: [''],
   });
   const [dotTypes, setDotTypes] = useState<Array<any>>([]);
 
@@ -40,7 +41,8 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
         },
         title: form.name,
         description: form.description,
-        type: form.categories
+        type: form.categories,
+        images: form.images
       }
       dispatch(hideSettings());
       dispatch(setCurrentFeature({}));
@@ -49,12 +51,34 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
         id: '',
         name: '',
         description: '',
-        categories: ''
+        categories: '',
+        images: ['']
       })
     } else {
       alert('Выберите категорию точки')
     }
   }
+
+  const imagesInputChange = (e, ind) => {
+    const editedImages = form.images;
+    editedImages[ind] = e.target.value;
+    setForm({
+      ...form,
+      images: editedImages
+    })
+  }
+
+  const addImageElem = () => {
+    const newImages = form.images;
+    newImages.push('');
+    setForm({
+      ...form,
+      images: newImages
+    })
+    console.log(form.images);
+
+  }
+
 
   const fetchDottype = async () => {
     const fetched = await getCategories();
@@ -73,6 +97,7 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
           name: el.title.toString(),
           description: el.description.toString(),
           categories: el.type,
+          images: el.images && el.images.length ? el.images : [''],
         })
       }
     })
@@ -82,8 +107,9 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
         name: '',
         description: '',
         categories: '',
+        images: ['']
       })
-    }        
+    }
   }, [isSettingsShawn])
 
   const formHandlerStyles = {
@@ -104,8 +130,14 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
     flexFlow: 'column',
     justifyContent: 'space-around',
     alignItems: 'center',
-    height: '550px',
+    // height: '550px',
   }
+
+  const imagesDotsStyles = {
+    marginBottom: "20px",
+    width: "95%"
+  }
+
 
   return (
     <div
@@ -117,9 +149,22 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
       } : { display: 'none' }}
       className='shadow'>
       <div onClick={(e) => e.stopPropagation()} style={isShawn ? formHandlerStyles : { display: 'none' }}>
-        <form className='form' style={formStyles}>
+        <form className='form save-dot-form ' style={formStyles}>
           <DescriptionInputs form={form} setForm={setForm} />
           <DescriptionsSelect form={form} setForm={setForm} dotTypes={dotTypes} />
+          <div style={imagesDotsStyles} className='images-dots'>
+            {form.images.map((el, index) => {
+              console.log(el, index);
+              return (
+                <div className="images-input">
+                  <div className='inputs'>
+                    <input className='image-input' type='text' placeholder='Вставьте ссылку на фотографию' value={el} onChange={(e) => imagesInputChange(e, index)} />
+                    <p className='add-image' onClick={addImageElem}>Add image</p>
+                  </div>
+                </div>
+              )
+            })}
+          </div>
           <button className='btn red' type='button' value='сохранить' onClick={submitHandler}>Сохранить</button>
         </form>
       </div >

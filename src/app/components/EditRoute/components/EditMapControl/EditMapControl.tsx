@@ -153,7 +153,8 @@ export const EditingMapControl: React.FunctionComponent = () => {
         },
         title: el.title,
         description: el.description,
-        type: el.type
+        type: el.type,
+        images: el.images
       };
       pointsArray.push(pointToAdd);
     })
