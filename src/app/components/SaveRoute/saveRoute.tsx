@@ -226,7 +226,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
                 <div className="images-input">
                   <div className='inputs'>
                     <input className='image-input' type='text' placeholder='Вставьте ссылку на фотографию' value={el} onChange={(e) => imagesInputChange(e, index)} />
-                    <p className='add-image' onClick={addImageElem}>Add image</p>
+                    <p className='add-image' onClick={addImageElem}>Добавить еще фото</p>
                   </div>
                 </div>
               )
