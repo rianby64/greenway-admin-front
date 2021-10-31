@@ -61,7 +61,8 @@ export interface SaveSwitches {
 }
 
 export interface Checkboxes {
-  array: Array<any>
+  array: Array<any>,
+  label?: string
 }
 
 export interface SaveSelectors {
