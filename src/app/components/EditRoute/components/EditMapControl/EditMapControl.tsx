@@ -8,9 +8,11 @@ import L from 'leaflet';
 import { setDistanceZero } from '../../../../../redux/useRoutesReducer';
 import { useTypedSelector } from '../../../../../redux/useTypedSelector.hook';
 import { PointRouteObj } from './../../../../../types/Types';
+import { MapLayers } from '../../../../../types/Constants';
 
 export const EditingMapControl: React.FunctionComponent = () => {
   const { lines, dots } = useTypedSelector(store => store.editing)
+  const [currentMapLayer, setCurrentMapLayer] = React.useState<string>(MapLayers.OSM.name)
   const map = useMap()
   const dispatch = useDispatch()
   const currentFeatureDispatcher = (e) => {
@@ -141,6 +143,23 @@ export const EditingMapControl: React.FunctionComponent = () => {
     })
   }
 
+  const switchLayer = () => {
+    map.eachLayer((layer) => {
+      if (layer instanceof L.TileLayer) {
+        layer.remove()
+        if (currentMapLayer === MapLayers.OSM.name) {
+          const newTileLayer = new L.TileLayer(MapLayers.Sattelite.mapLayersUrl, { attribution: MapLayers.Sattelite.mapAttribution })
+          map.addLayer(newTileLayer)
+          setCurrentMapLayer(MapLayers.Sattelite.name)
+        } else {
+          const newTileLayer = new L.TileLayer(MapLayers.OSM.mapLayersUrl, { attribution: MapLayers.OSM.mapAttribution })
+          map.addLayer(newTileLayer)
+          setCurrentMapLayer(MapLayers.OSM.name)
+        }
+      }
+    })
+  }
+
   React.useEffect(() => {
     dispatch(addPoliline(lines));
     let pointsArray: Array<PointRouteObj> = [];
@@ -210,9 +229,10 @@ export const EditingMapControl: React.FunctionComponent = () => {
         }) : null}
       </FeatureGroup>
       <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution={MapLayers.OSM.mapAttribution}
+        url={MapLayers.OSM.mapLayersUrl}
       />
+      <button className="switch-tiles" style={{ 'zIndex': 5000000, position: 'absolute' }} onClick={switchLayer}>Изменить тип карты</button>
     </>
   )
 }

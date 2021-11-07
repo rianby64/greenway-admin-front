@@ -152,6 +152,12 @@ export interface UserAction {
   payload: any
 }
 
+export interface LayerObject {
+  mapAttribution: string;
+  mapLayersUrl: string;
+  name: string
+}
+
 export enum ACTIONS {
   SHAW_SETTINGS = 'SHOW_SETTINGS',
   HIDE_SETTINGS = 'HIDE_SETTINGS',
@@ -164,6 +170,7 @@ export enum ACTIONS {
   EDIT_POINT = 'EDIT_POINT',
   SET_DISTANCE = 'SET_DISTANCE',
   SET_DISTANCE_ZERO = 'SET_DISTANCE_ZERO',
+  SWITCH_MAP_LAYER = 'SWITCH_MAP_LAYER',
 }
 
 export enum EDIT_ACTIONS {
