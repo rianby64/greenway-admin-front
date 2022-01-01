@@ -7,7 +7,7 @@ import { SaveRouteSelectors } from './components/SaveRoute-selectors';
 import { SaveRouteSwitches } from './components/SaveRoute-switches';
 import { SaveRouteDurations } from './components/SaveRoute-durations';
 import { SaveRouteInputs } from './components/SaveRoute-Inputs';
-import { DistrictsCheckboxes } from './components/SaveRoute-Districts';
+import { AreasCheckboxes } from './components/SaveRoute-Area';
 import { CategoriesCheckboxes } from './components/SaveRoute-Categories';
 import { TypesCheckboxes } from './components/SaveRoute-Types';
 import { SaveRouteCreator } from './components/SaveRoute-Creator';
@@ -18,8 +18,8 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   const [routeCat, setRouteCat] = useState<Array<any>>([]);
   const [routeDistricts, setRouteDistricts] = useState<Array<any>>([]);
   const { distance, polilines, points } = useTypedSelector(store => store.route);
-  const editingRoute = useTypedSelector(store => store.editing)
-  const { id } = useTypedSelector(store => store.editing)
+  const editingRoute = useTypedSelector(store => store.editing);
+  const { id } = useTypedSelector(store => store.editing);
   const [saveForm, setSaveForm] = useState<SaveForm>({
     title: '',
     description: '',
@@ -45,7 +45,12 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   });
 
   const submitRoute = () => {
-    saveForm.districts = routeDistricts.filter((el) => el.checked).map((el) => el.id);
+    const districts: any[] = [];
+    routeDistricts.forEach((el) => {
+      console.log(el);
+      el.district.filter((el) => el.checked).forEach((el) => districts.push(el.id));
+    });
+    saveForm.districts = districts;
     saveForm.categories = routeCat.filter((el) => el.checked).map((el) => el.id);
     saveForm.type = routeTypes.filter((el) => el.checked).map((el) => el.id);
     const durationArr: Array<{
@@ -82,7 +87,17 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
         title: el.title,
         id: el.id,
         checked: !!editingRoute.districts.find((elem) => {
-          return elem.id === el.id
+          return elem.area.areaId === el.id
+        }),
+        district: el.district.map((elem) => {
+          return {
+            id: elem.id,
+            areaId: elem.areaId,
+            title: elem.title,
+            checked: !!editingRoute.districts.find((elemEditing) => {
+              return elemEditing.id === elem.id
+            })
+          }
         })
       }
     }));
@@ -193,7 +208,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
           <SaveRouteCreator saveForm={saveForm} setSaveForm={setSaveForm} />
           <SaveRouteInputs saveForm={saveForm} setSaveForm={setSaveForm} />
           <SaveRouteSwitches saveForm={saveForm} setSaveForm={setSaveForm} />
-          <DistrictsCheckboxes array={routeDistricts} />
+          <AreasCheckboxes array={routeDistricts} label={"Выберите область"} />
           <CategoriesCheckboxes array={routeCat} />
           <SaveRouteSelectors
             saveForm={saveForm}
@@ -211,7 +226,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
                 <div className="images-input">
                   <div className='inputs'>
                     <input className='image-input' type='text' placeholder='Вставьте ссылку на фотографию' value={el} onChange={(e) => imagesInputChange(e, index)} />
-                    <p className='add-image' onClick={addImageElem}>Add image</p>
+                    <p className='add-image' onClick={addImageElem}>Добавить еще фото</p>
                   </div>
                 </div>
               )

@@ -69,14 +69,14 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
   }
 
   const addImageElem = () => {
-    const newImages = form.images;
-    newImages.push('');
-    setForm({
-      ...form,
-      images: newImages
-    })
-    console.log(form.images);
-
+    if (form.images.length < 3) {
+      const newImages = form.images;
+      newImages.push('');
+      setForm({
+        ...form,
+        images: newImages
+      })
+    }
   }
 
 
@@ -159,7 +159,7 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
                 <div className="images-input">
                   <div className='inputs'>
                     <input className='image-input' type='text' placeholder='Вставьте ссылку на фотографию' value={el} onChange={(e) => imagesInputChange(e, index)} />
-                    <p className='add-image' onClick={addImageElem}>Add image</p>
+                    <p className='add-image' onClick={addImageElem}>Добавить еще фото</p>
                   </div>
                 </div>
               )

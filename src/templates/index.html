@@ -1,161 +1,182 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta charset="utf-8" />
-    <title>Using OpenLayers with Webpack</title>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
-      integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
-      crossorigin=""
-    />
-    <link
-      rel="stylesheet"
-      href="//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-    <style>
-      html,
-      body {
-        margin: 0;
-        height: 100%;
-      }
-      a {
-        color: rgb(47, 46, 46) !important;
-      }
-      #root > div {
-        position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 100%;
-      }
-      .district__checkBoxes {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 15px 25px;
-        width: 95%;
-        margin-top: 15px;
-        margin-bottom: 25px;
-        text-align: left;
-        position: relative;
-        padding-left: 55px;
-      }
-      /*--------------------*/
-      .inputs {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-      }
-      .add-image{
-        color: blue;
-        font-weight: 500;
-        cursor: pointer;
-      }
 
-      .image-input {
-        width: 70% !important;
-      }
+<head>
+  <meta charset="utf-8" />
+  <title>Using OpenLayers with Webpack</title>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin="" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+  <style>
+    html,
+    body {
+      margin: 0;
+      height: 100%;
+    }
 
-      .input-field {
-        width: 95% !important;
-      }
-      .save-workspace {
-        display: flex;
-        flex-flow: column;
-        align-items: center;
-        width: 60%;
-        height: 100%;
-        background-color: rgb(156, 154, 154);
-        z-index: 2001;
-        min-width: 545px;
-      }
-      .save-label {
-        font-size: 20px;
-        color: rgb(22, 22, 22);
-        margin-bottom: 15px;
-        width: 80%;
-        text-align: center;
-      }
-      .save-dot-form {
-        overflow-y: auto;
-      }
-      .save-route-form {
-        width: 100%;
-        overflow-y: auto;
-        text-align: center;
-      }
-      .save-input {
-        width: 80% !important;
-        color: black;
-        margin-bottom: 30px !important;
-      }
-      .input-block {
-        width: 100%;
-        display: flex;
-        flex-flow: column;
-        justify-content: center;
-        align-items: center;
-      }
-      .distance {
-        width: 80%;
-        text-align: start;
-        font-weight: bold;
-        font-size: 15px;
-        margin-bottom: 30px;
-        text-align: center;
-      }
-      label {
-        color: black;
-        font-size: 10px;
-      }
-      .switch {
-        margin-bottom: 10px;
-      }
-      .durations {
-        width: 100%;
-      }
-      /* this make discarding changes unavailable*/
-      .leaflet-right .leaflet-draw-actions li:last-child a {
-        display: none;
-      }
-      /*--------------------------------------------------------*/
-      .route-listblock {
-        overflow-y: auto;
-        position: absolute;
-        width: 200px !important;
-        height: 100px;
-        background-color: tomato;
-        z-index: 3000;
-        left: 60%;
-        top: 10px !important;
-      }
-      .route-listblock {
-        display: flex;
-        flex-flow: column;
-        z-index: 1999 !important;
-      }
-      .route-list {
-        width: 100%;
-        padding-left: 5px !important;
-        padding-bottom: 5px !important;
-        display: flex;
-        flex-flow: column;
-        justify-content: center;
-      }
-      .route-list-li {
-        font-size: 15px;
-      }
-      .route-list-li:hover {
-        opacity: 0.5;
-      }
-      /*-------------------------------------*/
-    </style>
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
+    a {
+      color: rgb(47, 46, 46) !important;
+    }
+
+    #root>div {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+    }
+
+    .district__checkBoxes {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 15px 25px;
+      width: 95%;
+      margin-top: 15px;
+      margin-bottom: 25px;
+      text-align: left;
+      position: relative;
+      padding-left: 55px;
+    }
+
+    /*--------------------*/
+    .inputs {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
+    .add-image {
+      color: blue;
+      font-weight: 500;
+      cursor: pointer;
+    }
+
+    .image-input {
+      width: 70% !important;
+    }
+
+    .input-field {
+      width: 95% !important;
+    }
+
+    .save-workspace {
+      display: flex;
+      flex-flow: column;
+      align-items: center;
+      width: 60%;
+      height: 100%;
+      background-color: rgb(156, 154, 154);
+      z-index: 2001;
+      min-width: 545px;
+    }
+
+    .save-label {
+      font-size: 20px;
+      color: rgb(22, 22, 22);
+      margin-bottom: 15px;
+      width: 80%;
+      text-align: center;
+    }
+
+    .save-dot-form {
+      overflow-y: auto;
+    }
+
+    .save-route-form {
+      width: 100%;
+      overflow-y: auto;
+      text-align: center;
+    }
+
+    .save-input {
+      width: 80% !important;
+      color: black;
+      margin-bottom: 30px !important;
+    }
+
+    .input-block {
+      width: 100%;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .distance {
+      width: 100%;
+      text-align: start;
+      font-weight: bold;
+      font-size: 15px;
+      margin-bottom: 30px;
+      text-align: center;
+    }
+
+    label {
+      color: black;
+      font-size: 10px;
+    }
+
+    .switch {
+      margin-bottom: 10px;
+    }
+
+    .durations {
+      width: 100%;
+    }
+
+    /* this make discarding changes unavailable*/
+    .leaflet-right .leaflet-draw-actions li:last-child a {
+      display: none;
+    }
+
+    /*--------------------------------------------------------*/
+    .route-listblock {
+      overflow-y: auto;
+      position: absolute;
+      width: 200px !important;
+      height: 100px;
+      background-color: tomato;
+      z-index: 3000;
+      left: 60%;
+      top: 10px !important;
+    }
+
+    .route-listblock {
+      display: flex;
+      flex-flow: column;
+      z-index: 1999 !important;
+    }
+
+    .route-list {
+      width: 100%;
+      padding-left: 5px !important;
+      padding-bottom: 5px !important;
+      display: flex;
+      flex-flow: column;
+      justify-content: center;
+    }
+
+    .route-list-li {
+      font-size: 15px;
+    }
+
+    .route-list-li:hover {
+      opacity: 0.5;
+    }
+
+    .switch-tiles {
+      top: 85px;
+      left: 5px;
+    }
+
+    /*-------------------------------------*/
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+</body>
+
 </html>
