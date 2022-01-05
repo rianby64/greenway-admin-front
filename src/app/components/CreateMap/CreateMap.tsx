@@ -66,7 +66,7 @@ export const CreateMap: React.FunctionComponent = () => {
         СОХРАНИТЬ
       </button>
       <DropDown fetchedRoutes={fetchedVerified} title={"Проверенные маршруты"} left={"60%"} />
-      <DropDown fetchedRoutes={fetchedNotVerified} title={"Не проверенные маршруты"} left={"40%"} />
+      <DropDown fetchedRoutes={fetchedNotVerified} title={"Не проверенные маршруты"} left={"35%"} />
       <SaveRoute
         isEditing={false}
         isShawn={saveRouteMenu}

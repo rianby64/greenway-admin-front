@@ -9,6 +9,7 @@ import { setDistanceZero } from '../../../../../redux/useRoutesReducer';
 import { useTypedSelector } from '../../../../../redux/useTypedSelector.hook';
 import { PointRouteObj } from './../../../../../types/Types';
 import { MapLayers } from '../../../../../types/Constants';
+import * as Styled from './styled';
 
 export const EditingMapControl: React.FunctionComponent = () => {
   const { lines, dots } = useTypedSelector(store => store.editing)
@@ -232,7 +233,7 @@ export const EditingMapControl: React.FunctionComponent = () => {
         attribution={MapLayers.OSM.mapAttribution}
         url={MapLayers.OSM.mapLayersUrl}
       />
-      <button className="switch-tiles" style={{ 'zIndex': 5000000, position: 'absolute' }} onClick={switchLayer}>Изменить тип карты</button>
+      <Styled.Button className="switch-tiles" onClick={switchLayer}>Изменить тип карты</Styled.Button>
     </>
   )
 }
