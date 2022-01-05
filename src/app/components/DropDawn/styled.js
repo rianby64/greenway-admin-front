@@ -4,8 +4,8 @@ export const Dropdown = styled.div`
   border-radius: 5px;
   overflow-y: hidden;
   position: absolute;
-  width: 300px !important;
-  height: 35px;
+  width: 20% !important;
+  height: 38px;
   /* height: 200px; */
   background-color: tomato;
   z-index: 3000;
@@ -14,6 +14,7 @@ export const Dropdown = styled.div`
   flex-flow: column;
   z-index: 1999 !important;
   transition: all 0.2s;
+  overflow-x: hidden;
   :hover {
     height: 200px;
     overflow-y: hidden;
@@ -28,10 +29,15 @@ export const DropdownHeader = styled.div`
   font-size: 18px;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   width: 100%;
 `;
 
-export const DropdownTitle = styled.span``;
+export const DropdownTitle = styled.span`
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: 1vw;
+`;
 
 export const Li = styled.li`
   padding-left: 5px;
@@ -54,4 +60,5 @@ export const Ul = styled.ul`
   display: flex;
   flex-flow: column;
   justify-content: center;
+  overflow-y: auto;
 `;
