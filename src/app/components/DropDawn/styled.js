@@ -59,6 +59,5 @@ export const Ul = styled.ul`
   padding-bottom: 5px !important;
   display: flex;
   flex-flow: column;
-  justify-content: center;
   overflow-y: auto;
 `;
