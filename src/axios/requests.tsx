@@ -99,7 +99,7 @@ export const postRoute = async (
   id: string = '',
 ) => {
   if (!update) {
-    const responseWithId = await axios.post(`${firebase}routes`, {
+    const responseWithId = await axios.post(`${firebase}routes/users`, {
       approved: approved,
       animals: animals,
       children: children,
@@ -141,7 +141,7 @@ export const postRoute = async (
 }
 
 export const postLinesIntoRoute = async (arrOfLines: Array<Object>, id: string) => {
-  await axios.put(`${firebase}routes/${id}/lines`, arrOfLines)
+  await axios.put(`${firebase}routes/users/${id}/lines`, arrOfLines)
 }
 
 export const deleteDots = async (before, after) => {
@@ -162,5 +162,5 @@ export const deleteDots = async (before, after) => {
 }
 
 export const postDotsIntoRoute = async (arrOfPoints: Array<Object>, id: string) => {
-  await axios.post(`${firebase}routes/${id}/dots`, arrOfPoints)
+  await axios.post(`${firebase}routes/users/${id}/dots`, arrOfPoints)
 }
