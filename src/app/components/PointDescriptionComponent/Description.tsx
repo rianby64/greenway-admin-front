@@ -144,7 +144,7 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
       onClick={() => dispatch(hideSettings())}
       style={isShawn ? {
         width: '100%',
-        zIndex: 2000,
+        zIndex: 2005,
         background: 'rgb(14 14 14 / 65%'
       } : { display: 'none' }}
       className='shadow'>
