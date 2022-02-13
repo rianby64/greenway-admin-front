@@ -8,15 +8,19 @@ import { SaveRoute } from "../SaveRoute/saveRoute";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { setDefaultState } from "../../../redux/useEditRouteReducer";
-import { getAllRoutes } from "../../../axios/requests";
+import { getAllRoutes, getAllUsersRoutes } from "../../../axios/requests";
 
 export const CreateMap: React.FunctionComponent = () => {
   const { currentFeature } = useTypedSelector((store) => store.route);
   const [saveRouteMenu, setSaveRouteMenu] = React.useState<boolean>(false);
   const [fetchedRoutes, setFetchedRoutes] = React.useState<Array<any>>([]);
   const [fetchedVerified, setFetchedVerified] = React.useState<Array<any>>([]);
-  const [fetchedNotVerified, setFetchedNotVerified] = React.useState<Array<any>>([]);
-
+  const [fetchedNotVerified, setFetchedNotVerified] = React.useState<
+    Array<any>
+  >([]);
+  const [fetchedUsersRoutes, setFetchedUsersRoutes] = React.useState<
+    Array<any>
+  >([]);
 
   const dispatch = useDispatch();
 
@@ -24,21 +28,20 @@ export const CreateMap: React.FunctionComponent = () => {
     setFetchedNotVerified(array.filter((el) => !el.approved));
     console.log(fetchedNotVerified, "notverif");
     console.log(fetchedRoutes, "notverif");
-
-
   };
 
   const filterVerified = (array): void => {
     setFetchedVerified(array.filter((el) => el.approved));
     console.log(fetchedVerified, "verif");
-    
   };
 
   const fetchAllRoutes = async () => {
     const fetchedData = await getAllRoutes();
+    const fetchedUsers = await getAllUsersRoutes();
     setFetchedRoutes(fetchedData);
     filterVerified(fetchedData);
     filterNotVerified(fetchedData);
+    setFetchedUsersRoutes(fetchedUsers);
   };
 
   useEffect(() => {
@@ -65,8 +68,22 @@ export const CreateMap: React.FunctionComponent = () => {
       >
         СОХРАНИТЬ
       </button>
-      <DropDown fetchedRoutes={fetchedVerified} title={"Проверенные маршруты"} left={"60%"} />
-      <DropDown fetchedRoutes={fetchedNotVerified} title={"Не проверенные маршруты"} left={"35%"} />
+      <DropDown
+        fetchedRoutes={fetchedUsersRoutes}
+        isUsers={true}
+        title={"Пользовательские маршруты"}
+        left={"14%"}
+      />
+      <DropDown
+        fetchedRoutes={fetchedVerified}
+        title={"Проверенные маршруты"}
+        left={"60%"}
+      />
+      <DropDown
+        fetchedRoutes={fetchedNotVerified}
+        title={"Не проверенные маршруты"}
+        left={"37%"}
+      />
       <SaveRoute
         isEditing={false}
         isShawn={saveRouteMenu}

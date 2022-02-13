@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { SaveForm, SaveRouteType } from '../../../types/Types';
 import { useTypedSelector } from './../../../redux/useTypedSelector.hook';
-import { getRouteCategories, getRouteTypes, postRoute, postDotsIntoRoute, getDistricts } from '../../../axios/requests';
+import { getRouteCategories, getRouteTypes, postRoute, postDotsIntoRoute, getDistricts, deleteFromUsersRoutes } from '../../../axios/requests';
 import { postLinesIntoRoute, getRouteDifficulty } from './../../../axios/requests';
 import { SaveRouteSelectors } from './components/SaveRoute-selectors';
 import { SaveRouteSwitches } from './components/SaveRoute-switches';
@@ -19,7 +19,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   const [routeDistricts, setRouteDistricts] = useState<Array<any>>([]);
   const { distance, polilines, points } = useTypedSelector(store => store.route);
   const editingRoute = useTypedSelector(store => store.editing);
-  const { id } = useTypedSelector(store => store.editing);
+  const { id, isUsers } = useTypedSelector(store => store.editing);
   const [saveForm, setSaveForm] = useState<SaveForm>({
     title: '',
     description: '',
@@ -71,8 +71,15 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
             postDotsIntoRoute(points, response)
           }).then(() => window.location.replace('/'))
 
-      } else {
-        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, true, id)
+      }else if (isEditing && isUsers ){
+        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, false, true, id)
+        .then((response) => {
+          postLinesIntoRoute(polilines, response);
+          postDotsIntoRoute(points, response);
+        }).then(() => {deleteFromUsersRoutes(id)}).then(() => window.location.replace('/'))
+      } 
+      else {
+        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, true, false, id)
           .then(() => {
             postLinesIntoRoute(polilines, id);
             postDotsIntoRoute(points, id);
@@ -148,7 +155,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
     }));
   }
 
-  const fetchRoutetype = useCallback(async () => {
+  const fetchRouteType = useCallback(async () => {
     const fetchedTypes = await getRouteTypes();
     const fetchedDifficulties = await getRouteDifficulty();
     const fetchedCat = await getRouteCategories();
@@ -163,12 +170,13 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
     if (saveForm.categories.length === 0 || saveForm.type.length === 0 || saveForm.difficulty === '' || saveForm.districts.length === 0) return false
     else return true
   }, [saveForm])
+
   useEffect(() => {
-    fetchRoutetype();
+    fetchRouteType();
     mapDistricts(routeDistricts);
     mapRouteCat(routeCat);
     mapRouteTypes(routeTypes);
-    if (editingRoute.id != '') {
+    if (editingRoute.id !== '') {
       setSaveForm({
         title: editingRoute.title,
         description: editingRoute.description,
