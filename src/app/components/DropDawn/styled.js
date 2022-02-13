@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const Dropdown = styled.div`
@@ -39,14 +40,11 @@ export const DropdownTitle = styled.span`
   font-size: 1vw;
 `;
 
-export const Li = styled.li`
+export const Li = styled(NavLink)`
   padding-left: 5px;
-  a {
-    color: #000000 !important;
-    font-size: 15px;
-  }
+  color: #000000 !important;
+  font-size: 15px;
   margin-bottom: 8px;
-
   border-bottom: 1px solid #342525;
   :hover {
     opacity: 0.5;
