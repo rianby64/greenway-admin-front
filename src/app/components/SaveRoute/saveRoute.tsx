@@ -138,8 +138,6 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
       ...saveForm,
       images: newImages
     })
-    console.log(saveForm.images);
-
   }
 
   const mapRouteTypes = (arr) => {
