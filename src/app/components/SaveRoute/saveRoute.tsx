@@ -61,31 +61,31 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
       durationArr.push({
         name: el.id,
         number: el.duration != '' ? el.duration : 0
-      })
+      });
     })
     if (checkRequiredFields()) {
       if (!isEditing) {
         postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator)
           .then((response) => {
-            postLinesIntoRoute(polilines, response)
-            postDotsIntoRoute(points, response)
-          }).then(() => window.location.replace('/'))
+            postLinesIntoRoute(polilines, response);
+            postDotsIntoRoute(points, response);
+          }).then(() => window.location.replace('/'));
 
       }else if (isEditing && isUsers ){
         postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, false, true, id)
         .then((response) => {
           postLinesIntoRoute(polilines, response);
           postDotsIntoRoute(points, response);
-        }).then(() => {deleteFromUsersRoutes(id)}).then(() => window.location.replace('/'))
+        }).then(() => {deleteFromUsersRoutes(id)}).then(() => window.location.replace('/'));
       } 
       else {
         postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, true, false, id)
           .then(() => {
             postLinesIntoRoute(polilines, id);
             postDotsIntoRoute(points, id);
-          }).then(() => window.location.replace('/'))
+          }).then(() => window.location.replace('/'));
       }
-    } else alert('form is not filled')
+    } else alert('form is not filled');
   }
 
   const mapDistricts = (arr) => {
