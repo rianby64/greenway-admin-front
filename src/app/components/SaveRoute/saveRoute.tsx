@@ -69,21 +69,21 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
           .then((response) => {
             postLinesIntoRoute(polilines, response);
             postDotsIntoRoute(points, response);
-          }).then(() => window.location.replace('/'));
+          }).then(() => setTimeout(() => {window.location.replace('/')}, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
 
       }else if (isEditing && isUsers ){
         postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, false, true, id)
         .then((response) => {
           postLinesIntoRoute(polilines, response);
           postDotsIntoRoute(points, response);
-        }).then(() => {deleteFromUsersRoutes(id)}).then(() => window.location.replace('/'));
+        }).then(() => {deleteFromUsersRoutes(id)}).then(() => setTimeout(() => {window.location.replace('/')}, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
       } 
       else {
         postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, true, false, id)
           .then(() => {
             postLinesIntoRoute(polilines, id);
             postDotsIntoRoute(points, id);
-          }).then(() => window.location.replace('/'));
+          }).then(() => setTimeout(() => {window.location.replace('/')}, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
       }
     } else alert('form is not filled');
   }
