@@ -130,7 +130,7 @@ export const DescriptionComponent: React.FunctionComponent<DescriptionProps> = (
     flexFlow: 'column',
     justifyContent: 'space-around',
     alignItems: 'center',
-    // height: '550px',
+    height: '100%',
   }
 
   const imagesDotsStyles = {
