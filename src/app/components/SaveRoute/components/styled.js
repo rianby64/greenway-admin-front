@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const CustomSelect = styled.select`
 border-radius: 5px;
-width: 90%;
+width: 95%;
 display: initial;
 margin-top: 20px;
 border: 1px solid #777474;
