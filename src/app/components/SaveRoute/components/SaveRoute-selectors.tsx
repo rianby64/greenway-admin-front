@@ -1,6 +1,6 @@
 import React from 'react';
-import { Select } from 'react-materialize';
 import { SaveSelectors } from '../../../../types/Types';
+import * as Styled from './styled.js';
 
 export const SaveRouteSelectors: React.FunctionComponent<SaveSelectors> = ({ saveForm, setSaveForm, routeDif }) => {
 
@@ -61,12 +61,12 @@ export const SaveRouteSelectors: React.FunctionComponent<SaveSelectors> = ({ sav
   return (
     <>
      <label className='save-label'>Выберите сложность</label>
-      <Select id='dif' noLayout={true} multiple={false} onChange={selectHandler}>
+      <Styled.CustomSelect id='dif' multiple={false} onChange={selectHandler}>
         <option selected={true} disabled={true}>Выберите сложность</option>
         {routeDif ? routeDif.map((el, ind) => {
           return <option selected={el.id === saveForm.difficulty ? true : false} key={ind} value={el.id}>{el.title}</option>
         }) : <option value='NoCategory'>Нет Сложностей</option>}
-      </Select>
+      </Styled.CustomSelect>
     </>
   )
 }
