@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import { DescrSelect } from '../../../../types/Types'
 import * as Styled from './styled';
 
@@ -13,11 +13,6 @@ export const DescriptionsSelect: React.FunctionComponent<DescrSelect> = ({ form,
       setForm({ ...form, categories: e.target.value })
     }    
   }
-
-  useEffect(() => {
-    console.log(form);
-    
-  }, [form])
 
   return (
     <Styled.SelectContainer className='cattegories'>
