@@ -22,6 +22,7 @@
       rel="stylesheet"
     />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="./L.KML.js"></script>
     <style>
       html,
       body {
@@ -181,7 +182,13 @@
         top: 85px;
         left: 5px;
       }
-
+      .open-file::file-selector-button {
+        border: none;
+        background-color: transparent;
+        height: 100%;
+        display: flex;
+        align-items: center;
+      }
       /*-------------------------------------*/
     </style>
   </head>
