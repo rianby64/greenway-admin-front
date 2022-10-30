@@ -19,8 +19,9 @@ import L from "leaflet";
 import { setDistanceZero } from "./../../../redux/useRoutesReducer";
 import { MapLayers } from "../../../types/Constants";
 import * as Styled from "./styled";
-import { interpretateKmlText } from "../../../helpers/kmlHelper";
 import { useTypedSelector } from "../../../redux/useTypedSelector.hook";
+import { FileReadExtensions } from "../../../types/Types";
+import { interpretateGpxText, interpretateKmlText } from "../../../helpers/fileReadHelper";
 
 export const MapControl: React.FunctionComponent = () => {
   const map = useMap();
@@ -169,17 +170,23 @@ export const MapControl: React.FunctionComponent = () => {
   };
 
   const readFile = (e) => {
-    var file = e.target.files[0];
+    const file = e.target.files[0];
+    const fileExtension = file.name.split(".").pop();
     const reader = new FileReader();
     reader.readAsText(file, "UTF-8");
     reader.onload = (readerEvent) => {
       const content = readerEvent.target;
       if (content?.result) {
         const stringResult = `${content?.result}`;
-        const polilineArray = interpretateKmlText(stringResult);
-        console.log(polilineArray);
-
-        dispatch(addPoliline(polilineArray));
+        console.log(fileExtension);
+        if (fileExtension === FileReadExtensions.kml) {
+          const polilineArray = interpretateKmlText(stringResult);
+          dispatch(addPoliline(polilineArray));
+        }
+        if (fileExtension === FileReadExtensions.gpx) {
+          const polilineArray = interpretateGpxText(stringResult);
+          dispatch(addPoliline(polilineArray));
+        }
       }
     };
   };

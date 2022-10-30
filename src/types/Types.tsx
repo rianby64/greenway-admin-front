@@ -158,6 +158,11 @@ export interface LayerObject {
   name: string;
 }
 
+export enum FileReadExtensions {
+  kml = 'kml',
+  gpx = 'gpx',
+}
+
 export enum ACTIONS {
   SHAW_SETTINGS = "SHOW_SETTINGS",
   HIDE_SETTINGS = "HIDE_SETTINGS",
