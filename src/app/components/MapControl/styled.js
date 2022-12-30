@@ -8,7 +8,7 @@ export const Button = styled.div`
   border: 1px solid black;
   background: white;
   :hover {
-    background: tomato;
+    background: #0E7505;
     color: white;
     cursor: pointer;
     border: 1px solid white;

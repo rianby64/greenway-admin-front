@@ -30,5 +30,5 @@ export const StyledImageHandler = styled.div`
 export const Wrapper = styled.div`
   width: 100%;
   z-index: 5000;
-  background: "rgb(14 14 14 / 65%";
+  background: #F9F9F9;
 `;

@@ -6,9 +6,9 @@ export const Dropdown = styled.div`
   overflow-y: hidden;
   position: absolute;
   width: 20% !important;
-  height: 38px;
+  height: 46px;
   /* height: 200px; */
-  background-color: tomato;
+  background-color: #0E7505;
   z-index: 3000;
   top: 10px !important;
   display: flex;
@@ -38,11 +38,12 @@ export const DropdownTitle = styled.span`
   text-overflow: ellipsis;
   white-space: nowrap;
   font-size: 1vw;
+  color: #F9F9F9;
 `;
 
 export const Li = styled(NavLink)`
   padding-left: 5px;
-  color: #000000 !important;
+  color: #F9F9F9 !important;
   font-size: 15px;
   margin-bottom: 8px;
   border-bottom: 1px solid #342525;
