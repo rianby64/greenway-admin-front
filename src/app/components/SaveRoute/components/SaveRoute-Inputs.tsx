@@ -16,9 +16,10 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
     <>
       <div>
         <div className='input-block' >
-          <label className='save-label'>Введите назввание маршрута</label>
+          <Styled.styledTitleLabel className='save-label'>Введите назввание маршрута</Styled.styledTitleLabel>
+          <Styled.styledPInput>Название маршрута</Styled.styledPInput>
           <Styled.styledInput
-            placeholder='Название маршрута'
+            placeholder='Экологическая тропа «Окно в природу»'
             name='title'
             value={saveForm.title}
             onChange={changeHandler}
@@ -27,9 +28,9 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
           </Styled.styledInput>
         </div>
         <div className='input-block'>
-          <label className='save-label'>Введите описание маршрута</label>
+          <Styled.styledTitleLabel className='save-label'>Введите описание маршрута</Styled.styledTitleLabel>
           <Styled.styledTextArea
-            placeholder='Описание маршрута'
+            placeholder='Опишите маршрут'
             name='description'
             value={saveForm.description}
             onChange={changeHandler}

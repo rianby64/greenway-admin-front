@@ -1,7 +1,7 @@
 import React from "react"
 import { Checkbox } from 'react-materialize'
 import { TypesCheckboxesInterface } from "../../../../types/Types";
-
+import * as Styled from "./styled";
 export const TypesCheckboxes: React.FunctionComponent<TypesCheckboxesInterface> = ({ array, seter, saveForm, setSaveForm }) => {
 
   const checkBoxHandler = (elem: any) => {
@@ -15,7 +15,7 @@ export const TypesCheckboxes: React.FunctionComponent<TypesCheckboxesInterface> 
 
   return (
     <>
-      <label className='save-label'>Способы перемещения</label>
+      <Styled.styledTitleLabel className='save-label'>Способы перемещения</Styled.styledTitleLabel>
       <div className='district__checkBoxes'>
         {array ? array.map((el) => {
           return (

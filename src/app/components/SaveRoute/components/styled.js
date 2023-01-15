@@ -41,6 +41,10 @@ export const styledInput = styled.input`
   background: rgba(226, 227, 218, 0.5);
   border: 1px solid #E2E3DA;
   border-radius: 2px;
+  :focus{
+    background: #D3DFB9;
+    color: #000000;
+  }
 `
 
 export const styledDivInputs = styled.div`
@@ -103,4 +107,32 @@ export const styledSpanSwitch = styled.span`
   font-size: 14px;
   line-height: 20px;
   color: #000000;
+`;
+
+export const styledTitleLabel = styled.label`
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 20px;
+  color: #0E7505;
+  margin-top: 30px;
+`;
+
+export const styledPInput = styled.p`
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
+`;
+
+export const styledDivDurations = styled.div`
+  /*borderBottom: '1px solid black', marginBottom: '10px', display:"flex", gap:'10px', flexDirection:"column", justifyContent:"center",*/
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  width: 50%;
+  gap: 10px;
 `;

@@ -16,13 +16,14 @@ export const SaveRouteCreator: React.FunctionComponent<SaveInputs> = ({ saveForm
 
   return (
     <>
-        <label className='save-label'>Введите ваши контактные данные</label>
+        <Styled.styledTitleLabel>Введите ваши контактные данные</Styled.styledTitleLabel>
         <Styled.styledDiv>
 
         <Styled.styledDivInputs>
+            <Styled.styledPInput>Email</Styled.styledPInput>
             <Styled.styledInput
+                placeholder='bober@gmail.com'
                 type='text'
-                placeholder='Email'
                 name='email'
                 value={saveForm.creator.email}
                 onChange={changeHandler}
@@ -30,10 +31,11 @@ export const SaveRouteCreator: React.FunctionComponent<SaveInputs> = ({ saveForm
             />
         </Styled.styledDivInputs>
         <Styled.styledDivInputs>
+            <Styled.styledPInput>Ссылка на ваше лого (если есть)</Styled.styledPInput>
             {/* <label className='save-label'>Введите время прохода маршрута в минутах</label> */}
             <Styled.styledInput
+                placeholder='Скопируйте ссылку на Ваш логотип'
                 type='text'
-                placeholder='Ссылка на ваше лого (если есть)'
                 name='logo'
                 value={saveForm.creator.logo}
                 onChange={changeHandler}
@@ -41,10 +43,11 @@ export const SaveRouteCreator: React.FunctionComponent<SaveInputs> = ({ saveForm
             />
         </Styled.styledDivInputs>
         <Styled.styledDivInputs>
+            <Styled.styledPInput>Ваше имя</Styled.styledPInput>
             {/* <label className='save-label'>Введите время прохода маршрута в минутах</label> */}
             <Styled.styledInput
+                placeholder='Иван'
                 type='text'
-                placeholder='Ваше имя'
                 name='name'
                 value={saveForm.creator.name}
                 onChange={changeHandler}
@@ -52,10 +55,11 @@ export const SaveRouteCreator: React.FunctionComponent<SaveInputs> = ({ saveForm
             />
         </Styled.styledDivInputs>
         <Styled.styledDivInputs>
+            <Styled.styledPInput>Ваш телефон</Styled.styledPInput>
             {/* <label className='save-label'>Введите время прохода маршрута в минутах</label> */}
             <Styled.styledInput
+                placeholder='+375 (29/33) 000 00 00'
                 type='text'
-                placeholder='Ваш телефон'
                 name='phone'
                 value={saveForm.creator.phone}
                 onChange={changeHandler}
@@ -63,10 +67,11 @@ export const SaveRouteCreator: React.FunctionComponent<SaveInputs> = ({ saveForm
             />
         </Styled.styledDivInputs>
         <Styled.styledDivInputs>
+            <Styled.styledPInput>Ссылка на ваш сайт (вашей организации)</Styled.styledPInput>
             {/* <label className='save-label'>Введите время прохода маршрута в минутах</label> */}
             <Styled.styledInput
+                placeholder='Скопируйте ссылку на Ваш сайт'
                 type='text'
-                placeholder='Ссылка на ваш сайт (вашей организации)'
                 name='url'
                 value={saveForm.creator.url}
                 onChange={changeHandler}

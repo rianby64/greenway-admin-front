@@ -1,6 +1,6 @@
 import React from 'react';
 import { SaveDurations } from '../../../../types/Types';
-
+import * as Styled from "./styled";
 export const SaveRouteDurations: React.FunctionComponent<SaveDurations> = ({ array, setSaveForm, saveForm }) => {
 
   const durationsHandler = (el, ev) => {
@@ -12,14 +12,14 @@ export const SaveRouteDurations: React.FunctionComponent<SaveDurations> = ({ arr
   }
 
   return (
-    <div className='durations' style={{borderBottom: '1px solid black', marginBottom: '10px'}}>
+    <Styled.styledDivDurations>
       {array.filter((el) => el.checked).map((el) => {
         if (el.checked) {
           return (
-            <input type='number' key={el.id} placeholder={`Продолжительнить при типе '${el.title}'`} id={el.title} onChange={(ev) => durationsHandler(el, ev)} value={el.duration} />
+            <Styled.styledInput type='number' key={el.id} placeholder={`Продолжительнить при типе '${el.title}'`} id={el.title} onChange={(ev) => durationsHandler(el, ev)} value={el.duration} />
           )
         } else return null
       })}
-    </div>
+    </Styled.styledDivDurations>
   )
 }
