@@ -19,9 +19,8 @@ export const SaveRouteCreator: React.FunctionComponent<SaveInputs> = ({ saveForm
         <label className='save-label'>Введите ваши контактные данные</label>
         <Styled.styledDiv>
 
-        <div className='input-block' >
+        <Styled.styledDivInputs>
             <Styled.styledInput
-                style={{ marginTop: '15px' }}
                 type='text'
                 placeholder='Email'
                 name='email'
@@ -29,8 +28,8 @@ export const SaveRouteCreator: React.FunctionComponent<SaveInputs> = ({ saveForm
                 onChange={changeHandler}
                 className='save-input'
             />
-        </div>
-        <div className='input-block' >
+        </Styled.styledDivInputs>
+        <Styled.styledDivInputs>
             {/* <label className='save-label'>Введите время прохода маршрута в минутах</label> */}
             <Styled.styledInput
                 type='text'
@@ -40,8 +39,8 @@ export const SaveRouteCreator: React.FunctionComponent<SaveInputs> = ({ saveForm
                 onChange={changeHandler}
                 className='save-input'
             />
-        </div>
-        <div className='input-block' >
+        </Styled.styledDivInputs>
+        <Styled.styledDivInputs>
             {/* <label className='save-label'>Введите время прохода маршрута в минутах</label> */}
             <Styled.styledInput
                 type='text'
@@ -51,8 +50,8 @@ export const SaveRouteCreator: React.FunctionComponent<SaveInputs> = ({ saveForm
                 onChange={changeHandler}
                 className='save-input'
             />
-        </div>
-        <div className='input-block' >
+        </Styled.styledDivInputs>
+        <Styled.styledDivInputs>
             {/* <label className='save-label'>Введите время прохода маршрута в минутах</label> */}
             <Styled.styledInput
                 type='text'
@@ -62,8 +61,8 @@ export const SaveRouteCreator: React.FunctionComponent<SaveInputs> = ({ saveForm
                 onChange={changeHandler}
                 className='save-input'
             />
-        </div>
-        <div className='input-block' >
+        </Styled.styledDivInputs>
+        <Styled.styledDivInputs>
             {/* <label className='save-label'>Введите время прохода маршрута в минутах</label> */}
             <Styled.styledInput
                 type='text'
@@ -73,7 +72,7 @@ export const SaveRouteCreator: React.FunctionComponent<SaveInputs> = ({ saveForm
                 onChange={changeHandler}
                 className='save-input'
             />
-        </div>
+        </Styled.styledDivInputs>
     </Styled.styledDiv>
 
     </>

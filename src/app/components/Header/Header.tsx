@@ -2,14 +2,14 @@ import React from 'react';
 import {DropDown} from "../DropDawn/DropDawn";
 import Search from "../Search/Search";
 import * as Styled from "./styledHeader";
-
+import logo from "../../images/logo.png";
 const Header = (props) => {
 
 
 
     return (
         <Styled.StyledHeader>
-            <img src="/logo.png"/>
+            <img src={logo}/>
             <Search/>
             <DropDown
                 fetchedRoutes={props.fetchedUsersRoutes}

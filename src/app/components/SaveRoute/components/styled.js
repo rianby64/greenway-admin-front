@@ -17,6 +17,8 @@ option {
 `
 
 export const styledDiv = styled.div`
+  margin: 0 auto;
+  width: 880px;
 display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -36,15 +38,69 @@ export const styledInput = styled.input`
   color: rgba(0, 0, 0, 0.3);
   align-items: center;
   padding: 10px 24px;
-max-width: 380px;
   background: rgba(226, 227, 218, 0.5);
   border: 1px solid #E2E3DA;
   border-radius: 2px;
 `
 
-export const SelectContainer = styled.div`
- display: flex;
- align-items: center;
- flex-flow column;
- width: 90%;
-`
+export const styledDivInputs = styled.div`
+width: 380px;
+`;
+
+
+export const styledSwitchLabel = styled.label`
+  cursor: pointer;
+  text-indent: -9999px;
+  width: 50px;
+  height: 30px;
+  background: #E2E3DA;
+  display: block;
+  border-radius: 100px;
+  position: relative;
+
+  :after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 18px;
+    height: 18px;
+    background: #fff;
+    border-radius: 16px;
+    transition: 0.3s;
+  }
+
+  :active:after {
+    background: #F9F9F9;
+    width: 30px;
+  }
+`;
+
+export const styledSwitchInput = styled.input`
+  height: 0;
+  width: 0;
+  visibility: hidden;
+  :checked + ${styledSwitchLabel}{
+    background: #D3DFB9;
+  }
+  :checked + ${styledSwitchLabel}:after{
+    background: #0E7505;
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+  }
+`;
+
+export const styledDivSwitch = styled.div`
+display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
+export const styledSpanSwitch = styled.span`
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
+`;

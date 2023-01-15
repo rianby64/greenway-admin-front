@@ -10,6 +10,6 @@ export const StyledHeader = styled.div`
 `;
 
 export const styledImg = styled.div`
-  background-image: url("/logo.png");
+  background-image: url("/src/app/images/logo.png");
 
 `;

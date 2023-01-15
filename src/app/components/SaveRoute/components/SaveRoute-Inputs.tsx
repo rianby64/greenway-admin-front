@@ -14,7 +14,7 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
 
   return (
     <>
-      <div style={{ display: 'flex', width: '95%' }}>
+      <div>
         <div className='input-block' >
           <label className='save-label'>Введите назввание маршрута</label>
           <Styled.styledInput
@@ -39,7 +39,7 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
           </Styled.styledTextArea>
         </div>
       </div>
-      <div style={{ display: 'flex', width: '100%' }}>
+      <div>
         <p className='distance'>Длинна маршрута: {distance} км.</p>
       </div>
     </>
