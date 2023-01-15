@@ -2,9 +2,8 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const Dropdown = styled.div`
-  border-radius: 5px;
+  border-radius: 2px;
   overflow-y: hidden;
-  position: absolute;
   width: 20% !important;
   height: 46px;
   /* height: 200px; */

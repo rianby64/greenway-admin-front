@@ -20,7 +20,7 @@ export const DropDown: React.FunctionComponent<any> = (props) => {
     console.log(props);
   }, [props]);
   return (
-    <Styled.Dropdown style={{ left: props.left }}>
+    <Styled.Dropdown>
       <Styled.DropdownHeader>
         <Styled.DropdownTitle>{props.title}</Styled.DropdownTitle>
         <i className="material-icons">expand_more</i>

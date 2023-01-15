@@ -11,6 +11,7 @@ import { AreasCheckboxes } from './components/SaveRoute-Area';
 import { CategoriesCheckboxes } from './components/SaveRoute-Categories';
 import { TypesCheckboxes } from './components/SaveRoute-Types';
 import { SaveRouteCreator } from './components/SaveRoute-Creator';
+import * as Styled from './components/styled.js';
 
 export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, isShawn, setIsShawn }: SaveRouteType) => {
   const [routeTypes, setRouteTypes] = useState<Array<any>>([]);
@@ -231,7 +232,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
               return (
                 <div className="images-input">
                   <div className='inputs'>
-                    <input className='image-input' type='text' placeholder='Вставьте ссылку на фотографию' value={el} onChange={(e) => imagesInputChange(e, index)} />
+                    <Styled.styledInput className='image-input' type='text' placeholder='Вставьте ссылку на фотографию' value={el} onChange={(e) => imagesInputChange(e, index)} />
                     <p className='add-image' onClick={addImageElem}>Добавить еще фото</p>
                   </div>
                 </div>

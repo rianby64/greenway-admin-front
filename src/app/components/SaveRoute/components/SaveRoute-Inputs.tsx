@@ -1,7 +1,7 @@
 import React from 'react';
 import { SaveInputs } from '../../../../types/Types';
 import { useTypedSelector } from '../../../../redux/useTypedSelector.hook';
-
+import * as Styled from './styled.js';
 export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm, setSaveForm }) => {
 
   const { distance } = useTypedSelector(store => store.route);
@@ -17,18 +17,18 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
       <div style={{ display: 'flex', width: '95%' }}>
         <div className='input-block' >
           <label className='save-label'>Введите назввание маршрута</label>
-          <input
+          <Styled.styledInput
             placeholder='Название маршрута'
             name='title'
             value={saveForm.title}
             onChange={changeHandler}
             className='save-input'
           >
-          </input>
+          </Styled.styledInput>
         </div>
         <div className='input-block'>
           <label className='save-label'>Введите описание маршрута</label>
-          <textarea
+          <Styled.styledTextArea
             placeholder='Описание маршрута'
             name='description'
             value={saveForm.description}
@@ -36,7 +36,7 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
             className='save-input'
           >
             {saveForm.description}
-          </textarea>
+          </Styled.styledTextArea>
         </div>
       </div>
       <div style={{ display: 'flex', width: '100%' }}>
