@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { setDefaultState } from "../../../redux/useEditRouteReducer";
 import { getAllRoutes, getAllUsersRoutes } from "../../../axios/requests";
 import Header from "../Header/Header";
-
+import * as Styled from "./styled";
 
 export const CreateMap: React.FunctionComponent = () => {
   const { currentFeature } = useTypedSelector((store) => store.route);
@@ -76,15 +76,18 @@ export const CreateMap: React.FunctionComponent = () => {
             isShawn={saveRouteMenu}
             setIsShawn={setSaveRouteMenu}
         />
-        <button
+        <Styled.styledButton
             className="waves-effect waves-light btn red"
-            style={{ zIndex: 1999, position: "absolute", bottom: 0, left: "45%" }}
+            style={{ zIndex: 1999, position: "absolute", bottom: 120, left: "75%" }}
             onClick={() => {
                 setSaveRouteMenu(true);
             }}
         >
-            СОХРАНИТЬ
-        </button>
+            СОХРАНИТЬ МАРШРУТ
+        </Styled.styledButton>
+        <Styled.styledButton2
+            style={{ zIndex: 1999, position: "absolute", bottom: 60, left: "75%" }}
+        >ОЧИСТИТЬ</Styled.styledButton2>
     </>
   );
 };

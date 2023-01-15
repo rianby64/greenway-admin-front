@@ -8,3 +8,8 @@ export const StyledHeader = styled.div`
   height: 100px;
   background: white;
 `;
+
+export const styledImg = styled.div`
+  background-image: url("/logo.png");
+
+`;

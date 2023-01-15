@@ -9,7 +9,7 @@ const Header = (props) => {
 
     return (
         <Styled.StyledHeader>
-
+            <img src="/logo.png"/>
             <Search/>
             <DropDown
                 fetchedRoutes={props.fetchedUsersRoutes}
