@@ -60,13 +60,16 @@ export const SaveRouteSelectors: React.FunctionComponent<SaveSelectors> = ({ sav
 
   return (
     <>
-     <Styled.styledTitleLabel className='save-label'>Выберите сложность</Styled.styledTitleLabel>
-      <Styled.CustomSelect id='dif' multiple={false} onChange={selectHandler}>
-        <option selected={true} disabled={true}>Выберите сложность</option>
-        {routeDif ? routeDif.map((el, ind) => {
-          return <option selected={el.id === saveForm.difficulty ? true : false} key={ind} value={el.id}>{el.title}</option>
-        }) : <option value='NoCategory'>Нет Сложностей</option>}
-      </Styled.CustomSelect>
+      <div style={{display:'flex', justifyContent:'space-between'}}>
+        <Styled.styledTitleLabel className='save-label'>Выберите сложность</Styled.styledTitleLabel>
+        <Styled.CustomSelect id='dif' multiple={false} onChange={selectHandler}>
+          <option selected={true} disabled={true}>Выберите сложность</option>
+          {routeDif ? routeDif.map((el, ind) => {
+            return <option selected={el.id === saveForm.difficulty ? true : false} key={ind} value={el.id}>{el.title}</option>
+          }) : <option value='NoCategory'>Нет Сложностей</option>}
+        </Styled.CustomSelect>
+      </div>
+
     </>
   )
 }

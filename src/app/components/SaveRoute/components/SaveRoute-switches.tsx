@@ -1,7 +1,7 @@
 import React from 'react';
 import { Switch } from 'react-materialize';
 import { SaveSwitches } from '../../../../types/Types';
-import * as Styled from "./styled";
+// import SwitchComp from "./SwitchComp";
 export const SaveRouteSwitches: React.FunctionComponent<SaveSwitches> = ({ saveForm, setSaveForm }) => {
   const switchHandler = (e) => {
     switch (e.target.id) {
@@ -9,6 +9,7 @@ export const SaveRouteSwitches: React.FunctionComponent<SaveSwitches> = ({ saveF
         setSaveForm({
           ...saveForm,
           children: !saveForm.children
+
         });
         break;
       case 'wheelChair':
@@ -38,17 +39,14 @@ export const SaveRouteSwitches: React.FunctionComponent<SaveSwitches> = ({ saveF
       default:
         break;
     }
+    console.log(saveForm);
   }
 
   return (
     <div className='switches_handler' style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '95%' }}>
       <div className='switches_pair' style={{ display: 'flex', flexFlow: 'column', justifyContent: 'center', alignItems: 'center' }}>
-        <Styled.styledDivSwitch>
-          <Styled.styledSpanSwitch>Без животных</Styled.styledSpanSwitch>
-          <Styled.styledSwitchInput type="checkbox" id="switch"/>
-          <Styled.styledSwitchLabel htmlFor="switch">Toggle</Styled.styledSwitchLabel>
-          <Styled.styledSpanSwitch>С животными</Styled.styledSpanSwitch>
-        </Styled.styledDivSwitch>
+
+        {/*<SwitchComp id={'animals'} checked={saveForm.animals} onChange={switchHandler} onLabel={'С животными'} offLabel={'Без животных'}/>*/}
         <Switch id='animals' checked={saveForm.animals} onChange={switchHandler} onLabel='С животными' offLabel='Без животных' />
         <Switch id='children' checked={saveForm.children} onChange={switchHandler} onLabel='С детьми' offLabel='Без детей' />
       </div>

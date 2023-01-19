@@ -18,7 +18,40 @@ export const StyledHandlers = styled.div`
   width: 40%;
   min-width: 190px;
   height: 100vh;
-  background: #9c9a9a;
+  background: #F9F9F9;
+`;
+
+export const styledInput = styled.input`
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.3);
+  align-items: center;
+  padding: 10px 24px;
+  background: rgba(226, 227, 218, 0.5);
+  border: 1px solid #E2E3DA;
+  border-radius: 2px;
+  :focus{
+    background: #D3DFB9;
+    color: #000000;
+  }
+`
+
+export const styledButton = styled.button`
+width: 260px;
+  cursor: pointer;
+  height: 50px;
+  background: #0E7505;
+  border-radius: 2px;
+  border: none;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  color: #F9F9F9;
 `;
 
 export const StyledImageHandler = styled.div`

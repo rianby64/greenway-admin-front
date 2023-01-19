@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Checkbox } from 'react-materialize'
 import { Checkboxes } from "../../../../types/Types"
-
+import * as Styled from './styled.js';
 export const AreasCheckboxes: React.FunctionComponent<Checkboxes> = ({ array, label }) => {
 
   const [districts, setDistricts] = useState<any[]>([]);
@@ -38,7 +38,7 @@ export const AreasCheckboxes: React.FunctionComponent<Checkboxes> = ({ array, la
   return (
 
     <>
-      <label className='save-label'>{label}</label>
+      <Styled.styledUnderTitleLabel className='save-label'>{label}</Styled.styledUnderTitleLabel>
       <div className='district__checkBoxes'>
         {array ? array.map((el, ind, array) => {
           return (
@@ -48,7 +48,7 @@ export const AreasCheckboxes: React.FunctionComponent<Checkboxes> = ({ array, la
       </div>
       {districts.length ?
         <div>
-          <label className='save-label'>{label}</label>
+          <Styled.styledUnderTitleLabel className='save-label'>{label}</Styled.styledUnderTitleLabel>
           <div className='district__checkBoxes'>
             {districts ? districts.map((el, ind) => {
               return (

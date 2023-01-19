@@ -16,7 +16,7 @@ export const DescriptionsSelect: React.FunctionComponent<DescrSelect> = ({ form,
 
   return (
     <Styled.SelectContainer className='cattegories'>
-      <label style={{ fontSize: '25px', fontWeight: 'bold', color: 'black' }}>Подходящие категории</label>
+      <Styled.styledTitleLabel>Подходящие категории</Styled.styledTitleLabel>
         <Styled.CustomSelect id='categories' style={{ width: '100%' }} multiple={false} onChange={selectHandler}>
           <option selected={true} disabled={true}>Выберите категорию </option>
           {dotTypes ? dotTypes.map((el, ind) => {

@@ -150,7 +150,7 @@ export const DescriptionComponent: React.FunctionComponent<
               return (
                 <div className="images-input">
                   <div className="inputs">
-                    <input
+                    <Styled.styledInput
                       className="image-input"
                       type="text"
                       placeholder="Вставьте ссылку на фотографию"
@@ -165,14 +165,14 @@ export const DescriptionComponent: React.FunctionComponent<
               );
             })}
           </Styled.StyledImageHandler>
-          <button
+          <Styled.styledButton
             className="btn red"
             type="button"
             value="сохранить"
             onClick={submitHandler}
           >
             Сохранить
-          </button>
+          </Styled.styledButton>
         </Styled.StyledForm>
       </Styled.StyledHandlers>
     </Styled.Wrapper>

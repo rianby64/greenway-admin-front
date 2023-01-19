@@ -1,6 +1,6 @@
 import React from 'react'
 import { DescrInput } from '../../../../types/Types';
-
+import * as Styled from './styled';
 export const DescriptionInputs: React.FunctionComponent<DescrInput> = ({form, setForm}) => {
   const textArea = {
     width: '90%',
@@ -15,15 +15,15 @@ export const DescriptionInputs: React.FunctionComponent<DescrInput> = ({form, se
 
   return (
     <>
-      <label style={{ fontSize: '25px', fontWeight: 'bold', color: 'black' }}>Название места</label>
-      <textarea
+      <Styled.styledTitleLabel>Название места</Styled.styledTitleLabel>
+      <Styled.styledTextArea
         style={textArea}
         onChange={changeHandler}
         name='name'
         placeholder='Введите название места'
         value={form.name} />
-      <label style={{ fontSize: '25px', fontWeight: 'bold', color: 'black' }}>Описание</label>
-      <textarea
+      <Styled.styledTitleLabel>Описание</Styled.styledTitleLabel>
+      <Styled.styledTextArea
         style={textArea}
         onChange={changeHandler}
         name='description'

@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 export const CustomSelect = styled.select`
 border-radius: 5px;
-width: 95%;
+width: 40%;
 display: initial;
   height: 40px;
 margin-top: 20px;
@@ -117,6 +117,15 @@ export const styledTitleLabel = styled.label`
   line-height: 20px;
   color: #0E7505;
   margin-top: 30px;
+`;
+
+export const styledUnderTitleLabel = styled.label`
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
 `;
 
 export const styledPInput = styled.p`
