@@ -15,7 +15,7 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
   return (
     <>
       <Styled.styledTitleLabel className='save-label'>Введите данные маршрута</Styled.styledTitleLabel>
-      <Styled.styledDiv>
+      <Styled.styledDivForInputs>
         <div>
           <div>
             <div className='input-block' >
@@ -40,7 +40,7 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
           </div>
 
         </div>
-      </Styled.styledDiv>
+      </Styled.styledDivForInputs>
       <Styled.styledTextArea
           placeholder='Опишите маршрут'
           name='description'

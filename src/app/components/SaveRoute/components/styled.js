@@ -18,10 +18,11 @@ option {
 
 export const styledDiv = styled.div`
   margin: 0 auto;
-  width: 880px;
+  width: 100%;
+  max-width: 880px;
   display: flex;
-  flex-wrap: wrap;
   justify-content: space-between;
+  
 `
 export const styledTextArea = styled.textarea`
   width: 905px;
@@ -30,6 +31,8 @@ export const styledTextArea = styled.textarea`
 
 `;
 export const styledInput = styled.input`
+  padding: 10px 24px;
+  width: 100%;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
@@ -41,6 +44,7 @@ export const styledInput = styled.input`
   background: rgba(226, 227, 218, 0.5);
   border: 1px solid #E2E3DA;
   border-radius: 2px;
+  box-sizing: border-box;
   :focus{
     background: #D3DFB9;
     color: #000000;
@@ -48,7 +52,7 @@ export const styledInput = styled.input`
 `
 
 export const styledDivInputs = styled.div`
-width: 380px;
+
 `;
 
 
@@ -61,7 +65,6 @@ export const styledSwitchLabel = styled.label`
   display: block;
   border-radius: 100px;
   position: relative;
-
   :after {
     content: '';
     position: absolute;
@@ -73,7 +76,6 @@ export const styledSwitchLabel = styled.label`
     border-radius: 16px;
     transition: 0.3s;
   }
-
   :active:after {
     background: #F9F9F9;
     width: 30px;
@@ -95,7 +97,7 @@ export const styledSwitchInput = styled.input`
 `;
 
 export const styledDivSwitch = styled.div`
-display: flex;
+  display: flex;
   align-items: center;
   gap: 10px;
 `;
@@ -110,13 +112,16 @@ export const styledSpanSwitch = styled.span`
 `;
 
 export const styledTitleLabel = styled.label`
+  display: block;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
   font-size: 18px;
   line-height: 20px;
   color: #0E7505;
-  margin-top: 30px;
+  max-width: 880px;
+  margin: 56px auto 25px ;
+  
 `;
 
 export const styledUnderTitleLabel = styled.label`
@@ -135,6 +140,7 @@ export const styledPInput = styled.p`
   font-size: 14px;
   line-height: 20px;
   color: #000000;
+  text-align: left;
 `;
 
 export const styledDivDurations = styled.div`
@@ -161,3 +167,26 @@ width: 260px;
   line-height: 22px;
   color: #F9F9F9;
 `;
+
+export const styledDivForInputs = styled.div`
+  display:flex;
+  flex-direction: column;
+  max-width: 380px;
+  width: 100%;
+`;
+
+export const styledDivText = styled.div`
+  margin-top: 30px;
+  border: 1px solid #91C18D;
+  padding: 10px 15px;
+`;
+
+export const styledDivTextP = styled.div`
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+`;
+
+
