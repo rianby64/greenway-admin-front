@@ -18,7 +18,7 @@ export const StyledHandlers = styled.div`
   width: 40%;
   min-width: 190px;
   height: 100vh;
-  background: #F9F9F9;
+  background: #f8f8f8;
 `;
 
 export const styledInput = styled.input`
@@ -64,4 +64,13 @@ export const Wrapper = styled.div`
   width: 100%;
   z-index: 5000;
   background: #F9F9F9;
+`;
+
+export const styledP = styled.p`
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
 `;

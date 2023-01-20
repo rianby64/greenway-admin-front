@@ -5,6 +5,7 @@ import { DescriptionComponent } from '../PointDescriptionComponent/Description'
 import { SaveRoute } from '../SaveRoute/saveRoute'
 import { EditingMapControl } from './components/EditMapControl/EditMapControl';
 
+
 export const CreateEditingMap: React.FunctionComponent = () => {
   const { currentFeature } = useTypedSelector(store => store.route);
   const [saveRouteMenu, setSaveRouteMenu] = React.useState<boolean>(false);
@@ -16,7 +17,7 @@ export const CreateEditingMap: React.FunctionComponent = () => {
         zoom={9}
         scrollWheelZoom={true}
       >
-        <EditingMapControl />
+        <EditingMapControl/>
       </MapContainer>
       <button
         className='waves-effect waves-light btn red'

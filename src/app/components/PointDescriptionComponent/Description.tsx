@@ -157,9 +157,9 @@ export const DescriptionComponent: React.FunctionComponent<
                       value={el}
                       onChange={(e) => imagesInputChange(e, index)}
                     />
-                    <p className="add-image" onClick={addImageElem}>
+                    <Styled.styledP className="add-image" onClick={addImageElem}>
                       Добавить еще фото
-                    </p>
+                    </Styled.styledP>
                   </div>
                 </div>
               );

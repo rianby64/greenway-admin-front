@@ -233,13 +233,13 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
                 <div className="images-input">
                   <div className='inputs'>
                     <Styled.styledInput className='image-input' type='text' placeholder='Вставьте ссылку на фотографию' value={el} onChange={(e) => imagesInputChange(e, index)} />
-                    <p className='add-image' onClick={addImageElem}>Добавить еще фото</p>
+                    <Styled.styledButton type='button' className='add-image' onClick={addImageElem}>Добавить еще фото</Styled.styledButton>
                   </div>
                 </div>
               )
             })}
           </div>
-          <button type='button' className='btn pink' onClick={submitRoute}>Отправить на сервер</button>
+          <Styled.styledButton type='button' className='btn pink' onClick={submitRoute}>Отправить на сервер</Styled.styledButton>
         </form>
       </div>
     </div>

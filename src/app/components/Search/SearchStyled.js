@@ -18,7 +18,6 @@ export const StyledDiv = styled.div`
 export const StyledMyInput = styled.input`
   
   align-items: center;
-  border: 2px solid #7BA7AB;
   height: 46px;
   width: 270px;
   font-family: 'Roboto'; 
