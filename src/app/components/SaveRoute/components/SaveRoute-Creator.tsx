@@ -1,7 +1,7 @@
 import React from 'react';
-import { SaveInputs } from '../../../../types/Types';
+import { SaveSelector } from '../../../../types/Types';
 import * as Styled from './styled.js';
-export const SaveRouteCreator: React.FunctionComponent<SaveInputs> = ({ saveForm, setSaveForm }) => {
+export const SaveRouteCreator: React.FunctionComponent<SaveSelector> = ({ saveForm, setSaveForm }) => {
 
   const changeHandler = (e: any) => {
     let { name, value } = e.target;

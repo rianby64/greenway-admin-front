@@ -10,14 +10,18 @@ export const CategoriesCheckboxes: React.FunctionComponent<Checkboxes> = ({ arra
 
   return (
     <>
-      <Styled.styledTitleLabel className='save-label'>Категории</Styled.styledTitleLabel>
-      <div className='district__checkBoxes'>
-        {array ? array.map((el) => {
-          return (
-            <Checkbox className={'checkboxes'} checked={el.checked} filledIn id={`district_${el.id}`} label={el.title} onChange={() => checkBoxHandler(el)} value={el.id} />
-          )
-        }) : <Checkbox filledIn id={`district_Nodata`} label={`Нет данных`} disabled={true} value={''} />}
-      </div>
+        <Styled.styledDiv style={{flexDirection:'column'}}>
+            <Styled.styledUnderTitleLabel className='save-label'>Выберите категорию (категории)*</Styled.styledUnderTitleLabel>
+            <div className='district__checkBoxes'>
+                {array ? array.map((el) => {
+                    return (
+                        <Checkbox className={'checkboxes'} checked={el.checked} filledIn id={`district_${el.id}`} label={el.title} onChange={() => checkBoxHandler(el)} value={el.id} />
+                    )
+                }) : <Checkbox filledIn id={`district_Nodata`} label={`Нет данных`} disabled={true} value={''} />}
+            </div>
+        </Styled.styledDiv>
+
+
     </>
   )
 }

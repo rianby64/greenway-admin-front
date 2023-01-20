@@ -48,6 +48,14 @@ export interface DescrInput {
 export interface SaveInputs {
   saveForm: SaveForm;
   setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>;
+  routeCat:any;
+routeDif:any;
+routeTypes:any;
+}
+export interface SaveSelector {
+  saveForm: SaveForm;
+  setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>;
+
 }
 
 export interface SaveDurations {

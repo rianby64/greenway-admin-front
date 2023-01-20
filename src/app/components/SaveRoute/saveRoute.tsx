@@ -3,7 +3,6 @@ import { SaveForm, SaveRouteType } from '../../../types/Types';
 import { useTypedSelector } from './../../../redux/useTypedSelector.hook';
 import { getRouteCategories, getRouteTypes, postRoute, postDotsIntoRoute, getDistricts, deleteFromUsersRoutes } from '../../../axios/requests';
 import { postLinesIntoRoute, getRouteDifficulty } from './../../../axios/requests';
-import { SaveRouteSelectors } from './components/SaveRoute-selectors';
 import { SaveRouteSwitches } from './components/SaveRoute-switches';
 import { SaveRouteDurations } from './components/SaveRoute-durations';
 import { SaveRouteInputs } from './components/SaveRoute-Inputs';
@@ -212,34 +211,34 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
     >
       <div onClick={(e) => e.stopPropagation()} className='save-workspace'>
         <form className='save-route-form'>
-          <SaveRouteCreator saveForm={saveForm} setSaveForm={setSaveForm} />
-          <SaveRouteInputs saveForm={saveForm} setSaveForm={setSaveForm} />
+          <SaveRouteCreator saveForm={saveForm} setSaveForm={setSaveForm}/>
+          <SaveRouteInputs saveForm={saveForm}
+                           setSaveForm={setSaveForm}
+                           routeCat={routeCat}
+                           routeDif={routeDif}
+                           routeTypes={routeTypes} />
           <SaveRouteSwitches saveForm={saveForm} setSaveForm={setSaveForm} />
           <AreasCheckboxes array={routeDistricts} label={"Выберите область"} />
           <CategoriesCheckboxes array={routeCat} />
-          <SaveRouteSelectors
-            saveForm={saveForm}
-            setSaveForm={setSaveForm}
-            routeCat={routeCat}
-            routeDif={routeDif}
-            routeTypes={routeTypes}
-          />
           <TypesCheckboxes saveForm={saveForm} setSaveForm={setSaveForm} array={routeTypes} seter={setRouteTypes} />
           <SaveRouteDurations array={routeTypes} saveForm={saveForm} setSaveForm={setSaveForm} />
           <div className='images'>
             {saveForm.images.map((el, index) => {
               console.log(el, index);
               return (
-                <div className="images-input">
-                  <div className='inputs'>
-                    <Styled.styledInput className='image-input' type='text' placeholder='Вставьте ссылку на фотографию' value={el} onChange={(e) => imagesInputChange(e, index)} />
-                    <Styled.styledButton type='button' className='add-image' onClick={addImageElem}>Добавить еще фото</Styled.styledButton>
-                  </div>
-                </div>
+
+                  <Styled.styledDiv style={{gap:'20px'}} className='inputs'>
+                    <Styled.styledInput style={{marginBottom:'10px'}}className='image-input' type='text' placeholder='Вставьте ссылку на фотографию' value={el} onChange={(e) => imagesInputChange(e, index)} />
+                    <Styled.styledButton style={{marginBottom:'10px'}} type='button' className='add-image' onClick={addImageElem}>Добавить еще фото</Styled.styledButton>
+                  </Styled.styledDiv>
+
               )
             })}
           </div>
-          <Styled.styledButton type='button' className='btn pink' onClick={submitRoute}>Отправить на сервер</Styled.styledButton>
+          <div style={{display:"flex", justifyContent:'center', marginTop:'20px'}}>
+            <Styled.styledButton type='button' className='btn pink' onClick={submitRoute}>Отправить на сервер</Styled.styledButton>
+          </div>
+
         </form>
       </div>
     </div>

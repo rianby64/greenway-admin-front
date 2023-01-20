@@ -2,14 +2,26 @@ import styled from 'styled-components'
 
 export const CustomSelect = styled.select`
 border-radius: 5px;
-width: 40%;
+width: 100%;
 display: initial;
-  height: 40px;
-margin-top: 20px;
+  padding: 13px 24px;
+  height: auto;
 border: 1px solid #777474;
-  background: rgba(226, 227, 218, 0.5);
+  background: #0E7505;
+  box-shadow: 2px 2px 20px rgba(97, 180, 45, 0.2);
+  color: #F9F9F9;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
 option {
-    font-size: 16px;
+    color:#F9F9F9;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 20px;
     :hover {
         cursor: pointer;
     }
@@ -31,7 +43,6 @@ export const styledTextArea = styled.textarea`
 
 `;
 export const styledInput = styled.input`
-  padding: 10px 24px;
   width: 100%;
   font-family: 'Roboto';
   font-style: normal;
@@ -121,16 +132,20 @@ export const styledTitleLabel = styled.label`
   color: #0E7505;
   max-width: 880px;
   margin: 56px auto 25px ;
+  text-align: left;
   
 `;
 
 export const styledUnderTitleLabel = styled.label`
+  display: block;
+  max-width: 880px;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
   color: #000000;
+  text-align: left;
 `;
 
 export const styledPInput = styled.p`
@@ -187,6 +202,14 @@ export const styledDivTextP = styled.div`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
+`;
+
+export const styledDivInformation = styled.div`
+display: flex;
+  max-width:880px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
 `;
 
 

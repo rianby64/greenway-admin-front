@@ -4,7 +4,7 @@ import { useTypedSelector } from '../../../redux/useTypedSelector.hook'
 import { DescriptionComponent } from '../PointDescriptionComponent/Description'
 import { SaveRoute } from '../SaveRoute/saveRoute'
 import { EditingMapControl } from './components/EditMapControl/EditMapControl';
-
+import * as Styled from './styled'
 
 export const CreateEditingMap: React.FunctionComponent = () => {
   const { currentFeature } = useTypedSelector(store => store.route);
@@ -19,12 +19,12 @@ export const CreateEditingMap: React.FunctionComponent = () => {
       >
         <EditingMapControl/>
       </MapContainer>
-      <button
+      <Styled.styledButton
         className='waves-effect waves-light btn red'
         style={{ zIndex: 1999, position: 'absolute', bottom: 0, left: '45%' }}
         onClick={() => { setSaveRouteMenu(true) }}>
-        Изменить хар-ки
-        </button>
+        Изменить характеристики
+        </Styled.styledButton>
       <SaveRoute isEditing={true} isShawn={saveRouteMenu} setIsShawn={setSaveRouteMenu} />
     </>
   )

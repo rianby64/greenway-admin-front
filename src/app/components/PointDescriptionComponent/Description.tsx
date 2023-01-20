@@ -148,7 +148,8 @@ export const DescriptionComponent: React.FunctionComponent<
             {form.images.map((el, index) => {
               console.log(el, index);
               return (
-                <div className="images-input">
+
+
                   <div className="inputs">
                     <Styled.styledInput
                       className="image-input"
@@ -161,7 +162,7 @@ export const DescriptionComponent: React.FunctionComponent<
                       Добавить еще фото
                     </Styled.styledP>
                   </div>
-                </div>
+
               );
             })}
           </Styled.StyledImageHandler>
