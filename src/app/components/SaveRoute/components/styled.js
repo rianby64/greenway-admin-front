@@ -15,16 +15,23 @@ border: 1px solid #777474;
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
+ 
 option {
-    color:#F9F9F9;
+  color: rgba(0, 0, 0, 0.5);
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
+  background:#F9F9F9;
     :hover {
+      background: #D3DFB9;
+      color: #000000;
         cursor: pointer;
     }
+  :checked{
+    background: #D3DFB9;
+  }
 }
 `
 
