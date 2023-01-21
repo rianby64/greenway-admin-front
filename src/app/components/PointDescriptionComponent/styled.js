@@ -73,4 +73,5 @@ export const styledP = styled.p`
   font-size: 14px;
   line-height: 20px;
   color: #000000;
+  text-align: center;
 `;

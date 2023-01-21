@@ -4,8 +4,9 @@ import * as Styled from './styled';
 export const DescriptionInputs: React.FunctionComponent<DescrInput> = ({form, setForm}) => {
   const textArea = {
     width: '90%',
-    paddingTop: '25px',
-    minHeight: '100px'
+    padding: '10px 24px',
+    minHeight: '100px',
+      boxSizing:'border-box'
   }
 
   const changeHandler = (e: any) => {

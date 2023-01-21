@@ -12,14 +12,26 @@ export const SaveRouteDurations: React.FunctionComponent<SaveDurations> = ({ arr
   }
 
   return (
-    <Styled.styledDivDurations>
+      <Styled.styledDiv style={{display:'flex', flexDirection:'column', marginBottom:'30px'}}>
       {array.filter((el) => el.checked).map((el) => {
         if (el.checked) {
           return (
-            <Styled.styledInput type='number' key={el.id} placeholder={`Продолжительнить при типе '${el.title}'`} id={el.title} onChange={(ev) => durationsHandler(el, ev)} value={el.duration} />
+                <div style={{marginBottom:'15px', display:'flex', flexDirection:'row', alignItems:'center', justifyContent:'space-between'}}>
+                  <Styled.styledSpan>Введите ориентировочное время прохождения маршрута на способе: {el.title}</Styled.styledSpan>
+                  <div>
+                    <Styled.styledInputDuration type='number'
+                                                key={el.id}
+                                                placeholder={'100'}
+                                                id={el.title} onChange={(ev) => durationsHandler(el, ev)}
+                                                value={el.duration} />
+                    <Styled.styledSpan>Минут</Styled.styledSpan>
+                  </div>
+                </div>
+
+
           )
         } else return null
       })}
-    </Styled.styledDivDurations>
+      </Styled.styledDiv>
   )
 }

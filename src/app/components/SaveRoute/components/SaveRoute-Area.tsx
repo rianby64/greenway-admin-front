@@ -40,7 +40,7 @@ export const AreasCheckboxes: React.FunctionComponent<Checkboxes> = ({ array, la
 
     <>
       <Styled.styledDiv style={{flexDirection:'column'}}>
-        <Styled.styledUnderTitleLabel className='save-label'>{label}</Styled.styledUnderTitleLabel>
+        <Styled.styledUnderTitleLabel className='save-label'>{label} <span style={{color:'#0E7505'}}>*</span></Styled.styledUnderTitleLabel>
         <CheckboxStyled/>
         <div style={{display:'flex', gap:'30px', marginBottom:'30px'}}>
           {array ? array.map((el, ind, array) => {

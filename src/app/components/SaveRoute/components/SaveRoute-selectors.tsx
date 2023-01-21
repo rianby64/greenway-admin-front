@@ -61,7 +61,7 @@ export const SaveRouteSelectors: React.FunctionComponent<SaveSelectors> = ({ sav
   return (
     <>
       <div style={{display:'flex', flexDirection:'column'}}>
-        <Styled.styledUnderTitleLabel className='save-label'>Выберите сложность</Styled.styledUnderTitleLabel>
+        <Styled.styledUnderTitleLabel className='save-label'>Выберите сложность <span style={{color:'#0E7505'}}>*</span></Styled.styledUnderTitleLabel>
         <Styled.CustomSelect id='dif' multiple={false} onChange={selectHandler}>
           <option selected={true} disabled={true}>Выберите сложность</option>
           {routeDif ? routeDif.map((el, ind) => {

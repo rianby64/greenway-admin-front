@@ -16,7 +16,7 @@ export const TypesCheckboxes: React.FunctionComponent<TypesCheckboxesInterface> 
   return (
     <>
         <Styled.styledDiv style={{flexDirection:'column', marginBottom:'60px'}}>
-            <Styled.styledUnderTitleLabel className='save-label'>Выберите способ(ы) перемещения*</Styled.styledUnderTitleLabel>
+            <Styled.styledUnderTitleLabel className='save-label'>Выберите способ(ы) перемещения <span style={{color:'#0E7505'}}>*</span></Styled.styledUnderTitleLabel>
             <div className='district__checkBoxes'>
                 {array ? array.map((el) => {
                     return (

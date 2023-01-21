@@ -44,9 +44,15 @@ export const styledDiv = styled.div`
   
 `
 export const styledTextArea = styled.textarea`
-  width: 905px;
-  height: 134px;
+  padding: 10px 24px;
+  box-sizing: border-box;
+  min-width: 905px;
+  min-height: 134px;
   background: rgba(226, 227, 218, 0.5);
+  :focus{
+    background: #D3DFB9;
+    color: #000000;
+  }
 
 `;
 export const styledInput = styled.input`
@@ -56,7 +62,7 @@ export const styledInput = styled.input`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  color: rgba(0, 0, 0, 0.3);
+  color: #000000;
   align-items: center;
   padding: 10px 24px;
   background: rgba(226, 227, 218, 0.5);
@@ -69,6 +75,26 @@ export const styledInput = styled.input`
   }
 `
 
+export const styledInputDuration = styled.input`
+  width: 40%;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: rgba(0, 0, 0, 0.3);
+  align-items: center;
+  padding: 10px 0px 10px 10px;
+  background: rgba(226, 227, 218, 0.5);
+  border: 1px solid #E2E3DA;
+  border-radius: 2px;
+  box-sizing: border-box;
+  margin: 0 5px 0 0px;
+  :focus{
+    background: #D3DFB9;
+    color: #000000;
+  }
+`
 export const styledDivInputs = styled.div`
 
 `;
@@ -247,6 +273,15 @@ export const styledCheckboxLabel = styled.label`
     border: 1px solid #91C18D;
     border-radius: 2px;
   }
+`;
+
+export const styledSpan = styled.span`
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
 `;
 
 
