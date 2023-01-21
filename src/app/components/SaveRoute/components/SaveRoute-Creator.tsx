@@ -1,7 +1,9 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { SaveSelector } from '../../../../types/Types';
 import * as Styled from './styled.js';
+import PopUp from "./PopUp";
 export const SaveRouteCreator: React.FunctionComponent<SaveSelector> = ({ saveForm, setSaveForm }) => {
+const [modalActive, setModalActive] = useState();
 
   const changeHandler = (e: any) => {
     let { name, value } = e.target;
@@ -48,7 +50,11 @@ export const SaveRouteCreator: React.FunctionComponent<SaveSelector> = ({ saveFo
 
             <Styled.styledDivForInputs>
                 <Styled.styledDivInputs>
-                    <Styled.styledPInput>Ссылка на ваше лого (если есть)</Styled.styledPInput>
+                    <Styled.styledPInput style={{display:'flex', justifyContent:'space-between'}}>Ссылка на логотип Вашей компании (если есть)
+                        <PopUp content={"Логотип - это фирменный знак, который люди ассоциируют с конкретным брендом. Зачем нужен логотип? 1.Логотип помогает выделиться среди конкурентов 2.Помощь в продвижении 3.Логотип является одним из способов защиты ваших авторских прав"} active={modalActive} setActive={setModalActive}/>
+
+                    </Styled.styledPInput>
+
                     {/* <label className='save-label'>Введите время прохода маршрута в минутах</label> */}
                     <Styled.styledInput
                         placeholder='Скопируйте ссылку на Ваш логотип'

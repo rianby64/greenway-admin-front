@@ -23,7 +23,7 @@ export const DropDown: React.FunctionComponent<any> = (props) => {
     <Styled.Dropdown>
       <Styled.DropdownHeader>
         <Styled.DropdownTitle>{props.title}</Styled.DropdownTitle>
-        <i className="material-icons">expand_more</i>
+        <i style={{color:'#F9F9F9'}}className="material-icons">expand_more</i>
       </Styled.DropdownHeader>
       <Styled.Ul className="route-list">
         {props.fetchedRoutes ? (

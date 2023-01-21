@@ -11,6 +11,7 @@ import { CategoriesCheckboxes } from './components/SaveRoute-Categories';
 import { TypesCheckboxes } from './components/SaveRoute-Types';
 import { SaveRouteCreator } from './components/SaveRoute-Creator';
 import * as Styled from './components/styled.js';
+// import PopUp from "./components/PopUp";
 
 export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, isShawn, setIsShawn }: SaveRouteType) => {
   const [routeTypes, setRouteTypes] = useState<Array<any>>([]);
@@ -20,6 +21,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   const { distance, polilines, points } = useTypedSelector(store => store.route);
   const editingRoute = useTypedSelector(store => store.editing);
   const { id, isUsers } = useTypedSelector(store => store.editing);
+  // const [modalActive, setModalActive] = useState();
   const [saveForm, setSaveForm] = useState<SaveForm>({
     title: '',
     description: '',
@@ -239,6 +241,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
           <div style={{display:"flex", justifyContent:'center', marginTop:'20px'}}>
             <Styled.styledButton type='button' className='btn pink' onClick={submitRoute}>Отправить на сервер</Styled.styledButton>
           </div>
+
 
         </form>
       </div>

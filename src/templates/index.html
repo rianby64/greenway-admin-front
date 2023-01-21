@@ -74,7 +74,54 @@
       }
 
 
+      .modal{
+        background: transparent;
+        height: 100vh;
+        width: 100vw;
+        position: absolute;
+        top: 0;
+        left: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transform: scale(0);
+        transition: 0.5s;
+      }
 
+      .modal.active{
+        transform: scale(1);
+      }
+
+      .modal__content{
+        max-width: 210px;
+        padding: 12px;
+        background: rgba(231, 240, 212, 0.8);
+        backdrop-filter: blur(10px);
+        border-radius: 2px;
+      }
+
+      .popUpDiv{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #0E7505;
+        width: 17px;
+        height: 17px;
+        border-radius: 100px;
+        font-family: 'Roboto';
+        font-style: normal;
+        font-weight: 600;
+        font-size: 14px;
+        line-height: 24px;
+        color: #FFFFFF;
+      }
+      .popUpDiv:hover{
+          cursor: pointer;
+        border: 1px solid #91C18D;
+      }
+      .popUpDiv:active{
+        background: #C10016;
+      }
       /*--------------------*/
 
 
@@ -112,6 +159,7 @@
       }
 
       .save-route-form {
+        position: relative;
         width: 100%;
         overflow-y: auto;
       }
