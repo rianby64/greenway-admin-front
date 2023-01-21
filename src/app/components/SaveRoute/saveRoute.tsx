@@ -222,15 +222,16 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
           <CategoriesCheckboxes array={routeCat} />
           <TypesCheckboxes saveForm={saveForm} setSaveForm={setSaveForm} array={routeTypes} seter={setRouteTypes} />
           <SaveRouteDurations array={routeTypes} saveForm={saveForm} setSaveForm={setSaveForm} />
-          <div className='images'>
+          <div style={{maxWidth:'880px', width:'100%', margin:'0 auto'}} className='images'>
+            <Styled.styledUnderTitleLabel>Фотографии маршрута</Styled.styledUnderTitleLabel>
             {saveForm.images.map((el, index) => {
               console.log(el, index);
               return (
 
-                  <Styled.styledDiv style={{gap:'20px'}} className='inputs'>
-                    <Styled.styledInput style={{marginBottom:'10px'}}className='image-input' type='text' placeholder='Вставьте ссылку на фотографию' value={el} onChange={(e) => imagesInputChange(e, index)} />
+                  <div className='inputs'>
+                    <Styled.styledInput style={{marginBottom:'10px', marginRight:'20px'}}className='image-input' type='text' placeholder='Вставьте ссылку на фотографию' value={el} onChange={(e) => imagesInputChange(e, index)} />
                     <Styled.styledButton style={{marginBottom:'10px'}} type='button' className='add-image' onClick={addImageElem}>Добавить еще фото</Styled.styledButton>
-                  </Styled.styledDiv>
+                  </div>
 
               )
             })}
