@@ -10,7 +10,7 @@ export const CategoriesCheckboxes: React.FunctionComponent<Checkboxes> = ({ arra
 
   return (
     <>
-        <Styled.styledDiv style={{flexDirection:'column'}}>
+        <Styled.styledDiv style={{flexDirection:'column', marginBottom:'60px'}}>
             <Styled.styledUnderTitleLabel className='save-label'>Выберите категорию (категории)*</Styled.styledUnderTitleLabel>
             <div className='district__checkBoxes'>
                 {array ? array.map((el) => {

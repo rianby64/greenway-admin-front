@@ -14,7 +14,7 @@ export const DistrictsCheckboxes: React.FunctionComponent<Checkboxes> = ({ array
       <div className='district__checkBoxes'>
         {array ? array.map((el) => {
           return (
-            <Checkbox className={'checkboxes'} checked={el.checked} filledIn id={`district_${el.id}`} label={el.title} onChange={() => checkBoxHandler(el)} value={el.id} />
+            <Checkbox checked={el.checked} filledIn id={`district_${el.id}`} label={el.title} onChange={() => checkBoxHandler(el)} value={el.id} />
           )
         }) : <Checkbox filledIn id={`district_Nodata`} label={`Нет данных`} disabled={true} value={''} />}
       </div>

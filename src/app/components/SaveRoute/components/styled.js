@@ -219,4 +219,35 @@ display: flex;
   justify-content: space-between;
 `;
 
+export const styledCheckboxInput = styled.input`
+  display: none;
+  cursor: pointer;
+
+`;
+
+export const styledCheckboxLabel = styled.label`
+  padding-left: 25px;
+  position: relative;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #000000;
+  :before{
+    
+    left: 0;
+    bottom: 1px;
+    content: "";
+    display: inline-block;
+    position: absolute;
+    width: 16px;
+    height: 16px;
+    background: #F9F9F9;
+    border: 1px solid #91C18D;
+    border-radius: 2px;
+  }
+`;
+
+
 
