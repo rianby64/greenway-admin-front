@@ -41,11 +41,12 @@ export const AreasCheckboxes: React.FunctionComponent<Checkboxes> = ({ array, la
     <>
       <Styled.styledDiv style={{flexDirection:'column'}}>
         <Styled.styledUnderTitleLabel className='save-label'>{label} <span style={{color:'#0E7505'}}>*</span></Styled.styledUnderTitleLabel>
-        <CheckboxStyled/>
+
         <div style={{display:'flex', gap:'30px', marginBottom:'30px'}}>
           {array ? array.map((el, ind, array) => {
             return (
-                <Checkbox key={ind} className={'checkboxes'} checked={el.checked} filledIn id={`district_${el.id}`} label={el.title} onChange={() => checkBoxHandler(el, array)} value={el.id} />
+                <CheckboxStyled key={ind} isChecked={el.checked} label={el.title} onChange={() => checkBoxHandler(el, array)}/>
+              //  <Checkbox key={ind} className={'checkboxes'} checked={el.checked} filledIn id={`district_${el.id}`} label={el.title} onChange={() => checkBoxHandler(el, array)} value={el.id} />
             )
           }) : <Checkbox filledIn id={`district_Nodata`} label={`Нет данных`} disabled={true} value={''} />}
         </div>
@@ -55,7 +56,8 @@ export const AreasCheckboxes: React.FunctionComponent<Checkboxes> = ({ array, la
               <div>
                 {districts ? districts.map((el, ind) => {
                   return (
-                      <Checkbox key={ind} className={'checkboxes'} checked={el.checked} filledIn id={`district_${el.id}`} label={el.title} onChange={() => districtHandler(el)} value={el.id} />
+                      <CheckboxStyled key={ind} isChecked={el.checked} label={el.title} onChange={() => districtHandler(el)}/>
+                      //<Checkbox key={ind} className={'checkboxes'} checked={el.checked} filledIn id={`district_${el.id}`} label={el.title} onChange={() => districtHandler(el)} value={el.id} />
                   )
                 }) : <Checkbox filledIn id={`district_Nodata`} label={`Нет данных`} disabled={true} value={''} />}
               </div>

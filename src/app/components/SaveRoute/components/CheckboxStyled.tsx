@@ -1,10 +1,13 @@
 import React from 'react';
 import * as Styled from './styled.js';
-const CheckboxStyled = () => {
+const CheckboxStyled:React.FunctionComponent<any> = (props) => {
+    const changeHandler=()=>{
+        props.onChange()
+    }
     return (
         <div>
-                <Styled.styledCheckboxInput type="checkbox" style={{margin:'0'}} />
-                <Styled.styledCheckboxLabel>Check one</Styled.styledCheckboxLabel>
+                <Styled.styledCheckboxInput checked={props.isChecked} type="checkbox" style={{margin:'0'}} />
+                <Styled.styledCheckboxLabel onClick={changeHandler}>{props.label}</Styled.styledCheckboxLabel>
         </div>
     );
 };

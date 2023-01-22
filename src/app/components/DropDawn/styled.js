@@ -15,7 +15,7 @@ export const Dropdown = styled.div`
   transition: all 0.2s;
   overflow-x: hidden;
   :hover {
-    height: 200px;
+    
     overflow-y: hidden;
     i {
       display: none;
@@ -45,7 +45,6 @@ export const DropdownTitle = styled.span`
 `;
 
 export const Li = styled(NavLink)`
-  
   color: #F9F9F9 !important;
   font-size: 15px;
   margin-bottom: 8px;

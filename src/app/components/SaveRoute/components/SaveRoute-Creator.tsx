@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import { SaveSelector } from '../../../../types/Types';
 import * as Styled from './styled.js';
 import PopUp from "./PopUp";
+import {PopUpText} from "../../../../constants/Text1";
 export const SaveRouteCreator: React.FunctionComponent<SaveSelector> = ({ saveForm, setSaveForm }) => {
 const [modalActive, setModalActive] = useState();
 
@@ -51,7 +52,7 @@ const [modalActive, setModalActive] = useState();
             <Styled.styledDivForInputs>
                 <Styled.styledDivInputs>
                     <Styled.styledPInput style={{display:'flex', justifyContent:'space-between'}}>Ссылка на логотип Вашей компании (если есть)
-                        <PopUp content={"Логотип - это фирменный знак, который люди ассоциируют с конкретным брендом. Зачем нужен логотип? 1.Логотип помогает выделиться среди конкурентов 2.Помощь в продвижении 3.Логотип является одним из способов защиты ваших авторских прав"} active={modalActive} setActive={setModalActive}/>
+                        <PopUp content={PopUpText.popUp1} active={modalActive} setActive={setModalActive}/>
 
                     </Styled.styledPInput>
 

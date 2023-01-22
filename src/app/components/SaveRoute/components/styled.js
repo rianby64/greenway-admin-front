@@ -85,7 +85,7 @@ export const styledInputDuration = styled.input`
   font-weight: 400;
   font-size: 14px;
   line-height: 20px;
-  color: rgba(0, 0, 0, 0.3);
+  color: #000000;
   align-items: center;
   padding: 10px 0px 10px 10px;
   background: rgba(226, 227, 218, 0.5);
@@ -287,6 +287,54 @@ export const styledSpan = styled.span`
   color: #000000;
 `;
 
+export const styledModalContent = styled.div`
+  max-width: 210px;
+  padding: 0 12px 0 12px;
+  background: rgba(231, 240, 212, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 2px;
+`;
+
+export const styledPopUpDiv = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #0E7505;
+  width: 17px;
+  height: 17px;
+  border-radius: 100px;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
+  color: #FFFFFF;
+  :hover{
+    cursor: pointer;
+    border: 1px solid #91C18D;
+  }
+  :active{
+    background: #C10016;
+  }
+`;
 
 
-
+export const styledModal = styled.div`
+  position: absolute;
+  background: transparent;
+  height: 100vh;
+  width: 100vw;
+  top: 0px;
+  bottom: 0px;
+  left: 5px;
+  right: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: scale(0);
+  transition: 0.5s;
+  &.active{
+    transform: scale(1);
+  }
+`;

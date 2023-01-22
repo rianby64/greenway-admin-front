@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useState} from 'react';
 // import { Switch } from 'react-materialize';
 import * as Styled from "./styled";
 import { SaveSwitches } from '../../../../types/Types';
 import SwitchComp from "./SwitchComp";
+import PopUp from "./PopUp";
+import {PopUpText} from "../../../../constants/Text1";
 export const SaveRouteSwitches: React.FunctionComponent<SaveSwitches> = ({ saveForm, setSaveForm }) => {
+  const [modalActive, setModalActive] = useState();
   const switchHandler = (id: 'children' | "wheelChair" | 'visuallyImpaired' | 'approved' | 'animals' ) => {
     switch (id) {
       case 'children':
@@ -44,21 +47,29 @@ export const SaveRouteSwitches: React.FunctionComponent<SaveSwitches> = ({ saveF
   }
 
   return (
-      <Styled.styledDiv style={{flexWrap:'wrap', marginBottom:'50px'}}>
 
-          <div className='switches_pair' style={{ display: 'flex', flexFlow: 'column', justifyContent: 'center', alignItems: 'center', gap:'20px'}}>
-            <SwitchComp id={'animals'} checked={saveForm.animals} onChange={switchHandler} onLabel={'С животными'} offLabel={'Без животных'}/>
-            <SwitchComp id={'children'} checked={saveForm.children} onChange={switchHandler} onLabel={'С детьми'} offLabel={'Без детей'}/>
-          </div>
-          <div className='switches_pair' style={{ display: 'flex', flexFlow: 'column', justifyContent: 'center', alignItems: 'center', gap:'20px' }}>
-            <SwitchComp id={'wheelChair'} checked={saveForm.wheelChair} onChange={switchHandler} onLabel={'Подходит людям на коляске'} offLabel={'Не подходит людям на коляске'}/>
-            <SwitchComp id={'visuallyImpaired'} checked={saveForm.visuallyImpaired} onChange={switchHandler} onLabel={'Доступно с нарушенем зрения'} offLabel={'Не доступно с нарушенем зрения'}/>
-          </div>
-          <div className='switches_pair' style={{ display: 'flex', flexFlow: 'column', justifyContent: 'center', alignItems: 'center', gap:'20px', marginTop:'20px' }}>
-            <SwitchComp id={'approved'} checked={saveForm.approved} onChange={switchHandler} onLabel={'Проверен'} offLabel={'Не проверен'}/>
-          </div>
+<div>
+  <Styled.styledUnderTitleLabel style={{marginBottom:'20px', marginLeft:'130px', display:'flex', gap:'10px'}}>Отметьте, для кого подходит маршрут
+    <PopUp content={PopUpText.popUp4} active={modalActive} setActive={setModalActive}
+    /></Styled.styledUnderTitleLabel>
+  <Styled.styledDiv style={{flexWrap:'wrap', marginBottom:'50px'}}>
+    <div className='switches_pair' style={{ display: 'flex', flexFlow: 'column', justifyContent: 'center', alignItems: 'center', gap:'20px'}}>
+      <SwitchComp id={'animals'} checked={saveForm.animals} onChange={switchHandler} onLabel={'С животными'} offLabel={'Без животных'}/>
+      <SwitchComp id={'children'} checked={saveForm.children} onChange={switchHandler} onLabel={'С детьми'} offLabel={'Без детей'}/>
+    </div>
+    <div className='switches_pair' style={{ display: 'flex', flexFlow: 'column', justifyContent: 'center', alignItems: 'center', gap:'20px' }}>
+      <SwitchComp id={'wheelChair'} checked={saveForm.wheelChair} onChange={switchHandler} onLabel={'Подходит людям на коляске'} offLabel={'Не подходит людям на коляске'}/>
+      <SwitchComp id={'visuallyImpaired'} checked={saveForm.visuallyImpaired} onChange={switchHandler} onLabel={'Доступно с нарушенем зрения'} offLabel={'Не доступно с нарушенем зрения'}/>
+    </div>
+    <div className='switches_pair' style={{ display: 'flex', flexFlow: 'column', justifyContent: 'center', alignItems: 'center', gap:'20px', marginTop:'20px' }}>
+      <SwitchComp id={'approved'} checked={saveForm.approved} onChange={switchHandler} onLabel={'Проверен'} offLabel={'Не проверен'}/>
+    </div>
 
-      </Styled.styledDiv>
+  </Styled.styledDiv>
+</div>
+
+
+
 
   )
 }
