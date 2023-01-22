@@ -24,7 +24,10 @@ option {
   font-size: 14px;
   line-height: 20px;
   background:#F9F9F9;
-    :hover {
+  box-shadow: 2px 2px 20px rgba(97, 180, 45, 0.2);
+  border-radius: 2px;
+
+  :hover {
       background: #D3DFB9;
       color: #000000;
         cursor: pointer;
