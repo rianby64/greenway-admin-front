@@ -26,6 +26,7 @@ export const Dropdown = styled.div`
 export const DropdownHeader = styled.div`
   padding: 12px;
   font-size: 18px;
+  height: 200px;
   display: flex;
   justify-content: space-between;
   align-items: center;

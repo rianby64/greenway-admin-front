@@ -248,11 +248,7 @@ display: flex;
   justify-content: space-between;
 `;
 
-export const styledCheckboxInput = styled.input`
-  display: none;
-  cursor: pointer;
 
-`;
 
 export const styledCheckboxLabel = styled.label`
   padding-left: 25px;
@@ -263,21 +259,51 @@ export const styledCheckboxLabel = styled.label`
   font-size: 14px;
   line-height: 20px;
   color: #000000;
+`;
+
+export const styledCheckboxInput = styled.input`
+  position: relative;
+  cursor: pointer;
+  width:20px;
+  height:20px;
   :before{
-    
-    left: 0;
-    bottom: 1px;
     content: "";
-    display: inline-block;
+    display: block;
     position: absolute;
-    width: 16px;
-    height: 16px;
-    background: #F9F9F9;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    background-color:#F9F9F9;
     border: 1px solid #91C18D;
     border-radius: 2px;
   }
+  
+  :checked:before{
+    content: "";
+    display: block;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+    top: 0;
+    left: 0;
+    background-color:#0E7505;
+  }
+  :checked:after{
+    content: "";
+    display: block;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    position: absolute;
+    top: 2px;
+    left: 7px;
+  }
 `;
-
 export const styledSpan = styled.span`
   font-family: 'Roboto';
   font-style: normal;
@@ -325,10 +351,8 @@ export const styledModal = styled.div`
   background: transparent;
   height: 100vh;
   width: 100vw;
-  top: 0px;
-  bottom: 0px;
-  left: 5px;
-  right: 0px;
+  top: 10px;
+  right: 10px;
   display: flex;
   align-items: center;
   justify-content: center;

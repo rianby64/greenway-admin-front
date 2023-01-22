@@ -5,9 +5,10 @@ const CheckboxStyled:React.FunctionComponent<any> = (props) => {
         props.onChange()
     }
     return (
-        <div>
-                <Styled.styledCheckboxInput checked={props.isChecked} type="checkbox" style={{margin:'0'}} />
-                <Styled.styledCheckboxLabel onClick={changeHandler}>{props.label}</Styled.styledCheckboxLabel>
+        <div style={{alignItems:'center'}}>
+                <Styled.styledCheckboxInput onClick={changeHandler} checked={props.isChecked} type="checkbox" style={{margin:'0'}} />
+                <Styled.styledCheckboxLabel >{props.label}</Styled.styledCheckboxLabel>
+
         </div>
     );
 };
