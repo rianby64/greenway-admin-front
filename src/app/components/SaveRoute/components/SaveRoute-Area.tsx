@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react"
-import { Checkbox } from 'react-materialize'
 import { Checkboxes } from "../../../../types/Types"
 import * as Styled from './styled.js';
 import CheckboxStyled from "./CheckboxStyled";
@@ -48,18 +47,18 @@ export const AreasCheckboxes: React.FunctionComponent<Checkboxes> = ({ array, la
                 <CheckboxStyled key={ind} сhecked={el.checked} label={el.title} onChange={() => checkBoxHandler(el, array)}/>
               //  <Checkbox key={ind} className={'checkboxes'} checked={el.checked} filledIn id={`district_${el.id}`} label={el.title} onChange={() => checkBoxHandler(el, array)} value={el.id} />
             )
-          }) : <Checkbox filledIn id={`district_Nodata`} label={`Нет данных`} disabled={true} value={''} />}
+          }) : <CheckboxStyled filledIn id={`district_Nodata`} label={`Нет данных`} disabled={true} value={''} />}
         </div>
         {districts.length ?
             <div style={{marginBottom:'30px'}}>
               <Styled.styledUnderTitleLabel className='save-label'>{label}</Styled.styledUnderTitleLabel>
-              <div>
+              <div style={{display:'flex', gap:'30px'}}>
                 {districts ? districts.map((el, ind) => {
                   return (
                       <CheckboxStyled key={ind} checked={el.checked} label={el.title} onChange={() => districtHandler(el)}/>
                       //<Checkbox key={ind} className={'checkboxes'} checked={el.checked} filledIn id={`district_${el.id}`} label={el.title} onChange={() => districtHandler(el)} value={el.id} />
                   )
-                }) : <Checkbox filledIn id={`district_Nodata`} label={`Нет данных`} disabled={true} value={''} />}
+                }) : <CheckboxStyled filledIn id={`district_Nodata`} label={`Нет данных`} disabled={true} value={''} />}
               </div>
             </div> : null}
       </Styled.styledDiv>

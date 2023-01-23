@@ -250,15 +250,15 @@ display: flex;
 
 
 
-export const styledCheckboxLabel = styled.label`
-  padding-left: 25px;
+export const styledCheckboxLabel = styled.div`
   position: relative;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
-  line-height: 20px;
+  line-height: 1;
   color: #000000;
+  mix-height:20px;
 `;
 
 export const styledCheckboxInput = styled.input`
@@ -277,6 +277,7 @@ export const styledCheckboxInput = styled.input`
     background-color:#F9F9F9;
     border: 1px solid #91C18D;
     border-radius: 2px;
+    box-sizing: border-box;
   }
   
   :checked:before{
@@ -322,7 +323,6 @@ export const styledModalContent = styled.div`
 `;
 
 export const styledPopUpDiv = styled.div`
-  position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
