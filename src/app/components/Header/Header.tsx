@@ -3,14 +3,18 @@ import {DropDown} from "../DropDawn/DropDawn";
 import Search from "../Search/Search";
 import * as Styled from "./styledHeader";
 import logo from "../../images/logo.png";
+import NewDropDawn from "../DropDawn/NewDropDawn";
 const Header = (props) => {
 
 
 
     return (
         <Styled.StyledHeader>
-            <img src={logo}/>
+            <img alt="logo" src={logo}/>
             <Search/>
+            <NewDropDawn fetchedRoutes={props.fetchedVerified}
+                         isUsers={true}
+                         title={"Пользовательские маршруты"}/>
             <DropDown
                 fetchedRoutes={props.fetchedUsersRoutes}
                 isUsers={true}

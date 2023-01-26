@@ -179,7 +179,11 @@ export const MapControl: React.FunctionComponent = () => {
         attribution={MapLayers.OSM.mapAttribution}
         url={MapLayers.OSM.mapLayersUrl}
       />
-      <Styled.Button className="switch-tiles" onClick={switchLayer}>Изменить тип карты</Styled.Button>
+      <div>
+        <img src = ""/>
+        <Styled.Button className="switch-tiles" onClick={switchLayer}>Изменить тип карты</Styled.Button>
+      </div>
+
     </>
   )
 }

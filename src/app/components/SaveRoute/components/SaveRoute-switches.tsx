@@ -7,7 +7,7 @@ import PopUp from "./PopUp";
 import {PopUpText} from "../../../../constants/Text1";
 export const SaveRouteSwitches: React.FunctionComponent<SaveSwitches> = ({ saveForm, setSaveForm }) => {
   const [modalActive, setModalActive] = useState();
-  const switchHandler = (id: 'children' | "wheelChair" | 'visuallyImpaired' | 'approved' | 'animals' ) => {
+  const switchHandler = (id: 'children' | "wheelChair" | 'visuallyImpaired' | 'approved' | 'animals') => {
     switch (id) {
       case 'children':
         setSaveForm({
@@ -48,27 +48,28 @@ export const SaveRouteSwitches: React.FunctionComponent<SaveSwitches> = ({ saveF
 
   return (
 
-<div>
-  <Styled.styledUnderTitleLabel style={{marginBottom:'20px', marginLeft:'130px', display:'flex', gap:'10px'}}>Отметьте, для кого подходит маршрут
-    <PopUp content={PopUpText.popUp4} active={modalActive} setActive={setModalActive}
-    /></Styled.styledUnderTitleLabel>
-  <Styled.styledDiv style={{flexWrap:'wrap', marginBottom:'50px'}}>
-    <div className='switches_pair' style={{ display: 'flex', flexFlow: 'column', justifyContent: 'center', alignItems: 'center', gap:'20px'}}>
-      <SwitchComp id={'animals'} checked={saveForm.animals} onChange={switchHandler} onLabel={'С животными'} offLabel={'Без животных'}/>
-      <SwitchComp id={'children'} checked={saveForm.children} onChange={switchHandler} onLabel={'С детьми'} offLabel={'Без детей'}/>
-    </div>
-    <div className='switches_pair' style={{ display: 'flex', flexFlow: 'column', justifyContent: 'center', alignItems: 'center', gap:'20px' }}>
-      <SwitchComp id={'wheelChair'} checked={saveForm.wheelChair} onChange={switchHandler} onLabel={'Подходит людям на коляске'} offLabel={'Не подходит людям на коляске'}/>
-      <SwitchComp id={'visuallyImpaired'} checked={saveForm.visuallyImpaired} onChange={switchHandler} onLabel={'Доступно с нарушенем зрения'} offLabel={'Не доступно с нарушенем зрения'}/>
-    </div>
-    <div className='switches_pair' style={{ display: 'flex', flexFlow: 'column', justifyContent: 'center', alignItems: 'center', gap:'20px', marginTop:'20px' }}>
-      <SwitchComp id={'approved'} checked={saveForm.approved} onChange={switchHandler} onLabel={'Проверен'} offLabel={'Не проверен'}/>
-    </div>
+      <div>
+        <Styled.styledUnderTitleLabel style={{marginBottom: '20px', marginLeft: '130px', display: 'flex', gap: '10px'}}>Отметьте,
+          для кого подходит маршрут
+          <PopUp content={PopUpText.popUp4} active={modalActive} setActive={setModalActive}
+          /></Styled.styledUnderTitleLabel>
+        <Styled.styledDiv style={{flexWrap: 'wrap', marginBottom: '50px', alignItems:'end'}}>
 
-  </Styled.styledDiv>
-</div>
+          <SwitchComp id={'animals'} label={'Питомцы'} checked={saveForm.animals} onChange={switchHandler}
+                      onLabel={'Да'} offLabel={'Нет'}/>
+          <SwitchComp id={'children'} label={'Дети'} checked={saveForm.children} onChange={switchHandler}
+                      onLabel={'Да'} offLabel={'Нет'}/>
+          <SwitchComp id={'wheelChair'} label={'Люди с нарушениями зрения'} checked={saveForm.wheelChair}
+                      onChange={switchHandler} onLabel={'Да'} offLabel={'Нет'}/>
+          <SwitchComp id={'visuallyImpaired'} label={'Люди, передвигающиеся на инвалидной коляске'}
+                      checked={saveForm.visuallyImpaired} onChange={switchHandler}
+                      onLabel={'Да'} offLabel={'Нет'}/>
+          <SwitchComp id={'approved'} label={'Маршрут проверен'} checked={saveForm.approved} onChange={switchHandler}
+                      onLabel={'Да'} offLabel={'Нет'}/>
 
 
+        </Styled.styledDiv>
+      </div>
 
 
   )

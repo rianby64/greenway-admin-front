@@ -72,6 +72,8 @@ export const styledInput = styled.input`
   border: 1px solid #E2E3DA;
   border-radius: 2px;
   box-sizing: border-box;
+  outline-color:#91C18D;
+  outline-width:1px;
   :focus{
     background: #D3DFB9;
     color: #000000;
@@ -130,6 +132,7 @@ export const styledSwitchLabel = styled.label`
 `;
 
 export const styledSwitchInput = styled.input`
+  position: absolute;
   height: 0;
   width: 0;
   visibility: hidden;
@@ -147,15 +150,32 @@ export const styledDivSwitch = styled.div`
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-direction: column;
 `;
 
 export const styledSpanSwitch = styled.span`
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 400;
+  font-size: 10px;
+  line-height: 20px;
+  color: #000000;
+`;
+
+export const styledSpanTopSwitch = styled.span`
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 20px;
   color: #000000;
+  max-width: 200px;
+  text-align: center;
+`;
+
+export const styledDivUnderSwitch = styled.div`
+display: flex;
+  gap: 20px;
 `;
 
 export const styledTitleLabel = styled.label`

@@ -13,10 +13,14 @@ const SwitchComp = (props) => {
     return (
         <div>
             <Styled.styledDivSwitch>
-                <Styled.styledSpanSwitch>{props.offLabel}</Styled.styledSpanSwitch>
+                <Styled.styledSpanTopSwitch>{props.label}</Styled.styledSpanTopSwitch>
                 <Styled.styledSwitchInput id={props.id} checked={props.checked} type="checkbox"/>
                 <Styled.styledSwitchLabel onClick={()=> switchHandler()} htmlFor="switch">Toggle</Styled.styledSwitchLabel>
-                <Styled.styledSpanSwitch>{props.onLabel}</Styled.styledSpanSwitch>
+                <Styled.styledDivUnderSwitch>
+                    <Styled.styledSpanSwitch>{props.offLabel}</Styled.styledSpanSwitch>
+                    <Styled.styledSpanSwitch>{props.onLabel}</Styled.styledSpanSwitch>
+                </Styled.styledDivUnderSwitch>
+
             </Styled.styledDivSwitch>
         </div>
     );

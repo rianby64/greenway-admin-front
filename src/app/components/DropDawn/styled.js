@@ -61,3 +61,31 @@ export const Ul = styled.ul`
   flex-flow: column;
   overflow-y: auto;
 `;
+
+export const styledContainer = styled.div`
+  position: relative;
+`;
+
+export const styledButton = styled.button`
+  background: #fff;
+  padding: 10px;
+  border: 1px solid #ccc;
+`;
+
+export const styledDropdownList = styled.ul`
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  display: ${props => (props.show ? 'block' : 'none')};
+`;
+
+export const styledDropdownItem = styled.li`
+  padding: 10px;
+`;
+
