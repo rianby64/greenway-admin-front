@@ -18,7 +18,7 @@ export const StyledDiv = styled.div`
 export const StyledMyInput = styled.input`
   
   align-items: center;
-  height: 46px;
+  padding: 12px 12px 12px 50px;
   width: 270px;
   font-family: 'Roboto'; 
   font-style: normal;
@@ -27,6 +27,8 @@ export const StyledMyInput = styled.input`
   line-height: 20px;
   border: 1px solid #0E7505;
   border-radius: 2px;
+  box-sizing: border-box;
+  outline-color:#91C18D
 `;
 
 export const StyledButton = styled.button`

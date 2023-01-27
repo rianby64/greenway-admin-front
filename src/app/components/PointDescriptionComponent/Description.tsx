@@ -84,7 +84,8 @@ export const DescriptionComponent: React.FunctionComponent<
     });
   };
 
-  const addImageElem = () => {
+  const addImageElem = (e) => {
+    e.preventDefault();
     if (form.images.length < 3) {
       const newImages = form.images;
       newImages.push("");
@@ -128,54 +129,59 @@ export const DescriptionComponent: React.FunctionComponent<
   }, [isSettingsShawn]);
 
   return (
-    <Styled.Wrapper
-      onClick={() => dispatch(hideSettings())}
-      style={isShawn ? {} : { display: "none" }}
-      className="shadow"
-    >
-      <Styled.StyledHandlers
-        onClick={(e) => e.stopPropagation()}
-        style={isShawn ? {} : { display: "none" }}
-      >
-        <Styled.StyledForm className="form save-dot-form ">
-          <DescriptionInputs form={form} setForm={setForm} />
-          <DescriptionsSelect
-            form={form}
-            setForm={setForm}
-            dotTypes={dotTypes}
-          />
-          <Styled.StyledImageHandler className="images-dots">
-            {form.images.map((el, index) => {
-              console.log(el, index);
-              return (
-
-
-                  <div className="inputs">
-                    <Styled.styledInput
-                      className="image-input"
-                      type="text"
-                      placeholder="Вставьте ссылку на фотографию"
-                      value={el}
-                      onChange={(e) => imagesInputChange(e, index)}
-                    />
-                    <Styled.styledP className="add-image" onClick={addImageElem}>
-                      Добавить еще фото
-                    </Styled.styledP>
-                  </div>
-
-              );
-            })}
-          </Styled.StyledImageHandler>
-          <Styled.styledButton
-            className="btn red"
-            type="button"
-            value="сохранить"
-            onClick={submitHandler}
+      <Styled.styledDivWrapper>
+        <Styled.Wrapper
+            onClick={() => dispatch(hideSettings())}
+            style={isShawn ? {} : { display: "none"}}
+            className="shadow"
+        >
+          <Styled.StyledHandlers
+              onClick={(e) => e.stopPropagation()}
+              style={isShawn ? {} : { display: "none" }}
           >
-            Сохранить
-          </Styled.styledButton>
-        </Styled.StyledForm>
-      </Styled.StyledHandlers>
-    </Styled.Wrapper>
+            <Styled.StyledForm className="form save-dot-form ">
+              <DescriptionInputs form={form} setForm={setForm} />
+              <DescriptionsSelect
+                  form={form}
+                  setForm={setForm}
+                  dotTypes={dotTypes}
+              />
+              <Styled.StyledImageHandler className="images-dots">
+                {form.images.map((el, index) => {
+                  console.log(el, index);
+                  return (
+
+
+                      <Styled.styledDiv className="inputs">
+                        <Styled.styledInput
+                            className="image-input"
+                            type="text"
+                            placeholder="Вставьте ссылку на фотографию"
+                            value={el}
+                            onChange={(e) => imagesInputChange(e, index)}
+                        />
+
+                          <Styled.styledButton onClick={addImageElem}>Добавить ещё фото</Styled.styledButton>
+
+
+
+                      </Styled.styledDiv>
+
+                  );
+                })}
+              </Styled.StyledImageHandler>
+              <Styled.styledButton
+                  className="btn red"
+                  type="button"
+                  value="сохранить"
+                  onClick={submitHandler}
+              >
+                Сохранить
+              </Styled.styledButton>
+            </Styled.StyledForm>
+          </Styled.StyledHandlers>
+        </Styled.Wrapper>
+      </Styled.styledDivWrapper>
+
   );
 };

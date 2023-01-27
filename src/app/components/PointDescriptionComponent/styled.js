@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const StyledForm = styled.form`
+  
   padding-top: 25px;
   width: 100%;
   display: flex;
@@ -57,13 +58,14 @@ width: 260px;
 export const StyledImageHandler = styled.div`
   margin-bottom: 20px;
   width: 95%;
-  overflow-y: auto;
 `;
 
 export const Wrapper = styled.div`
   width: 100%;
   z-index: 5000;
   background: #F9F9F9;
+  position:absolute;
+  left: 0;
 `;
 
 export const styledP = styled.p`
@@ -75,3 +77,18 @@ export const styledP = styled.p`
   color: #000000;
   text-align: center;
 `;
+
+export const styledDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  margin-bottom: 20px;
+`;
+export const styledDivWrapper = styled.div`
+  margin: 0 0 0 50px;
+  width: 100%;
+  max-width: 880px;
+  display: flex;
+  justify-content: space-between;
+  
+`

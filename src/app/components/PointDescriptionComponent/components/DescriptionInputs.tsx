@@ -16,21 +16,24 @@ export const DescriptionInputs: React.FunctionComponent<DescrInput> = ({form, se
 
   return (
     <>
-      <Styled.styledTitleLabel>Название места</Styled.styledTitleLabel>
-      <Styled.styledTextArea
-        style={textArea}
-        onChange={changeHandler}
-        name='name'
-        placeholder='Введите название места'
-        value={form.name} />
-      <Styled.styledTitleLabel>Описание</Styled.styledTitleLabel>
-      <Styled.styledTextArea
-        style={textArea}
-        onChange={changeHandler}
-        name='description'
-        placeholder='Введите описание места '
-        value={form.description}
-      />
+        <Styled.styledDivWrapper>
+            <Styled.styledTitleLabel>Название места</Styled.styledTitleLabel>
+            <Styled.styledTextArea
+                style={textArea}
+                onChange={changeHandler}
+                name='name'
+                placeholder='Введите название места'
+                value={form.name} />
+            <Styled.styledTitleLabel>Описание</Styled.styledTitleLabel>
+            <Styled.styledTextArea
+                style={textArea}
+                onChange={changeHandler}
+                name='description'
+                placeholder='Введите описание места '
+                value={form.description}
+            />
+        </Styled.styledDivWrapper>
+
     </>
   )
 }

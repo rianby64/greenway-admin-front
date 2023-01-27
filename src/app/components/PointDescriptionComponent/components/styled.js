@@ -5,7 +5,7 @@ export const CustomSelect = styled.select`
   width: 40%;
   display: initial;
   height: 40px;
-  margin-top: 20px;
+  margin: 20px 0 20px 0;
   border: 1px solid #777474;
   background: rgba(226, 227, 218, 0.5);
   option {
@@ -15,14 +15,22 @@ export const CustomSelect = styled.select`
     }
   }
 `
-
+export const styledDivWrapper = styled.div`
+  margin: 0 0 0 50px;
+  width: 100%;
+  max-width: 880px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  
+`
 
 
 export const styledTextArea = styled.textarea`
   width: 905px;
   height: 134px;
   background: rgba(226, 227, 218, 0.5);
-
+  outline-color:#91C18D
 `;
 
 export const styledTitleLabel = styled.label`
