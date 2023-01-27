@@ -8,6 +8,7 @@ import L from 'leaflet';
 import { setDistanceZero } from './../../../redux/useRoutesReducer';
 import { MapLayers } from '../../../types/Constants';
 import * as Styled from './styled'
+import ChangeTypeMap from "./ChangeTypeMap";
 
 export const MapControl: React.FunctionComponent = () => {
   const map = useMap()
@@ -182,6 +183,7 @@ export const MapControl: React.FunctionComponent = () => {
       <div>
         <img src = ""/>
         <Styled.Button className="switch-tiles" onClick={switchLayer}>Изменить тип карты</Styled.Button>
+        <ChangeTypeMap/>
       </div>
 
     </>

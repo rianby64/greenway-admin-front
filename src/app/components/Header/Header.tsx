@@ -1,5 +1,4 @@
 import React from 'react';
-import {DropDown} from "../DropDawn/DropDawn";
 import Search from "../Search/Search";
 import * as Styled from "./styledHeader";
 import logo from "../../images/logo.png";
@@ -12,19 +11,16 @@ const Header = (props) => {
         <Styled.StyledHeader>
             <img alt="logo" src={logo}/>
             <Search/>
-            <NewDropDawn fetchedRoutes={props.fetchedVerified}
-                         isUsers={true}
-                         title={"Пользовательские маршруты"}/>
-            <DropDown
+            <NewDropDawn
                 fetchedRoutes={props.fetchedUsersRoutes}
                 isUsers={true}
                 title={"Пользовательские маршруты"}
             />
-            <DropDown
+            <NewDropDawn
                 fetchedRoutes={props.fetchedVerified}
                 title={"Проверенные маршруты"}
             />
-            <DropDown
+            <NewDropDawn
                 fetchedRoutes={props.fetchedNotVerified}
                 title={"Не проверенные маршруты"}
             />
