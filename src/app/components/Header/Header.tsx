@@ -17,10 +17,12 @@ const Header = (props) => {
                 title={"Пользовательские маршруты"}
             />
             <NewDropDawn
+                isUsers={false}
                 fetchedRoutes={props.fetchedVerified}
                 title={"Проверенные маршруты"}
             />
             <NewDropDawn
+                isUsers={false}
                 fetchedRoutes={props.fetchedNotVerified}
                 title={"Не проверенные маршруты"}
             />

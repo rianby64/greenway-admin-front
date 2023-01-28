@@ -75,8 +75,8 @@ const newDropdown = (props) => {
         }
     };
     useEffect(()=>{
-        console.log(props.fetchedRoutes);
-    }, [])
+        console.log(props.fetchedRoutes, "dr");
+    }, [props.fetchedRoutes])
     const [show, setShow] = useState(false);
 
     return (
@@ -88,7 +88,7 @@ const newDropdown = (props) => {
                 <Span><i className="material-icons">expand_more</i></Span>
             </Button>
             <DropdownList show={show}>
-                {props.fetchedRoutes ? (
+                {props.fetchedRoutes.length ? (
                     props.fetchedRoutes.map((el, ind) => {
                         return (
                             <DropdownItem
@@ -102,7 +102,7 @@ const newDropdown = (props) => {
                         );
                     })
                 ) : (
-                    <DropdownItem>Нет данных</DropdownItem>
+                    <DropdownItem to={""}>Нет данных</DropdownItem>
                 )}
 
             </DropdownList>
