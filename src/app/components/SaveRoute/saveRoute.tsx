@@ -13,6 +13,9 @@ import { SaveRouteCreator } from './components/SaveRoute-Creator';
 import * as Styled from './components/styled.js';
 import {PopUpText} from "../../../constants/Text1";
 import NewPopUp from "./components/NewPopUp";
+import girl from "../../images/Girl.png";
+import left from "../../images/Group 98 (1).png";
+import right from "../../images/Group 97.png";
 // import PopUp from "./components/PopUp";
 
 export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, isShawn, setIsShawn }: SaveRouteType) => {
@@ -248,6 +251,9 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
 
         </form>
 
+        <img style={{width:'250px', height:'120px', position:'fixed', bottom:'0'}} src={left}/>
+        <img style={{width:'250px', height:'120px', position:'fixed', right:'860px', bottom:'0'}} src={right}/>
+        <img style={{width:'160px', height:'310px', position:'fixed', bottom:'0', right:'770px'}} src={girl}/>
       </div>
     </div>
   )
