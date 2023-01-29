@@ -1,12 +1,11 @@
-import React, {useState} from 'react';
+import React from 'react';
 // import { Switch } from 'react-materialize';
 import * as Styled from "./styled";
 import { SaveSwitches } from '../../../../types/Types';
 import SwitchComp from "./SwitchComp";
-import PopUp from "./PopUp";
 import {PopUpText} from "../../../../constants/Text1";
+import NewPopUp from "./NewPopUp";
 export const SaveRouteSwitches: React.FunctionComponent<SaveSwitches> = ({ saveForm, setSaveForm }) => {
-  const [modalActive, setModalActive] = useState();
   const switchHandler = (id: 'children' | "wheelChair" | 'visuallyImpaired' | 'approved' | 'animals') => {
     switch (id) {
       case 'children':
@@ -51,8 +50,7 @@ export const SaveRouteSwitches: React.FunctionComponent<SaveSwitches> = ({ saveF
       <div>
         <Styled.styledUnderTitleLabel style={{marginBottom: '20px', marginLeft: '130px', display: 'flex', gap: '10px'}}>Отметьте,
           для кого подходит маршрут
-          <PopUp content={PopUpText.popUp4} active={modalActive} setActive={setModalActive}
-          /></Styled.styledUnderTitleLabel>
+          <NewPopUp content={PopUpText.popUp4}/></Styled.styledUnderTitleLabel>
         <Styled.styledDiv style={{flexWrap: 'wrap', marginBottom: '50px', alignItems:'end'}}>
 
           <SwitchComp id={'animals'} label={'Питомцы'} checked={saveForm.animals} onChange={switchHandler}

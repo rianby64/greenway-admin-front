@@ -1,32 +1,50 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
-
+import relef from "../../images/relef.png";
+import sputink from "../../images/Sputnik.png";
 const Container = styled.div`
-  position: relative;
+  position: absolute;
+  left: 15px;
+  bottom: 60px;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
 `;
 
 const ImageButton = styled.button`
-  background: url(${props => props.imageUrl});
+  background: #0E7505;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 22px;
+  color: #F9F9F9;
   background-size: cover;
-  width: 50px;
+  width: 120px;
   height: 50px;
   border: none;
+  cursor: pointer;
 `;
 
-const ChangeTypeMap= () => {
-    const [imageUrl, setImageUrl] = useState('https://example.com/image1.jpg');
+const ChangeTypeMap= ({switchLayer}) => {
+    const [imageUrl, setImageUrl] = useState(sputink);
+    const [text, setText] = useState('РЕЛЬЕФ')
 
     const handleClick = () => {
-        if (imageUrl === 'https://example.com/image1.jpg') {
-            setImageUrl('https://example.com/image2.jpg');
+        switchLayer();
+        if (imageUrl === relef) {
+            setImageUrl(sputink);
+            setText('CПУТНИК');
         } else {
-            setImageUrl('https://example.com/image1.jpg');
+            setImageUrl(relef);
+            setText('РЕЛЬЕФ');
         }
     };
 
     return (
         <Container>
-           <ImageButton imageUrl={imageUrl} onClick={handleClick}>Изменить тип карты</ImageButton>
+            <img style={{width:'120px', height:'120px'}} src={imageUrl}/>
+           <ImageButton onClick={handleClick}>{text}</ImageButton>
         </Container>
     );
 };

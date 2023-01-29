@@ -1,12 +1,11 @@
-import React, {useState} from "react"
+import React from "react"
 import { Checkbox } from 'react-materialize'
 import { TypesCheckboxesInterface } from "../../../../types/Types";
 import * as Styled from "./styled";
-import PopUp from "./PopUp";
 import {PopUpText} from "../../../../constants/Text1";
 import CheckboxStyled from "./CheckboxStyled";
+import NewPopUp from "./NewPopUp";
 export const TypesCheckboxes: React.FunctionComponent<TypesCheckboxesInterface> = ({ array, seter, saveForm, setSaveForm }) => {
-    const [modalActive, setModalActive] = useState();
   const checkBoxHandler = (elem: any) => {
     elem.checked = !elem.checked;
     seter(array);
@@ -20,7 +19,7 @@ export const TypesCheckboxes: React.FunctionComponent<TypesCheckboxesInterface> 
     <>
         <Styled.styledDiv style={{flexDirection:'column', marginBottom:'60px'}}>
             <Styled.styledUnderTitleLabel style={{display:"flex", gap:'10px'}} className='save-label'>Выберите способ(ы) перемещения <span style={{color:'#0E7505'}}>*</span>
-                <PopUp content={PopUpText.popUp6} active={modalActive} setActive={setModalActive}/>
+                <NewPopUp content={PopUpText.popUp6}/>
             </Styled.styledUnderTitleLabel>
             <div style={{display:'flex', gap:'15px', textAlign:'center'}} className='district__checkBoxes'>
                 {array ? array.map((el) => {

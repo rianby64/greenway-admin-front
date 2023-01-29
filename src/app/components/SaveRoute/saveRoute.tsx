@@ -11,8 +11,8 @@ import { CategoriesCheckboxes } from './components/SaveRoute-Categories';
 import { TypesCheckboxes } from './components/SaveRoute-Types';
 import { SaveRouteCreator } from './components/SaveRoute-Creator';
 import * as Styled from './components/styled.js';
-import PopUp from "./components/PopUp";
 import {PopUpText} from "../../../constants/Text1";
+import NewPopUp from "./components/NewPopUp";
 // import PopUp from "./components/PopUp";
 
 export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, isShawn, setIsShawn }: SaveRouteType) => {
@@ -23,7 +23,6 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   const { distance, polilines, points } = useTypedSelector(store => store.route);
   const editingRoute = useTypedSelector(store => store.editing);
   const { id, isUsers } = useTypedSelector(store => store.editing);
-  const [modalActive, setModalActive] = useState();
   const [saveForm, setSaveForm] = useState<SaveForm>({
     title: '',
     description: '',
@@ -228,7 +227,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
           <SaveRouteDurations array={routeTypes} saveForm={saveForm} setSaveForm={setSaveForm} />
           <div style={{maxWidth:'880px', width:'100%', margin:'0 auto'}} className='images'>
             <Styled.styledUnderTitleLabel style={{display:'flex', gap:'10px'}}>Фотографии маршрута
-              <PopUp content={PopUpText.popUp7} active={modalActive} setActive={setModalActive}/>
+              <NewPopUp content={PopUpText.popUp7}/>
             </Styled.styledUnderTitleLabel>
             {saveForm.images.map((el, index) => {
               console.log(el, index);

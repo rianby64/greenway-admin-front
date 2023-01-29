@@ -7,7 +7,6 @@ import { removePoliline, addPoliline, removePoint, editPoint, setRouteDistance, 
 import L from 'leaflet';
 import { setDistanceZero } from './../../../redux/useRoutesReducer';
 import { MapLayers } from '../../../types/Constants';
-import * as Styled from './styled'
 import ChangeTypeMap from "./ChangeTypeMap";
 
 export const MapControl: React.FunctionComponent = () => {
@@ -181,9 +180,7 @@ export const MapControl: React.FunctionComponent = () => {
         url={MapLayers.OSM.mapLayersUrl}
       />
       <div>
-        <img src = ""/>
-        <Styled.Button className="switch-tiles" onClick={switchLayer}>Изменить тип карты</Styled.Button>
-        <ChangeTypeMap/>
+        <ChangeTypeMap switchLayer={switchLayer}/>
       </div>
 
     </>

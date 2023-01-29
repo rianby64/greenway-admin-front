@@ -5,44 +5,50 @@ const PopUpContainer = styled.div`
   position: relative;
 `;
 
-const PopUpCircle = styled.div`
-  width: 50px;
-  height: 50px;
-  border-radius: 25px;
-  background-color: green;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-`;
-
 const PopUpQuestion = styled.input`
   color: white;
+  background-color: #0E7505;
+  outline: none;
+  display: flex;
+  text-align: center;
+  width: 17px;
+  height: 17px;
+  padding: 0;
+  border-radius: 100%;
+  border: none;
+  cursor: pointer;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 24px;
 `;
 
-const PopUpModal = styled.div`
+const StyledModalContent = styled.div`
   position: absolute;
-  top: 60px;
-  right: 0;
-  background-color: white;
-  padding: 20px;
-  border-radius: 10px;
-  z-index: 1;
+  max-width: 210px;
+  padding: 0 12px 0 12px;
+  background: rgba(231, 240, 212, 0.8);
+  backdrop-filter: blur(10px);
+  border-radius: 2px;
+  z-index: 9999999;
 `;
 
-const NewPopUp = () => {
+const NewPopUp = ({content}) => {
     const [showModal, setShowModal] = useState(false);
 
 
     return (
         <PopUpContainer>
-            <PopUpCircle>
-                <PopUpQuestion onBlur={()=>{setShowModal(false)}} onFocus={()=>{setShowModal(true)}} placeholder="?"></PopUpQuestion>
-            </PopUpCircle>
+
+            <PopUpQuestion type='text' readonly value='?' onBlur={() => {
+                setShowModal(false)
+            }} onFocus={() => {
+                setShowModal(true)
+            }}></PopUpQuestion>
+
             {showModal && (
-                <PopUpModal className="popup-modal">
-                    <div>Текст всплывающего окна</div>
-                </PopUpModal>
+                <StyledModalContent dangerouslySetInnerHTML={{__html: content}}></StyledModalContent>
             )}
         </PopUpContainer>
     );

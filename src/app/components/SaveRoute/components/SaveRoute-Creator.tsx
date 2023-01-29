@@ -1,11 +1,9 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { SaveSelector } from '../../../../types/Types';
 import * as Styled from './styled.js';
-import PopUp from "./PopUp";
 import {PopUpText} from "../../../../constants/Text1";
 import NewPopUp from "./NewPopUp";
 export const SaveRouteCreator: React.FunctionComponent<SaveSelector> = ({ saveForm, setSaveForm }) => {
-const [modalActive, setModalActive] = useState();
 
   const changeHandler = (e: any) => {
     let { name, value } = e.target;
@@ -17,6 +15,7 @@ const [modalActive, setModalActive] = useState();
     });
     console.log(saveForm.creator);
   }
+
 
   return (
     <>
@@ -53,8 +52,7 @@ const [modalActive, setModalActive] = useState();
             <Styled.styledDivForInputs>
                 <Styled.styledDivInputs>
                     <Styled.styledPInput style={{display:'flex', justifyContent:'space-between'}}>Ссылка на логотип Вашей компании (если есть)
-                        <NewPopUp/>
-                        <PopUp content={PopUpText.popUp1} active={modalActive} setActive={setModalActive}/>
+                        <NewPopUp content={PopUpText.popUp1}/>
 
                     </Styled.styledPInput>
 
