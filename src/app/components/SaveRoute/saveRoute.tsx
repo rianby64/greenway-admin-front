@@ -244,16 +244,15 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
               )
             })}
           </div>
-          <div style={{display:"flex", justifyContent:'center', marginTop:'20px'}}>
+          <div style={{display:"flex", justifyContent:'center', marginTop:'100px'}}>
             <Styled.styledButton type='button' className='btn pink' onClick={submitRoute}>Отправить на сервер</Styled.styledButton>
           </div>
-
-
+          <div style={{position: 'relative', marginTop:'80px'}}>
+            <img alt="left" style={{ width: '250px', height: '120px', position: 'absolute', bottom: '0' }} src={left} />
+            <img alt="right" style={{ width: '250px', height: '120px', position: 'absolute', right: '0', bottom: '0' }} src={right} />
+            <img alt="girl" style={{ width: '160px', height: '310px', position: 'absolute', bottom: '0', right: '0' }} src={girl} />
+          </div>
         </form>
-
-        <img style={{width:'250px', height:'120px', position:'fixed', bottom:'0'}} src={left}/>
-        <img style={{width:'250px', height:'120px', position:'fixed', right:'860px', bottom:'0'}} src={right}/>
-        <img style={{width:'160px', height:'310px', position:'fixed', bottom:'0', right:'770px'}} src={girl}/>
       </div>
     </div>
   )

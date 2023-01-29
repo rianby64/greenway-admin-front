@@ -21,7 +21,7 @@ const ImageButton = styled.button`
   color: #F9F9F9;
   background-size: cover;
   width: 120px;
-  height: 50px;
+  height: 34px;
   border: none;
   cursor: pointer;
 `;
@@ -43,7 +43,7 @@ const ChangeTypeMap= ({switchLayer}) => {
 
     return (
         <Container>
-            <img style={{width:'120px', height:'120px'}} src={imageUrl}/>
+            <img style={{width:'120px', height:'100px'}} src={imageUrl}/>
            <ImageButton onClick={handleClick}>{text}</ImageButton>
         </Container>
     );

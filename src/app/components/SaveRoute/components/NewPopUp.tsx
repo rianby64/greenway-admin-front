@@ -22,6 +22,7 @@ const PopUpQuestion = styled.input`
   font-weight: 600;
   font-size: 14px;
   line-height: 24px;
+  caret-color: transparent;
 `;
 
 const StyledModalContent = styled.div`

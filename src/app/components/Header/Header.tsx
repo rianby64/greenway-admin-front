@@ -9,7 +9,7 @@ const Header = (props) => {
 
     return (
         <Styled.StyledHeader>
-            <img alt="logo" src={logo}/>
+            <img style={{marginRight:'70xp'}} alt="logo" src={logo}/>
             <Search/>
             <NewDropDawn
                 fetchedRoutes={props.fetchedUsersRoutes}
