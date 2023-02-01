@@ -24,7 +24,7 @@ export const DescriptionInputs: React.FunctionComponent<DescrInput> = ({form, se
                 name='name'
                 placeholder='Введите название места'
                 value={form.name} />
-            <Styled.styledTitleLabel>Описание</Styled.styledTitleLabel>
+            <Styled.styledTitleLabel style={{marginTop:'30px'}}>Описание</Styled.styledTitleLabel>
             <Styled.styledTextArea
                 style={textArea}
                 onChange={changeHandler}

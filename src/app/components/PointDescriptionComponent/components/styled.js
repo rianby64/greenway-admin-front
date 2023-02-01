@@ -8,12 +8,8 @@ export const CustomSelect = styled.select`
   margin: 20px 0 20px 0;
   border: 1px solid #777474;
   background: rgba(226, 227, 218, 0.5);
-  option {
-    font-size: 16px;
-    :hover {
-      cursor: pointer;
-    }
-  }
+ 
+  
 `
 export const styledDivWrapper = styled.div`
   margin: 0 0 0 50px;
@@ -25,6 +21,13 @@ export const styledDivWrapper = styled.div`
   
 `
 
+export const styledOption = styled.option`
+font-size: 16px;
+  background: #F9F9F9;
+  &:hover{
+    background-color: #91C18D;
+  }
+`;
 
 export const styledTextArea = styled.textarea`
   width: 905px;
@@ -40,7 +43,6 @@ export const styledTitleLabel = styled.label`
   font-size: 18px;
   line-height: 20px;
   color: #0E7505;
-  margin-top: 30px;
 `;
 
 export const customOption = styled.option`

@@ -206,6 +206,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
       className='save-shadow'
       style={isShawn ?
         {
+          position:"absolute",
           zIndex: 2000,
           width: '100%',
           background: 'rgb(14 14 14 / 65%',
@@ -238,14 +239,14 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
 
                   <div className='inputs'>
                     <Styled.styledInput style={{marginBottom:'10px', marginRight:'20px'}}className='image-input' type='text' placeholder='Вставьте ссылку на фотографию' value={el} onChange={(e) => imagesInputChange(e, index)} />
-                    <Styled.styledButton style={{marginBottom:'10px'}} type='button' className='add-image' onClick={addImageElem}>Добавить еще фото</Styled.styledButton>
+                    <Styled.styledButton style={{marginBottom:'10px'}} type='button' className='add-image' onClick={addImageElem}>ДОБАВИТЬ ЕЩЁ ФОТО</Styled.styledButton>
                   </div>
 
               )
             })}
           </div>
           <div style={{display:"flex", justifyContent:'center', marginTop:'100px'}}>
-            <Styled.styledButton type='button' className='btn pink' onClick={submitRoute}>Отправить на сервер</Styled.styledButton>
+            <Styled.styledButton type='button' className='btn pink' onClick={submitRoute}>ОТПРАВИТЬ НА СЕРВЕР</Styled.styledButton>
           </div>
           <div style={{position: 'relative', marginTop:'80px'}}>
             <img alt="left" style={{ width: '250px', height: '120px', position: 'absolute', bottom: '0' }} src={left} />

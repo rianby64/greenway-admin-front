@@ -15,7 +15,6 @@ border: 1px solid #777474;
   font-weight: 500;
   font-size: 14px;
   line-height: 20px;
- 
 option {
   color: rgba(0, 0, 0, 0.5);
   font-family: 'Roboto';
@@ -35,8 +34,16 @@ option {
   :checked{
     background: #D3DFB9;
   }
+  ::-moz-focus-inner {
+    border: 0;
+  }
 }
 `
+export const styledOption = styled.option`
+:hover{
+  background-color: red;
+}
+`;
 
 export const styledDiv = styled.div`
   margin: 0 auto;
@@ -52,7 +59,9 @@ export const styledTextArea = styled.textarea`
   min-width: 905px;
   min-height: 134px;
   background: rgba(226, 227, 218, 0.5);
+  outline:none;
   :focus{
+    outline:#91C18D;
     background: #D3DFB9;
     color: #000000;
   }
@@ -194,7 +203,6 @@ export const styledTitleLabel = styled.label`
 
 export const styledUnderTitleLabel = styled.label`
   display: block;
-  max-width: 880px;
   font-family: 'Roboto';
   font-style: normal;
   font-weight: 500;

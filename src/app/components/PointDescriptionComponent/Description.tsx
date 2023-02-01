@@ -161,10 +161,7 @@ export const DescriptionComponent: React.FunctionComponent<
                             onChange={(e) => imagesInputChange(e, index)}
                         />
 
-                          <Styled.styledButton onClick={addImageElem}>Добавить ещё фото</Styled.styledButton>
-
-
-
+                          <Styled.styledButton onClick={addImageElem}>ДОБАВИТЬ ЕЩЁ ФОТО</Styled.styledButton>
                       </Styled.styledDiv>
 
                   );

@@ -23,6 +23,9 @@ const PopUpQuestion = styled.input`
   font-size: 14px;
   line-height: 24px;
   caret-color: transparent;
+  :active{
+    background-color: red;
+  }
 `;
 
 const StyledModalContent = styled.div`
@@ -38,18 +41,23 @@ const StyledModalContent = styled.div`
 const NewPopUp = ({content}) => {
     const [showModal, setShowModal] = useState(false);
 
+    function click(){
+        if (showModal === true){
+            setShowModal(false);
+        }
+        else{
+            setShowModal(true);
+        }
+    }
 
     return (
         <PopUpContainer>
 
             <PopUpQuestion type='text' readonly value='?' onBlur={() => {
                 setShowModal(false)
-            }} onFocus={() => {
-                setShowModal(true)
-            }}></PopUpQuestion>
-
+            }} onClick={click}></PopUpQuestion>
             {showModal && (
-                <StyledModalContent dangerouslySetInnerHTML={{__html: content}}></StyledModalContent>
+                <StyledModalContent style={{top}} dangerouslySetInnerHTML={{__html: content}}></StyledModalContent>
             )}
         </PopUpContainer>
     );

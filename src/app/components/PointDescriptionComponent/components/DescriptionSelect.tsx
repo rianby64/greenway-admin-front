@@ -19,11 +19,11 @@ export const DescriptionsSelect: React.FunctionComponent<DescrSelect> = ({ form,
         <Styled.SelectContainer className='cattegories'>
           <Styled.styledTitleLabel>Подходящие категории</Styled.styledTitleLabel>
           <Styled.CustomSelect id='categories' style={{ width: '100%' }} multiple={false} onChange={selectHandler}>
-            <option selected={true} disabled={true}>Выберите категорию </option>
+            <Styled.styledOption selected={true} disabled={true}>Выберите категорию </Styled.styledOption>
             {dotTypes ? dotTypes.map((el, ind) => {
-                  return <option selected={form.categories === el.id} key={ind} value={el.id}>{el.title}</option>
+                  return <Styled.styledOption selected={form.categories === el.id} key={ind} value={el.id}>{el.title}</Styled.styledOption>
                 }
-            ) : <option value='NoCategory'>Нет категорий</option>}
+            ) : <Styled.styledOption value='NoCategory'>Нет категорий</Styled.styledOption>}
           </Styled.CustomSelect>
         </Styled.SelectContainer>
       </Styled.styledDivWrapper>

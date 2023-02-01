@@ -34,7 +34,9 @@ export const styledInput = styled.input`
   background: rgba(226, 227, 218, 0.5);
   border: 1px solid #E2E3DA;
   border-radius: 2px;
+  outline:none;
   :focus{
+    outline: #D3DFB9;
     background: #D3DFB9;
     color: #000000;
   }
@@ -56,16 +58,16 @@ width: 260px;
 `;
 
 export const StyledImageHandler = styled.div`
-  margin-bottom: 20px;
   width: 95%;
 `;
 
 export const Wrapper = styled.div`
   width: 100%;
   z-index: 5000;
-  background: #F9F9F9;
+  background: rgba(14, 14, 14, 0.65);
   position:absolute;
   left: 0;
+  top: 0;
 `;
 
 export const styledP = styled.p`

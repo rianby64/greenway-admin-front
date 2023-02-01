@@ -48,12 +48,12 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
         </Styled.styledDivInformation>
 
         <Styled.styledDiv style={{flexDirection:'column', marginBottom:'60px'}}>
-            <div className='input-block'>
-                <Styled.styledUnderTitleLabel style={{display:'flex', justifyContent:'space-between', width:'100%'}} className='save-label'>
+
+                <Styled.styledUnderTitleLabel style={{display:'flex', gap:'10px'}} className='save-label'>
                     Введите описание маршрута <span style={{color:'#0E7505'}}>*</span>
                     <NewPopUp content={PopUpText.popUp3}/>
                 </Styled.styledUnderTitleLabel>
-            </div>
+
             <Styled.styledTextArea
                 placeholder='Опишите маршрут'
                 name='description'

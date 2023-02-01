@@ -57,7 +57,7 @@ export const CreateMap: React.FunctionComponent = () => {
                 fetchedVerified={fetchedVerified}
                 fetchedNotVerified={fetchedNotVerified}
             />
-            <div style={{marginTop: "100px"}}>
+            <div>
                 <DescriptionComponent currentFeature={currentFeature}/>
                 <MapContainer
                     style={{height: "calc(100vh - 100px)"}}
