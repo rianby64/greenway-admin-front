@@ -26,7 +26,15 @@ export const CategoriesCheckboxes: React.FunctionComponent<Checkboxes> = ({array
                 <Styled.styledUnderTitleLabel style={{display: 'flex', gap: '10px'}} className='save-label'>Выберите
                     категорию (категории) <span style={{color: '#0E7505'}}>*</span>
 
-                    <NewPopUp content={PopUpText.popUp5}/>
+                    <NewPopUp
+                        content={PopUpText.popUp5}
+                        height={'80px'}
+                        width={'210px'}
+                        top={'5px'}
+                        bottom={'0px'}
+                        right={'0px'}
+                        left={'20px'}
+                    />
                 </Styled.styledUnderTitleLabel>
                 <div style={{display: 'flex', gap: '30px'}} className='district__checkBoxes'>
                     {categoriesArray ? categoriesArray.map((el) => {

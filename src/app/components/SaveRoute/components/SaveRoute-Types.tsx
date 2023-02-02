@@ -19,7 +19,15 @@ export const TypesCheckboxes: React.FunctionComponent<TypesCheckboxesInterface> 
     <>
         <Styled.styledDiv style={{flexDirection:'column', marginBottom:'60px'}}>
             <Styled.styledUnderTitleLabel style={{display:"flex", gap:'10px'}} className='save-label'>Выберите способ(ы) перемещения <span style={{color:'#0E7505'}}>*</span>
-                <NewPopUp content={PopUpText.popUp6}/>
+                <NewPopUp
+                    content={PopUpText.popUp6}
+                    width={'230px'}
+                    height={'240px'}
+                    top={'5px'}
+                    bottom={'0px'}
+                    right={'0px'}
+                    left={'20px'}
+                />
             </Styled.styledUnderTitleLabel>
             <div style={{display:'flex', gap:'15px', textAlign:'center'}} className='district__checkBoxes'>
                 {array ? array.map((el) => {

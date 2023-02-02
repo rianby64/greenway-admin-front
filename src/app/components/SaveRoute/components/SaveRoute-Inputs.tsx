@@ -40,7 +40,15 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
                 <div style={{display:'flex', gap:'15px', flexDirection:'column'}}>
                     <Styled.styledUnderTitleLabel style={{display:'flex', gap:'10px'}}>
                         Длина маршрута:
-                        <NewPopUp content={PopUpText.popUp2}/>
+                        <NewPopUp
+                            content={PopUpText.popUp2}
+                            height={'80px'}
+                            width={'210px'}
+                            top={'-90px'}
+                            bottom={'0px'}
+                            right={'0px'}
+                            left={'10px'}
+                        />
                     </Styled.styledUnderTitleLabel>
                     <div style={{background: '#D3DFB9', padding:'13px 24px'}}><Styled.styledUnderTitleLabel>{distance} км </Styled.styledUnderTitleLabel></div>
                 </div>
@@ -51,7 +59,15 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
 
                 <Styled.styledUnderTitleLabel style={{display:'flex', gap:'10px'}} className='save-label'>
                     Введите описание маршрута <span style={{color:'#0E7505'}}>*</span>
-                    <NewPopUp content={PopUpText.popUp3}/>
+                    <NewPopUp
+                        content={PopUpText.popUp3}
+                        width={'230px'}
+                        height={'225px'}
+                        top={'5px'}
+                        bottom={'0px'}
+                        right={'0px'}
+                        left={'20px'}
+                    />
                 </Styled.styledUnderTitleLabel>
 
             <Styled.styledTextArea

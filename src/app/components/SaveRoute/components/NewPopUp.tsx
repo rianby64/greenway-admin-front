@@ -30,15 +30,21 @@ const PopUpQuestion = styled.input`
 
 const StyledModalContent = styled.div`
   position: absolute;
-  max-width: 210px;
   padding: 0 12px 0 12px;
   background: rgba(231, 240, 212, 0.8);
   backdrop-filter: blur(10px);
   border-radius: 2px;
   z-index: 9999999;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 18px;
+  color: #000000;
+  letter-spacing: -0.02em;
 `;
 
-const NewPopUp = ({content}) => {
+const NewPopUp = ({content, top, bottom, right, left, width, height}) => {
     const [showModal, setShowModal] = useState(false);
 
     function click(){
@@ -57,7 +63,7 @@ const NewPopUp = ({content}) => {
                 setShowModal(false)
             }} onClick={click}></PopUpQuestion>
             {showModal && (
-                <StyledModalContent style={{top}} dangerouslySetInnerHTML={{__html: content}}></StyledModalContent>
+                <StyledModalContent style={{top:top, bottom:bottom, right:right, left:left, width:width, height:height}} dangerouslySetInnerHTML={{__html: content}}></StyledModalContent>
             )}
         </PopUpContainer>
     );

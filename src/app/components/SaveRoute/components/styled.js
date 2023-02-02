@@ -187,7 +187,7 @@ display: flex;
   gap: 20px;
 `;
 
-export const styledTitleLabel = styled.label`
+export const styledTitleLabel = styled.span`
   display: block;
   font-family: 'Roboto';
   font-style: normal;
@@ -201,7 +201,7 @@ export const styledTitleLabel = styled.label`
   
 `;
 
-export const styledUnderTitleLabel = styled.label`
+export const styledUnderTitleLabel = styled.span`
   display: block;
   font-family: 'Roboto';
   font-style: normal;

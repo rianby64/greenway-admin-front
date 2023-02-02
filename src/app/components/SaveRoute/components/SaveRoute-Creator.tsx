@@ -52,7 +52,15 @@ export const SaveRouteCreator: React.FunctionComponent<SaveSelector> = ({ saveFo
             <Styled.styledDivForInputs>
                 <Styled.styledDivInputs>
                     <Styled.styledPInput style={{display:'flex', justifyContent:'space-between'}}>Ссылка на логотип Вашей компании (если есть)
-                        <NewPopUp content={PopUpText.popUp1}/>
+                        <NewPopUp
+                            content={PopUpText.popUp1}
+                            width={'210px'}
+                            height={'240px'}
+                            top={'30px'}
+                            bottom={'0px'}
+                            right={'0px'}
+                            left={'-100px'}
+                        />
 
                     </Styled.styledPInput>
 

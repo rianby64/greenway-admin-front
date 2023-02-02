@@ -50,7 +50,15 @@ export const SaveRouteSwitches: React.FunctionComponent<SaveSwitches> = ({ saveF
       <div>
         <Styled.styledUnderTitleLabel style={{marginBottom: '20px', marginLeft: '130px', display: 'flex', gap: '10px'}}>Отметьте,
           для кого подходит маршрут
-          <NewPopUp content={PopUpText.popUp4}/></Styled.styledUnderTitleLabel>
+          <NewPopUp
+              content={PopUpText.popUp4}
+              width={'230px'}
+              height={'135px'}
+              top={'5px'}
+              bottom={'0px'}
+              right={'0px'}
+              left={'20px'}
+          /></Styled.styledUnderTitleLabel>
         <Styled.styledDiv style={{flexWrap: 'wrap', marginBottom: '50px', alignItems:'end'}}>
 
           <SwitchComp id={'animals'} label={'Питомцы'} checked={saveForm.animals} onChange={switchHandler}

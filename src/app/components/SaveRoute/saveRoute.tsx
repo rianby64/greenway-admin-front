@@ -231,7 +231,15 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
           <SaveRouteDurations array={routeTypes} saveForm={saveForm} setSaveForm={setSaveForm} />
           <div style={{maxWidth:'880px', width:'100%', margin:'0 auto'}} className='images'>
             <Styled.styledUnderTitleLabel style={{display:'flex', gap:'10px'}}>Фотографии маршрута
-              <NewPopUp content={PopUpText.popUp7}/>
+              <NewPopUp
+                  content={PopUpText.popUp7}
+                  width={'400px'}
+                  height={'420px'}
+                  top={'-120px'}
+                  bottom={'0px'}
+                  right={'0px'}
+                  left={'20px'}
+              />
             </Styled.styledUnderTitleLabel>
             {saveForm.images.map((el, index) => {
               console.log(el, index);
