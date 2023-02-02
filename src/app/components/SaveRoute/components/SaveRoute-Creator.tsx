@@ -2,7 +2,7 @@ import React from 'react';
 import { SaveSelector } from '../../../../types/Types';
 import * as Styled from './styled.js';
 import {PopUpText} from "../../../../constants/Text1";
-import NewPopUp from "./NewPopUp";
+import NewPopUp from "../common-components/NewPopUp";
 export const SaveRouteCreator: React.FunctionComponent<SaveSelector> = ({ saveForm, setSaveForm }) => {
 
   const changeHandler = (e: any) => {

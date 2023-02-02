@@ -6,7 +6,7 @@ import * as Styled from './styled';
 
 const ChangeTypeMap= ({switchLayer}) => {
     const [imageUrl, setImageUrl] = useState(sputink);
-    const [text, setText] = useState('РЕЛЬЕФ')
+    const [text, setText] = useState('СПУТНИК')
 
     const handleClick = () => {
         switchLayer();

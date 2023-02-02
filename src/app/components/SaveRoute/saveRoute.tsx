@@ -12,7 +12,7 @@ import { TypesCheckboxes } from './components/SaveRoute-Types';
 import { SaveRouteCreator } from './components/SaveRoute-Creator';
 import * as Styled from './components/styled.js';
 import {PopUpText} from "../../../constants/Text1";
-import NewPopUp from "./components/NewPopUp";
+import NewPopUp from "./common-components/NewPopUp";
 import girl from "../../images/Girl.png";
 import left from "../../images/Group 98 (1).png";
 import right from "../../images/Group 97.png";

@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import * as Styled from './styled.js';
+import * as Styled from '../components/styled.js';
 const CheckboxStyled:React.FunctionComponent<any> = (props) => {
     const changeHandler=()=>{
         console.log("otrabotal");

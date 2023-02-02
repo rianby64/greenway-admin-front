@@ -2,9 +2,10 @@ import React from 'react';
 import { SaveInputs } from '../../../../types/Types';
 import { useTypedSelector } from '../../../../redux/useTypedSelector.hook';
 import * as Styled from './styled.js';
-import {SaveRouteSelectors} from "./SaveRoute-selectors";
+//import {SaveRouteSelectors} from "./SaveRoute-selectors";
 import {PopUpText} from "../../../../constants/Text1";
-import NewPopUp from "./NewPopUp";
+import NewPopUp from "../common-components/NewPopUp";
+import DropDawnSelect from "../common-components/DropDawnSelect";
 
 export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm, setSaveForm,  routeCat, routeDif, routeTypes}) => {
 
@@ -24,7 +25,7 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
             </Styled.styledTitleLabel>
 
         </div>
-        <Styled.styledDivInformation style={{marginBottom:'70px'}}>
+        <Styled.styledDivInformation style={{marginBottom:'70px', alignItems:'end'}}>
             <div style={{width:'100%' ,maxWidth:'350px'}} className='input-block' >
                     <Styled.styledPInput style={{marginTop:'0'}}>Название маршрута <span style={{color:'#0E7505'}}>*</span></Styled.styledPInput>
                     <Styled.styledInput
@@ -52,7 +53,7 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
                     </Styled.styledUnderTitleLabel>
                     <div style={{background: '#D3DFB9', padding:'13px 24px'}}><Styled.styledUnderTitleLabel>{distance} км </Styled.styledUnderTitleLabel></div>
                 </div>
-            <SaveRouteSelectors saveForm={saveForm} setSaveForm={setSaveForm} routeTypes={routeTypes} routeDif={routeDif} routeCat={routeCat}/>
+            <DropDawnSelect saveForm={saveForm} setSaveForm={setSaveForm} routeTypes={routeTypes} routeDif={routeDif} routeCat={routeCat}/>
         </Styled.styledDivInformation>
 
         <Styled.styledDiv style={{flexDirection:'column', marginBottom:'60px'}}>

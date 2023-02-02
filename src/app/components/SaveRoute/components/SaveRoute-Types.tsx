@@ -3,8 +3,8 @@ import { Checkbox } from 'react-materialize'
 import { TypesCheckboxesInterface } from "../../../../types/Types";
 import * as Styled from "./styled";
 import {PopUpText} from "../../../../constants/Text1";
-import CheckboxStyled from "./CheckboxStyled";
-import NewPopUp from "./NewPopUp";
+import CheckboxStyled from "../common-components/CheckboxStyled";
+import NewPopUp from "../common-components/NewPopUp";
 export const TypesCheckboxes: React.FunctionComponent<TypesCheckboxesInterface> = ({ array, seter, saveForm, setSaveForm }) => {
   const checkBoxHandler = (elem: any) => {
     elem.checked = !elem.checked;

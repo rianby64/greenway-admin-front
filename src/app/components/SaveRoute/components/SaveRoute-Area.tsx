@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Checkboxes } from "../../../../types/Types"
 import * as Styled from './styled.js';
-import CheckboxStyled from "./CheckboxStyled";
+import CheckboxStyled from "../common-components/CheckboxStyled";
 export const AreasCheckboxes: React.FunctionComponent<Checkboxes> = ({ array, label }) => {
 
   const [districts, setDistricts] = useState<any[]>([]);

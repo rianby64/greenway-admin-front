@@ -2,9 +2,9 @@ import React from 'react';
 // import { Switch } from 'react-materialize';
 import * as Styled from "./styled";
 import { SaveSwitches } from '../../../../types/Types';
-import SwitchComp from "./SwitchComp";
+import SwitchComp from "../common-components/SwitchComp";
 import {PopUpText} from "../../../../constants/Text1";
-import NewPopUp from "./NewPopUp";
+import NewPopUp from "../common-components/NewPopUp";
 export const SaveRouteSwitches: React.FunctionComponent<SaveSwitches> = ({ saveForm, setSaveForm }) => {
   const switchHandler = (id: 'children' | "wheelChair" | 'visuallyImpaired' | 'approved' | 'animals') => {
     switch (id) {

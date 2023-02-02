@@ -2,8 +2,8 @@ import React, {useEffect, useState} from "react"
 import {Checkboxes} from "../../../../types/Types"
 import * as Styled from "./styled";
 import {PopUpText} from "../../../../constants/Text1";
-import CheckboxStyled from "./CheckboxStyled";
-import NewPopUp from "./NewPopUp";
+import CheckboxStyled from "../common-components/CheckboxStyled";
+import NewPopUp from "../common-components/NewPopUp";
 
 export const CategoriesCheckboxes: React.FunctionComponent<Checkboxes> = ({array}) => {
     const [categoriesArray, setcategoriesArray] = useState<any[]>([]);
