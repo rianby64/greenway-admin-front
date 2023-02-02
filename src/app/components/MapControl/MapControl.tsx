@@ -7,7 +7,7 @@ import { removePoliline, addPoliline, removePoint, editPoint, setRouteDistance, 
 import L from 'leaflet';
 import { setDistanceZero } from './../../../redux/useRoutesReducer';
 import { MapLayers } from '../../../types/Constants';
-import ChangeTypeMap from "./ChangeTypeMap";
+import ChangeTypeMap from "./ChangeTypeMap-Button/ChangeTypeMap";
 
 export const MapControl: React.FunctionComponent = () => {
   const map = useMap()
