@@ -1,14 +1,15 @@
-
 import styled from 'styled-components';
 import React, {useState} from 'react';
 import {SaveSelectors} from "../../../../types/Types";
+//import {SaveSelectors} from "../../../../types/Types";
 
 
 const Container = styled.div`
   z-index: 1000;
   position: relative;
-  :hover{
-    Span{
+
+  :hover {
+    Span {
       display: none;
     }
 `;
@@ -26,15 +27,16 @@ const Button = styled.button`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width:270px;
-  height:48px;
-  :hover{
+  width: 270px;
+  height: 48px;
+
+  :hover {
     cursor: pointer;
   }
 `;
 
 const Span = styled.span`
-color: #F9F9F9;
+  color: #F9F9F9;
 `;
 
 const DropdownList = styled.ul`
@@ -44,6 +46,8 @@ const DropdownList = styled.ul`
   right: 0;
   background: #fff;
   border: 1px solid #ccc;
+  box-shadow: 2px 2px 20px rgba(97, 180, 45, 0.2);
+  border-radius: 2px;
   padding: 0;
   margin: 0;
   list-style: none;
@@ -56,9 +60,17 @@ const DropdownList = styled.ul`
 
 const DropdownItem = styled.li`
   padding: 10px;
-  text-decoration:none;
+  text-decoration: none;
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
   color: rgba(0, 0, 0, 0.5);
-  :hover{
+  &.active{
+    background-color: #D3DFB9;
+  }
+  :hover {
     background: #D3DFB9;
     color: #000000;
     cursor: pointer;
@@ -67,61 +79,14 @@ const DropdownItem = styled.li`
 
 const DropDawnSelect: React.FunctionComponent<SaveSelectors> = ({saveForm, setSaveForm, routeDif}) => {
     const [show, setShow] = useState(false);
-    const selectHandler = (e) => {
-        switch (e.target.id) {
-            case 'type':
-                const typeArr: Array<{
-                    title: string,
-                    rus: string
-                }> = [];
-                const durationArr: Array<{
-                    name: string,
-                    number: number
-                }> = [];
-                for (let item of e.target.selectedOptions) {
-                    typeArr.push({
-                        title: item.value,
-                        rus: item.innerText
-                    })
-                    let number: number = 0;
-                    saveForm.durations.forEach((el: any) => {
-                        if (el.name === item.value) number = el.number
-                    })
-                    durationArr.push({
-                        name: item.value,
-                        number: number
-                    })
-                }
-                setSaveForm({
-                    ...saveForm,
-                    durations: durationArr,
-                    type: typeArr
-                });
-                break;
-            case 'dif':
-                setSaveForm({
-                    ...saveForm,
-                    difficulty: e.target.value
-                })
-                break;
-
-            case 'category':
-                const catArr: Array<string> = [];
-                for (let item of e.target.selectedOptions) {
-                    catArr.push(item.value)
-
-                }
-                setSaveForm({
-                    ...saveForm,
-                    categories: catArr
-                })
-                break;
-            default:
-                alert('Form error');
-        }
+     const selectHandler = (e) => {
+         console.log(e.target.id)
+         setSaveForm({
+                            ...saveForm,
+                            difficulty: e.target.id
+                     })
+         console.log(saveForm)
     }
-
-
     return (
         <Container onMouseLeave={() => setShow(false)}>
             <Button
@@ -130,12 +95,15 @@ const DropDawnSelect: React.FunctionComponent<SaveSelectors> = ({saveForm, setSa
                 Выберите сложность
                 <Span><i className="material-icons">expand_more</i></Span>
             </Button>
-            <DropdownList id='dif' multiple={false} onChange={selectHandler} show={show}>
+            <DropdownList id='dif' multiple={false} show={show}>
                 <DropdownItem selected={true} disabled={true}>Выберите сложность</DropdownItem>
                 {routeDif ? routeDif.map((el, ind) => {
-                    return <DropdownItem selected={el.id === saveForm.difficulty ? true : false}
-                                   key={ind}
-                                   value={el.id}>{el.title}</DropdownItem>
+                    return <DropdownItem className={saveForm.difficulty===el.id?'active':''} selected={el.id === saveForm.difficulty ? true : false}
+                                         key={ind}
+                                         id={el.id}
+                                         onClick={selectHandler}
+                    >{el.title}
+                    </DropdownItem>
                 }) : <DropdownItem value='NoCategory'>Нет Сложностей</DropdownItem>}
 
             </DropdownList>

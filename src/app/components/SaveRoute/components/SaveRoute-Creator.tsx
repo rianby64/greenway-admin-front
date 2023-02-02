@@ -20,7 +20,7 @@ export const SaveRouteCreator: React.FunctionComponent<SaveSelector> = ({ saveFo
   return (
     <>
         <Styled.styledTitleLabel>Введите ваши контактные данные</Styled.styledTitleLabel>
-        <Styled.styledDiv>
+        <Styled.styledDiv style={{borderBottom:'2px solid #E2E3DA'}}>
             <Styled.styledDivForInputs>
                 <Styled.styledPInput>Ваше имя</Styled.styledPInput>
                 {/* <label className='save-label'>Введите время прохода маршрута в минутах</label> */}
@@ -43,7 +43,7 @@ export const SaveRouteCreator: React.FunctionComponent<SaveSelector> = ({ saveFo
                         className='save-input'
                     />
                 </Styled.styledDivInputs>
-                <Styled.styledDivText>
+                <Styled.styledDivText  style={{marginBottom:'30px'}}>
                     <Styled.styledDivTextP>Согласно <span style={{color:"#0E7505"}}>ПУБЛИЧНОМУ ДОГОВОРУ</span> о предоставлении доступа к информационным и технологическим ресурсам Интернет-сервиса BY Guide, эти данные будут опубликованы в приложении BY Guide и доступны для просмотра любому пользователю приложения.</Styled.styledDivTextP>
                 </Styled.styledDivText>
             </Styled.styledDivForInputs>

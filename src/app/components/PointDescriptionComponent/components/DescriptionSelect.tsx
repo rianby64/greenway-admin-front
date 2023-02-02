@@ -2,13 +2,10 @@ import React from 'react'
 import { DescrSelect } from '../../../../types/Types'
 import * as Styled from './styled';
 
+
 export const DescriptionsSelect: React.FunctionComponent<DescrSelect> = ({ form, setForm, dotTypes }) => {
 
   const selectHandler = (e: any) => {
-    // const catArr: Array<string> = [];
-    // for (let item of e.target.selectedOptions) {
-    //   catArr.push(item.value)
-    // }
     if (e.target.value != '') {
       setForm({ ...form, categories: e.target.value })
     }    
