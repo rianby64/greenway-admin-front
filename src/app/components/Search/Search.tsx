@@ -4,7 +4,7 @@ import search from './Search.png'
 const Search = () => {
     return (
         <Styled.StyledDiv>
-            <Styled.StyledForm>
+            <Styled.StyledForm style={{marginLeft:'70px'}}>
                 <img src={search} style={{position:'absolute', top:'13px', left:'20px'}}/>
                 <Styled.StyledMyInput type="text" placeholder="Искать маршрут"/>
 
