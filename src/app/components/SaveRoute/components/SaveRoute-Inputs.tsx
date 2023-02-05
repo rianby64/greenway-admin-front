@@ -51,7 +51,7 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
                             left={'10px'}
                         />
                     </Styled.styledUnderTitleLabel>
-                    <div style={{background: '#D3DFB9', padding:'13px 24px'}}><Styled.styledUnderTitleLabel>{distance} км </Styled.styledUnderTitleLabel></div>
+                    <div style={{background: '#D3DFB9', padding:'13px 24px'}}><Styled.styledUnderTitleLabel style={{margin:'0'}}>{distance} км </Styled.styledUnderTitleLabel></div>
                 </div>
             <DropDawnSelect saveForm={saveForm} setSaveForm={setSaveForm} routeTypes={routeTypes} routeDif={routeDif} routeCat={routeCat}/>
         </Styled.styledDivInformation>

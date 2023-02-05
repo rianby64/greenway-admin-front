@@ -78,7 +78,19 @@ const DropdownItem = styled.li`
 `;
 
 const DropDawnSelect: React.FunctionComponent<SaveSelectors> = ({saveForm, setSaveForm, routeDif}) => {
+
     const [show, setShow] = useState(false);
+
+    const changeText = () => {
+        switch (saveForm.difficulty){
+            case 'proffessional': return "Для проффесионалов";
+            case 'easy': return "Лёгкий";
+            case 'hard': return "Сложный";
+            case 'medium': return "Средний";
+            default : return "Выберите сложность"
+        }
+    }
+
      const selectHandler = (e) => {
          console.log(e.target.id)
          setSaveForm({
@@ -92,7 +104,7 @@ const DropDawnSelect: React.FunctionComponent<SaveSelectors> = ({saveForm, setSa
             <Button
                 onMouseEnter={() => setShow(true)}
             >
-                Выберите сложность
+                {changeText()}
                 <Span><i className="material-icons">expand_more</i></Span>
             </Button>
             <DropdownList id='dif' multiple={false} show={show}>

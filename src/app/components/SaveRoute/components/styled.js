@@ -210,6 +210,7 @@ export const styledUnderTitleLabel = styled.span`
   line-height: 20px;
   color: #000000;
   text-align: left;
+  margin-bottom: 16px;
 `;
 
 export const styledPInput = styled.p`

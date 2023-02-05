@@ -16,6 +16,7 @@ import NewPopUp from "./common-components/NewPopUp";
 import girl from "../../images/Girl.png";
 import left from "../../images/Group 98 (1).png";
 import right from "../../images/Group 97.png";
+import PopUpEnd from "../PopUpComponents/PopUpEnd";
 // import PopUp from "./components/PopUp";
 
 export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, isShawn, setIsShawn }: SaveRouteType) => {
@@ -257,10 +258,17 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
             <Styled.styledButton type='button' className='btn pink' onClick={submitRoute}>ОТПРАВИТЬ НА СЕРВЕР</Styled.styledButton>
           </div>
           <div style={{position: 'relative', marginTop:'80px'}}>
+            <PopUpEnd
+            text={'123'}
+            buttonText1={'Privet'}
+            buttonText2={'Privet'}
+            height={'335px'}
+            />
             <img alt="left" style={{ width: '250px', height: '120px', position: 'absolute', bottom: '0' }} src={left} />
             <img alt="right" style={{ width: '250px', height: '120px', position: 'absolute', right: '0', bottom: '0' }} src={right} />
             <img alt="girl" style={{ width: '160px', height: '310px', position: 'absolute', bottom: '0', right: '0' }} src={girl} />
           </div>
+
         </form>
       </div>
     </div>
