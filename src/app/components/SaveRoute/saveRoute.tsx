@@ -17,6 +17,8 @@ import girl from "../../images/Girl.png";
 import left from "../../images/Group 98 (1).png";
 import right from "../../images/Group 97.png";
 import PopUpEnd from "../PopUpComponents/PopUpEnd";
+import byguide from "../../images/ByGuide.png";
+import PopUpBegin from "../PopUpComponents/PopUpBegin";
 // import PopUp from "./components/PopUp";
 
 export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, isShawn, setIsShawn }: SaveRouteType) => {
@@ -263,6 +265,13 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
             buttonText1={'Privet'}
             buttonText2={'Privet'}
             height={'335px'}
+            img={byguide}
+            />
+            <PopUpBegin
+                text={'123'}
+                textunder={"123"}
+                height={'335px'}
+                img={byguide}
             />
             <img alt="left" style={{ width: '250px', height: '120px', position: 'absolute', bottom: '0' }} src={left} />
             <img alt="right" style={{ width: '250px', height: '120px', position: 'absolute', right: '0', bottom: '0' }} src={right} />

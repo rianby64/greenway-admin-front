@@ -19,6 +19,7 @@ const CloseButton = styled.span`
   font-family: Roboto;
   font-size: 15px;
   font-weight: 100;
+  cursor: pointer;
 `;
 
 const TopDiv = styled.div`
@@ -83,7 +84,7 @@ const ButtonSecond = styled.button`
 
 
 //вёрстка
-const PopUpEnd = ({text, buttonText1, buttonText2, height}) => (
+const PopUpEnd = ({text, buttonText1, buttonText2, height, img}) => (
 
     <ModalContent style={{height:height}}>
         <TopDiv>
@@ -91,7 +92,7 @@ const PopUpEnd = ({text, buttonText1, buttonText2, height}) => (
             <CloseButton>x</CloseButton>
         </TopDiv>
 
-        <img/>
+        <img src={img}/>
         <Text>{text}</Text>
         <ButtonWrapper>
             <ButtonFirst type="button">{buttonText1}</ButtonFirst>
