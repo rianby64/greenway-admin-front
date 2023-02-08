@@ -18,7 +18,7 @@ import left from "../../images/Group 98 (1).png";
 import right from "../../images/Group 97.png";
 import PopUpEnd from "../PopUpComponents/PopUpEnd";
 import byguide from "../../images/ByGuide.png";
-import PopUpBegin from "../PopUpComponents/PopUpBegin";
+// import PopUpBegin from "../PopUpComponents/PopUpBegin";
 // import PopUp from "./components/PopUp";
 
 export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, isShawn, setIsShawn }: SaveRouteType) => {
@@ -29,6 +29,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   const { distance, polilines, points } = useTypedSelector(store => store.route);
   const editingRoute = useTypedSelector(store => store.editing);
   const { id, isUsers } = useTypedSelector(store => store.editing);
+  const [isVisible, setisVisible] = useState(false);
   const [saveForm, setSaveForm] = useState<SaveForm>({
     title: '',
     description: '',
@@ -52,6 +53,14 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
       url: '',
     }
   });
+
+  const openModal = () =>{
+    setisVisible(true)
+
+  }
+  const closeModal = ()=>{
+    setisVisible(false)
+  }
 
   const submitRoute = () => {
     const districts: any[] = [];
@@ -257,22 +266,19 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
             })}
           </div>
           <div style={{display:"flex", justifyContent:'center', marginTop:'100px'}}>
-            <Styled.styledButton type='button' className='btn pink' onClick={submitRoute}>ОТПРАВИТЬ НА СЕРВЕР</Styled.styledButton>
+            <Styled.styledButton type='button' className='btn pink' onClick={openModal}>ОТПРАВИТЬ НА СЕРВЕР</Styled.styledButton>
           </div>
           <div style={{position: 'relative', marginTop:'80px'}}>
-            <PopUpEnd
-            text={'123'}
-            buttonText1={'Privet'}
-            buttonText2={'Privet'}
-            height={'335px'}
-            img={byguide}
-            />
-            <PopUpBegin
+            {isVisible && (<PopUpEnd
                 text={'123'}
-                textunder={"123"}
+                buttonSuccessText={'Privet'}
+                buttonRejectText={'Privet'}
                 height={'335px'}
                 img={byguide}
-            />
+                onSuccess={submitRoute}
+                onReject={closeModal}
+            />)}
+
             <img alt="left" style={{ width: '250px', height: '120px', position: 'absolute', bottom: '0' }} src={left} />
             <img alt="right" style={{ width: '250px', height: '120px', position: 'absolute', right: '0', bottom: '0' }} src={right} />
             <img alt="girl" style={{ width: '160px', height: '310px', position: 'absolute', bottom: '0', right: '0' }} src={girl} />

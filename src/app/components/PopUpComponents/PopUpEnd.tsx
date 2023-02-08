@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 
 const ModalContent = styled.div`
-  position: relative;
+  position: absolute;
   background: white;
   border-radius: 10px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
@@ -12,6 +12,8 @@ const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  bottom: 70px;
+  left: 380px;
 `;
 
 const CloseButton = styled.span`
@@ -31,6 +33,7 @@ const TopDiv = styled.div`
   box-sizing: border-box;
   display: flex;
   justify-content: space-between;
+  margin-bottom: 40px;
 `;
 
 const Text = styled.p`
@@ -84,19 +87,23 @@ const ButtonSecond = styled.button`
 
 
 //вёрстка
-const PopUpEnd = ({text, buttonText1, buttonText2, height, img}) => (
+const PopUpEnd = ({text, buttonSuccessText, buttonRejectText, height, img, onSuccess, onReject}) => (
+
 
     <ModalContent style={{height:height}}>
         <TopDiv>
             <div></div>
-            <CloseButton>x</CloseButton>
+            <CloseButton onClick={onReject}>x</CloseButton>
         </TopDiv>
 
         <img src={img}/>
-        <Text>{text}</Text>
+        <div>
+            <Text>{text}</Text>
+        </div>
+
         <ButtonWrapper>
-            <ButtonFirst type="button">{buttonText1}</ButtonFirst>
-            <ButtonSecond type="button">{buttonText2}</ButtonSecond>
+            <ButtonFirst onClick={onSuccess} type="button">{buttonSuccessText}</ButtonFirst>
+            <ButtonSecond onClick={onReject} type="button">{buttonRejectText}</ButtonSecond>
         </ButtonWrapper>
     </ModalContent>
 

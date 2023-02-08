@@ -30,10 +30,17 @@ font-size: 16px;
 `;
 
 export const styledTextArea = styled.textarea`
+  padding: 10px 24px;
+  box-sizing: border-box;
   width: 905px;
   height: 134px;
   background: rgba(226, 227, 218, 0.5);
-  outline-color:#91C18D
+  outline:none;
+  :focus{
+    outline:#91C18D;
+    background: #D3DFB9;
+    color: #000000;
+  }
 `;
 
 export const styledTitleLabel = styled.label`
