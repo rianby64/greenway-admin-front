@@ -59,7 +59,7 @@ export const SaveRouteCreator: React.FunctionComponent<SaveSelector> = ({ saveFo
                             top={'30px'}
                             bottom={'0px'}
                             right={'0px'}
-                            left={'-100px'}
+                            left={'-200px'}
                         />
 
                     </Styled.styledPInput>

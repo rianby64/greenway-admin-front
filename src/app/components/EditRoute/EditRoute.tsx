@@ -30,7 +30,7 @@ export const CreateEditingMap: React.FunctionComponent = () => {
         className='waves-effect waves-light btn red'
         style={{ zIndex: 1999, position: 'absolute', bottom: '60px', left: '75%' }}
         onClick={() => { setSaveRouteMenu(true) }}>
-        Изменить характеристики
+        СОХРАНИТЬ МАРШРУТ
         </Styled.styledButton>
       <SaveRoute isEditing={true} isShawn={saveRouteMenu} setIsShawn={setSaveRouteMenu} />
     </>
