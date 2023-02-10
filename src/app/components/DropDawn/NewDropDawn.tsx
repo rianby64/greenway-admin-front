@@ -5,6 +5,7 @@ import {setEditingRouteToStore, setIsUsers} from "../../../redux/useEditRouteRed
 import {NavLink} from "react-router-dom";
 
 const Container = styled.div`
+  width: 100%;
   z-index: 1000;
   position: relative;
   :hover{
@@ -26,7 +27,7 @@ const Button = styled.button`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width:270px;
+  width:100%;
   height:48px;
   :hover{
     cursor: pointer;
@@ -51,7 +52,7 @@ const DropdownList = styled.ul`
   transition: all .2s;
   max-height: 270px;
   overflow: auto;
-  flex-direction: column;
+  flex-direction: column;;
 `;
 
 const DropdownItem = styled(NavLink)`

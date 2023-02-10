@@ -87,26 +87,31 @@ const ButtonSecond = styled.button`
 
 
 //вёрстка
-const PopUpEnd = ({text, buttonSuccessText, buttonRejectText, height, img, onSuccess, onReject}) => (
+const PopUpEnd = ({text, buttonSuccessText, buttonRejectText, height, img, onSuccess, onReject}) => {
+    console.log(onSuccess)
+    return(
+        <ModalContent style={{height:height}}>
+            <TopDiv>
+                <div></div>
+                <CloseButton onClick={onReject}>x</CloseButton>
+            </TopDiv>
+
+            <img src={img}/>
+            <div>
+                <Text>{text}</Text>
+            </div>
+
+            <ButtonWrapper>
+                {!!onSuccess && <ButtonFirst onClick={onSuccess} type="button">{buttonSuccessText}</ButtonFirst>}
+                <ButtonSecond onClick={onReject} type="button">{buttonRejectText}</ButtonSecond>
+            </ButtonWrapper>
+        </ModalContent>
+    )
+}
 
 
-    <ModalContent style={{height:height}}>
-        <TopDiv>
-            <div></div>
-            <CloseButton onClick={onReject}>x</CloseButton>
-        </TopDiv>
 
-        <img src={img}/>
-        <div>
-            <Text>{text}</Text>
-        </div>
 
-        <ButtonWrapper>
-            <ButtonFirst onClick={onSuccess} type="button">{buttonSuccessText}</ButtonFirst>
-            <ButtonSecond onClick={onReject} type="button">{buttonRejectText}</ButtonSecond>
-        </ButtonWrapper>
-    </ModalContent>
 
-);
 
 export default PopUpEnd;

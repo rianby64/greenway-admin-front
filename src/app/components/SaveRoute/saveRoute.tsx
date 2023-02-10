@@ -55,8 +55,9 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   });
 
   const openModal = () =>{
-    setisVisible(true)
-
+    if (checkRequiredFields()) {
+      setisVisible(true);
+    }else alert('form is not filled');
   }
   const closeModal = ()=>{
     setisVisible(false)
@@ -81,7 +82,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
         number: el.duration != '' ? el.duration : 0
       });
     })
-    if (checkRequiredFields()) {
+
       if (!isEditing) {
         postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator)
           .then((response) => {
@@ -95,7 +96,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
           postLinesIntoRoute(polilines, response);
           postDotsIntoRoute(points, response);
         }).then(() => {deleteFromUsersRoutes(id)}).then(() => setTimeout(() => {window.location.replace('/')}, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
-      } 
+      }
       else {
         postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, true, false, id)
           .then(() => {
@@ -103,7 +104,6 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
             postDotsIntoRoute(points, id);
           }).then(() => setTimeout(() => {window.location.replace('/')}, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
       }
-    } else alert('form is not filled');
   }
 
   const mapDistricts = (arr) => {
@@ -212,6 +212,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
       })
     }
   }, [editingRoute])
+  console.log(submitRoute)
 
   return (
     <div
@@ -275,7 +276,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
                 buttonRejectText={'Privet'}
                 height={'335px'}
                 img={byguide}
-                onSuccess={submitRoute}
+                onSuccess={null}
                 onReject={closeModal}
             />)}
 
