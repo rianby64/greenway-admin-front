@@ -1,8 +1,8 @@
 import React from 'react'
 import { MapContainer } from 'react-leaflet'
 import { useTypedSelector } from '../../../redux/useTypedSelector.hook'
-import { DescriptionComponent } from '../PointDescriptionComponent/Description'
-import { SaveRoute } from '../SaveRoute/saveRoute'
+import { DescriptionComponent } from '../commonComponents/PointDescriptionComponent/Description'
+import { SaveRoute } from '../commonComponents/SaveRoute/saveRoute'
 import { EditingMapControl } from './components/EditMapControl/EditMapControl';
 import * as Styled from './styled'
 import Header from "../commonComponents/Header/Header";

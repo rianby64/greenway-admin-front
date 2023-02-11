@@ -1,8 +1,8 @@
 import React from 'react';
-import Search from "../../Search/Search";
+import Search from "./componentsHeader/Search/Search";
 import * as Styled from "./styledHeader";
 import logo from "../../../images/logo.png";
-import NewDropDawn from "../../DropDawn/NewDropDawn";
+import NewDropDawn from "./componentsHeader/DropDawn/NewDropDawn";
 const Header = (props) => {
 
 

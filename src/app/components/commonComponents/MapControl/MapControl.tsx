@@ -1,21 +1,17 @@
 import * as React from 'react';
-import { TileLayer, FeatureGroup, useMap, Polyline, Marker } from 'react-leaflet';
+import { TileLayer, FeatureGroup, useMap } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 import { useDispatch } from 'react-redux';
-import { hideSettings, setCurrentFeature, showSettings } from '../../../../../redux/useSettingsreducer';
-import { removePoliline, addPoliline, removePoint, editPoint, setRouteDistance, addPoint } from '../../../../../redux/useRoutesReducer';
+import { hideSettings, setCurrentFeature, showSettings } from '../../../../redux/useSettingsreducer';
+import { removePoliline, addPoliline, removePoint, editPoint, setRouteDistance, addPoint } from '../../../../redux/useRoutesReducer';
 import L from 'leaflet';
-import { setDistanceZero } from '../../../../../redux/useRoutesReducer';
-import { useTypedSelector } from '../../../../../redux/useTypedSelector.hook';
-import { PointRouteObj } from './../../../../../types/Types';
-import { MapLayers } from '../../../../../types/Constants';
-// import * as Styled from './styled';
-import ChangeTypeMap from "../../../commonComponents/MapControl/ChangeTypeMap-Button/ChangeTypeMap";
+import { setDistanceZero } from '../../../../redux/useRoutesReducer';
+import { MapLayers } from '../../../../types/Constants';
+import ChangeTypeMap from "./ChangeTypeMap-Button/ChangeTypeMap";
 
-export const EditingMapControl: React.FunctionComponent = () => {
-  const { lines, dots } = useTypedSelector(store => store.editing)
-  const [currentMapLayer, setCurrentMapLayer] = React.useState<string>(MapLayers.OSM.name)
+export const MapControl: React.FunctionComponent = () => {
   const map = useMap()
+  const [currentMapLayer, setCurrentMapLayer] = React.useState<string>(MapLayers.OSM.name)
   const dispatch = useDispatch()
   const currentFeatureDispatcher = (e) => {
     if (e.target instanceof L.Marker) dispatch(setCurrentFeature(e.target.getLatLng()))
@@ -48,15 +44,11 @@ export const EditingMapControl: React.FunctionComponent = () => {
     if (layer instanceof L.Polyline) {
       let counter: number = 0;
       map.eachLayer(layer => {
-        if (counter > 1) {
-          map.removeLayer(layer)
-        }
+        if (counter > 1) map.removeLayer(layer)
         if (layer instanceof L.Polyline) {
           counter++
-          if (counter <= 1) {
-            dispatch(addPoliline(layer.getLatLngs()))
-            dispatch(setRouteDistance(calculateDistance(layer.getLatLngs())))
-          }
+          dispatch(addPoliline(layer.getLatLngs()))
+          dispatch(setRouteDistance(calculateDistance(layer.getLatLngs())))
         }
       })
     }
@@ -71,7 +63,7 @@ export const EditingMapControl: React.FunctionComponent = () => {
     })
   }
 
-  const _onEdited = (e: any) => {
+  const _onEdited = (e: { layers: any; }) => {
     const pointsToEdit: Array<any> = [];
     const layers = e.layers;
     layers.eachLayer((layer: { bindPopup: (arg0: L.Popup) => void; }) => {
@@ -136,15 +128,6 @@ export const EditingMapControl: React.FunctionComponent = () => {
       }
     })
   }
-
-  const _onEditStop = () => {
-    map.eachLayer((layer) => {
-      if (layer instanceof L.Marker) {
-        layer.addEventListener('click', showSettingsDispatcher)
-      }
-    })
-  }
-
   const switchLayer = () => {
     map.eachLayer((layer) => {
       if (layer instanceof L.TileLayer) {
@@ -163,44 +146,9 @@ export const EditingMapControl: React.FunctionComponent = () => {
   }
 
   React.useEffect(() => {
-    dispatch(addPoliline(lines));
-    let pointsArray: Array<PointRouteObj> = [];
-    dots.map((el) => {
-      const pointToAdd: PointRouteObj = {
-        id: el.id,
-        position: {
-          lat: el.position.lat,
-          lng: el.position.lng
-        },
-        title: el.title,
-        description: el.description,
-        type: el.type,
-        images: el.images
-      };
-      pointsArray.push(pointToAdd);
-    })
-    dispatch(addPoint(pointsArray));
-    map.eachLayer((layer) => {
-      layer.addEventListener('mousedown', currentFeatureDispatcher)
-      if (layer instanceof L.Marker) {
-        const pointPopup = L.popup();
-        pointPopup.setContent('Нажмите на точку и добавьте описание')
-        layer.bindPopup(pointPopup)
-        layer.openPopup()
-        layer.addEventListener('click', showSettingsDispatcher)
-      }
-      if (layer instanceof L.Polyline) {
-        let counter: number = 0;
-        map.eachLayer(layer => {
-          if (counter > 2) map.removeLayer(layer)
-          if (layer instanceof L.Polyline) {
-            counter++
-            dispatch(addPoliline(layer.getLatLngs()))
-            dispatch(setRouteDistance(calculateDistance(layer.getLatLngs())))
-          }
-        })
-      }
-    })
+    dispatch(addPoliline([]));
+    dispatch(setCurrentFeature({}));
+    dispatch(addPoint([]))
   }, [])
 
   return (
@@ -208,14 +156,15 @@ export const EditingMapControl: React.FunctionComponent = () => {
       <FeatureGroup>
         <EditControl
           position='topright'
-          onEditStop={_onEditStop}
           onDeleteStart={_onDeleteStart}
-          onDeleteStop={_onDeleteStop}
           onCreated={_onCreated}
           onEdited={_onEdited}
           onDeleted={_onDeleted}
           onEditStart={_onEditStart}
           onEditMove={_OnEditMove}
+          onDeleteStop={_onDeleteStop}
+          onEditStop={_onDeleteStop}
+          onDrawStop={_onDeleteStop}
           draw={{
             polygon: false,
             rectangle: false,
@@ -225,16 +174,15 @@ export const EditingMapControl: React.FunctionComponent = () => {
             marker: true
           }}
         />
-        <Polyline positions={lines} />
-        {dots.length != 0 ? dots.map((el, ind) => {
-          return <Marker key={ind} position={el.position} />
-        }) : null}
       </FeatureGroup>
       <TileLayer
         attribution={MapLayers.OSM.mapAttribution}
         url={MapLayers.OSM.mapLayersUrl}
       />
-      <ChangeTypeMap switchLayer={switchLayer}/>
+      <div>
+        <ChangeTypeMap switchLayer={switchLayer}/>
+      </div>
+
     </>
   )
 }
