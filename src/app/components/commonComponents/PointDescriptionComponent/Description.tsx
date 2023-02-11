@@ -9,7 +9,7 @@ import { addPoint } from "../../../../redux/useRoutesReducer";
 import {
   hideSettings,
   setCurrentFeature,
-} from "../../../../redux/useSettingsreducer";
+} from "../../../../redux/useSettingsReducer";
 import { useTypedSelector } from "../../../../redux/useTypedSelector.hook";
 import { getCategories } from "../../../../axios/requests";
 import { DescriptionInputs } from "./components/DescriptionInputs";

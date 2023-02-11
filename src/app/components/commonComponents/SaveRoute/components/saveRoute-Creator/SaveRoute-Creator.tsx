@@ -1,6 +1,6 @@
 import React from 'react';
 import { SaveSelector } from '../../../../../../types/Types';
-import * as Styled from './styled.js';
+import * as Styled from './styledCreator.js';
 import {PopUpText} from "../../../../../../constants/Text1";
 import NewPopUp from "../../../popUp/NewPopUp";
 export const SaveRouteCreator: React.FunctionComponent<SaveSelector> = ({ saveForm, setSaveForm }) => {

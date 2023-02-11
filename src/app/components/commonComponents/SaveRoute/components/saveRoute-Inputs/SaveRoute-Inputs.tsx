@@ -3,31 +3,29 @@ import { SaveInputs } from '../../../../../../types/Types';
 import { useTypedSelector } from '../../../../../../redux/useTypedSelector.hook';
 import * as Styled from './styledInputs.js';
 //import {SaveRouteSelectors} from "./SaveRoute-selectors";
-import {PopUpText} from "../../../../../../constants/Text1";
+import { PopUpText } from "../../../../../../constants/Text1";
 import NewPopUp from "../../../popUp/NewPopUp";
 import DropDawnSelect from "../../../dropDrawnSelect/DropDawnSelect";
 
-export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm, setSaveForm,  routeCat, routeDif, routeTypes}) => {
+export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm, setSaveForm, routeCat, routeDif, routeTypes }) => {
 
-  const { distance } = useTypedSelector(store => store.route);
+    const { distance } = useTypedSelector(store => store.route);
 
-  const changeHandler = (e: any) => {
-    let { name, value } = e.target;
-    setSaveForm({ ...saveForm, [name]: value });
-  }
+    const changeHandler = (e: any) => {
+        let { name, value } = e.target;
+        setSaveForm({ ...saveForm, [name]: value });
+    }
 
-  return (
-    <>
-        <div>
-            <Styled.styledTitleLabel  style={{display:'flex', gap:'70px'}} className='save-label'>
+    return (
+        <>
+            <Styled.styledTitleLabel style={{ display: 'flex', gap: '70px' }}>
                 Введите данные маршрута
-                <Styled.styledSpan><span style={{color:'#0E7505'}}>*</span> - обязательное поле</Styled.styledSpan>
+                <Styled.styledSpan><span style={{ color: '#0E7505' }}>*</span> - обязательное поле</Styled.styledSpan>
             </Styled.styledTitleLabel>
 
-        </div>
-        <Styled.styledDivInformation style={{marginBottom:'70px', alignItems:'end'}}>
-            <div style={{width:'100%' ,maxWidth:'350px'}} className='input-block' >
-                    <Styled.styledPInput style={{marginTop:'0'}}>Название маршрута <span style={{color:'#0E7505'}}>*</span></Styled.styledPInput>
+            <Styled.styledDivInformation style={{ marginBottom: '70px', alignItems: 'end' }}>
+                <div style={{ width: '100%', maxWidth: '350px' }} className='input-block' >
+                    <Styled.styledPInput style={{ marginTop: '0' }}>Название маршрута <span style={{ color: '#0E7505' }}>*</span></Styled.styledPInput>
                     <Styled.styledInput
                         placeholder='Экологическая тропа «Окно в природу»'
                         name='title'
@@ -38,8 +36,8 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
                     </Styled.styledInput>
                 </div>
 
-                <div style={{display:'flex', gap:'15px', flexDirection:'column'}}>
-                    <Styled.styledUnderTitleLabel style={{display:'flex', gap:'10px'}}>
+                <div style={{ display: 'flex', gap: '15px', flexDirection: 'column' }}>
+                    <Styled.styledUnderTitleLabel style={{ display: 'flex', gap: '10px' }}>
                         Длина маршрута:
                         <NewPopUp
                             content={PopUpText.popUp2}
@@ -51,15 +49,15 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
                             left={'10px'}
                         />
                     </Styled.styledUnderTitleLabel>
-                    <div style={{background: '#D3DFB9', padding:'13px 24px'}}><Styled.styledUnderTitleLabel style={{margin:'0'}}>{distance} км </Styled.styledUnderTitleLabel></div>
+                    <div style={{ background: '#D3DFB9', padding: '13px 24px' }}><Styled.styledUnderTitleLabel style={{ margin: '0' }}>{distance} км </Styled.styledUnderTitleLabel></div>
                 </div>
-            <DropDawnSelect saveForm={saveForm} setSaveForm={setSaveForm} routeTypes={routeTypes} routeDif={routeDif} routeCat={routeCat}/>
-        </Styled.styledDivInformation>
+                <DropDawnSelect saveForm={saveForm} setSaveForm={setSaveForm} routeTypes={routeTypes} routeDif={routeDif} routeCat={routeCat} />
+            </Styled.styledDivInformation>
 
-        <Styled.styledDiv style={{flexDirection:'column', marginBottom:'60px'}}>
+            <Styled.styledDiv style={{ flexDirection: 'column', marginBottom: '60px' }}>
 
-                <Styled.styledUnderTitleLabel style={{display:'flex', gap:'10px'}} className='save-label'>
-                    Введите описание маршрута <span style={{color:'#0E7505'}}>*</span>
+                <Styled.styledUnderTitleLabel style={{ display: 'flex', gap: '10px' }} className='save-label'>
+                    Введите описание маршрута <span style={{ color: '#0E7505' }}>*</span>
                     <NewPopUp
                         content={PopUpText.popUp3}
                         width={'230px'}
@@ -71,18 +69,18 @@ export const SaveRouteInputs: React.FunctionComponent<SaveInputs> = ({ saveForm,
                     />
                 </Styled.styledUnderTitleLabel>
 
-            <Styled.styledTextArea
-                placeholder='Опишите маршрут'
-                name='description'
-                value={saveForm.description}
-                onChange={changeHandler}
-                className='save-input'
-            >
-                {saveForm.description}
-            </Styled.styledTextArea>
-        </Styled.styledDiv>
+                <Styled.styledTextArea
+                    placeholder='Опишите маршрут'
+                    name='description'
+                    value={saveForm.description}
+                    onChange={changeHandler}
+                    className='save-input'
+                >
+                    {saveForm.description}
+                </Styled.styledTextArea>
+            </Styled.styledDiv>
 
 
-    </>
-  )
+        </>
+    )
 }

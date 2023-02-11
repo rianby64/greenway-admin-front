@@ -2,6 +2,7 @@ import { ACTIONS, SettingsState, UserAction } from "../types/Types"
 
 const intialState: SettingsState = {
   isSettingsShawn: false,
+  allRoutes: [],
   usersRoutes: [],
   verifiedRoutes: [],
   notVerifiedRoutes: []
@@ -28,6 +29,11 @@ export const useSettingsReducer = (state = intialState, action: UserAction): Set
         ...state,
         notVerifiedRoutes: action.payload
       }
+    case ACTIONS.SET_ALL_ROUTES:
+      return {
+        ...state,
+        allRoutes: action.payload
+      }
     case ACTIONS.SET_USERS_ROUTES:
       return {
         ...state,
@@ -53,15 +59,20 @@ export const setCurrentFeature = (pointObj: object) => ({
 
 export const setVerifiedRoutes = (routes: any[]) => ({
   type: ACTIONS.SET_VERIFIED_ROUTES,
-  pyaload: routes
+  payload: routes
 })
 
 export const setNotVerifiedRoutes = (routes: any[]) => ({
   type: ACTIONS.SET_NOT_VERIFIED_ROUTES,
-  pyaload: routes
+  payload: routes
+})
+
+export const setAllRoutes = (routes: any[]) => ({
+  type: ACTIONS.SET_ALL_ROUTES,
+  payload: routes
 })
 
 export const setUsersRoutes = (routes: any[]) => ({
   type: ACTIONS.SET_USERS_ROUTES,
-  pyaload: routes
+  payload: routes
 })

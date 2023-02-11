@@ -10,7 +10,7 @@ import { AreasCheckboxes } from './components/saveRoute-Area/SaveRoute-Area';
 import { CategoriesCheckboxes } from './components/saveRoute-Categories/SaveRoute-Categories';
 import { TypesCheckboxes } from './components/saveRoute-Types/SaveRoute-Types';
 import { SaveRouteCreator } from './components/saveRoute-Creator/SaveRoute-Creator';
-import * as Styled from './components/saveRoute-Creator/styled.js';
+import * as Styled from './styled.js';
 import {PopUpText} from "../../../../constants/Text1";
 import NewPopUp from "../popUp/NewPopUp";
 import girl from "../../../images/Girl.png";

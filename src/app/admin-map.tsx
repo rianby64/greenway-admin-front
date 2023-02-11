@@ -3,43 +3,30 @@ import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { getAllRoutes, getAllUsersRoutes } from '../axios/requests';
 import { setDefaultState } from '../redux/useEditRouteReducer';
+import { setAllRoutes, setNotVerifiedRoutes, setUsersRoutes, setVerifiedRoutes } from '../redux/useSettingsReducer';
 import Header from './components/commonComponents/Header/Header';
 import { CreateMap } from './components/CreateMap/CreateMap';
 import { CreateEditingMap } from './components/EditRoute/EditRoute';
 
 
 export const AdminMap: React.FC = () => {
-    const [fetchedRoutes, setFetchedRoutes] = React.useState<Array<any>>([]);
-    const [fetchedVerified, setFetchedVerified] = React.useState<Array<any>>([]);
-    const [fetchedNotVerified, setFetchedNotVerified] = React.useState<
-        Array<any>
-    >([]);
-    const [fetchedUsersRoutes, setFetchedUsersRoutes] = React.useState<
-        Array<any>
-    >([]);
-
     const dispatch = useDispatch();
 
     const filterNotVerified = (array): void => {
-        setFetchedNotVerified(array.filter((el) => !el.approved));
-        console.log(fetchedNotVerified, "notverif");
-        console.log(fetchedRoutes, "notverif");
+        dispatch(setNotVerifiedRoutes(array.filter((el) => !el.approved)))
     };
 
     const filterVerified = (array): void => {
-        setFetchedVerified(array.filter((el) => el.approved));
-        console.log(fetchedVerified, "verif");
+        dispatch(setVerifiedRoutes(array.filter((el) => el.approved)))
     };
 
     const fetchAllRoutes = async () => {
         const fetchedData = await getAllRoutes();
         const fetchedUsers = await getAllUsersRoutes();
-        setFetchedRoutes(fetchedData);
+        dispatch(setAllRoutes(fetchedData));
         filterVerified(fetchedData);
         filterNotVerified(fetchedData);
-        setFetchedUsersRoutes(fetchedUsers);
-        console.log(fetchedUsersRoutes);
-
+        dispatch(setUsersRoutes(fetchedUsers));
     };
 
     React.useEffect(() => {
@@ -48,11 +35,8 @@ export const AdminMap: React.FC = () => {
     }, []);
     return (
         <>
-
             <Router>
-                <Header fetchedUsersRoutes={fetchedUsersRoutes}
-                    fetchedVerified={fetchedVerified}
-                    fetchedNotVerified={fetchedNotVerified} />
+                <Header/>
                 <Switch>
                     <Route component={CreateMap} path="/" exact />
                     <Route component={CreateEditingMap} path="/route/:id" />

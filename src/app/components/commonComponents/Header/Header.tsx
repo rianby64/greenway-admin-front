@@ -4,8 +4,9 @@ import * as Styled from "./styledHeader";
 import logo from "../../../images/logo.png";
 import NewDropDawn from "./componentsHeader/DropDawn/NewDropDawn";
 import { NavLink } from 'react-router-dom';
-const Header = (props) => {
-
+import { useTypedSelector } from '../../../../redux/useTypedSelector.hook';
+const Header = () => {
+    const { verifiedRoutes, notVerifiedRoutes, usersRoutes } = useTypedSelector(store => store.settings)
 
 
     return (
@@ -13,18 +14,18 @@ const Header = (props) => {
             <NavLink to={'/'}><img alt="logo" src={logo} /></NavLink>
             <Search />
             <NewDropDawn
-                fetchedRoutes={props.fetchedUsersRoutes}
+                fetchedRoutes={usersRoutes}
                 isUsers={true}
                 title={"Пользовательские маршруты"}
             />
             <NewDropDawn
                 isUsers={false}
-                fetchedRoutes={props.fetchedVerified}
+                fetchedRoutes={verifiedRoutes}
                 title={"Проверенные маршруты"}
             />
             <NewDropDawn
                 isUsers={false}
-                fetchedRoutes={props.fetchedNotVerified}
+                fetchedRoutes={notVerifiedRoutes}
                 title={"Не проверенные маршруты"}
             />
         </Styled.StyledHeader>

@@ -2,7 +2,7 @@ import * as React from 'react';
 import { TileLayer, FeatureGroup, useMap } from 'react-leaflet';
 import { EditControl } from 'react-leaflet-draw';
 import { useDispatch } from 'react-redux';
-import { hideSettings, setCurrentFeature, showSettings } from '../../../../redux/useSettingsreducer';
+import { hideSettings, setCurrentFeature, showSettings } from '../../../../redux/useSettingsReducer';
 import { removePoliline, addPoliline, removePoint, editPoint, setRouteDistance, addPoint } from '../../../../redux/useRoutesReducer';
 import L from 'leaflet';
 import { setDistanceZero } from '../../../../redux/useRoutesReducer';

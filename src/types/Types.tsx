@@ -156,6 +156,7 @@ export interface SettingsState {
   usersRoutes: any[];
   verifiedRoutes: any[];
   notVerifiedRoutes: any[];
+  allRoutes: any[];
 }
 
 export interface UserAction {
@@ -184,7 +185,8 @@ export enum ACTIONS {
   SWITCH_MAP_LAYER = "SWITCH_MAP_LAYER",
   SET_VERIFIED_ROUTES = "SET_VERIFIED_ROUTES",
   SET_NOT_VERIFIED_ROUTES = "SET_NOT_VERIFIED_ROUTES",
-  SET_USERS_ROUTES = "SET_USERS_ROUTES"
+  SET_USERS_ROUTES = "SET_USERS_ROUTES",
+  SET_ALL_ROUTES = "SET_All_ROUTES"
 }
 
 export enum EDIT_ACTIONS {
