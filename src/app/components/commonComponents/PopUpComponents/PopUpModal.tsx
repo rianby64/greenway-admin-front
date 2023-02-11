@@ -2,10 +2,10 @@ import React from 'react';
 import * as Styled from './styledPopUpModal.js'
 
 //вёрстка
-const PopUpModal = ({text, buttonSuccessText, buttonRejectText, height, img, onSuccess, onReject}) => {
+const PopUpModal = ({text, buttonSuccessText, buttonRejectText, img, onSuccess, onReject}) => {
     console.log(onSuccess)
     return (
-        <Styled.ModalContent style={{height: height}}>
+        <Styled.ModalContent>
             <Styled.TopDiv>
                 <div></div>
                 <Styled.CloseButton onClick={onReject}>x</Styled.CloseButton>

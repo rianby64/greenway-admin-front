@@ -11,7 +11,7 @@ import { CategoriesCheckboxes } from './components/saveRoute-Categories/SaveRout
 import { TypesCheckboxes } from './components/saveRoute-Types/SaveRoute-Types';
 import { SaveRouteCreator } from './components/saveRoute-Creator/SaveRoute-Creator';
 import * as Styled from './styled.js';
-import {PopUpText} from "../../../../constants/Text1";
+import { PopUpText } from "../../../../constants/Text1";
 import NewPopUp from "../popUp/NewPopUp";
 import girl from "../../../images/Girl.png";
 import left from "../../../images/Group 98 (1).png";
@@ -26,9 +26,9 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   const [routeDif, setRouteDif] = useState<Array<any>>([]);
   const [routeCat, setRouteCat] = useState<Array<any>>([]);
   const [routeDistricts, setRouteDistricts] = useState<Array<any>>([]);
-  const {distance, polilines, points} = useTypedSelector(store => store.route);
+  const { distance, polilines, points } = useTypedSelector(store => store.route);
   const editingRoute = useTypedSelector(store => store.editing);
-  const {id, isUsers} = useTypedSelector(store => store.editing);
+  const { id, isUsers } = useTypedSelector(store => store.editing);
   const [isVisible, setisVisible] = useState(false);
   const [saveForm, setSaveForm] = useState<SaveForm>({
     title: '',
@@ -55,9 +55,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   });
 
   const openModal = () => {
-    if (checkRequiredFields()) {
-      setisVisible(true);
-    } else alert('form is not filled');
+    setisVisible(true);
   }
   const closeModal = () => {
     setisVisible(false)
@@ -82,34 +80,37 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
         number: el.duration != '' ? el.duration : 0
       });
     })
-
-    if (!isEditing) {
-      postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator)
+    if (checkRequiredFields()) {
+      if (!isEditing) {
+        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator)
           .then((response) => {
             postLinesIntoRoute(polilines, response);
             postDotsIntoRoute(points, response);
           }).then(() => setTimeout(() => {
-        window.location.replace('/')
-      }, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
+            window.location.replace('/')
+          }, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
 
-    } else if (isEditing && isUsers) {
-      postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, false, true, id)
+      } else if (isEditing && isUsers) {
+        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, false, true, id)
           .then((response) => {
             postLinesIntoRoute(polilines, response);
             postDotsIntoRoute(points, response);
           }).then(() => {
-        deleteFromUsersRoutes(id)
-      }).then(() => setTimeout(() => {
-        window.location.replace('/')
-      }, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
-    } else {
-      postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, true, false, id)
+            deleteFromUsersRoutes(id)
+          }).then(() => setTimeout(() => {
+            window.location.replace('/')
+          }, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
+      } else {
+        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, true, false, id)
           .then(() => {
             postLinesIntoRoute(polilines, id);
             postDotsIntoRoute(points, id);
           }).then(() => setTimeout(() => {
-        window.location.replace('/')
-      }, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
+            window.location.replace('/')
+          }, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
+      }
+    } else {
+      alert('form is not filled');
     }
   }
 
@@ -221,84 +222,83 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   }, [editingRoute])
 
   return (
-      <div
-          className='save-shadow'
-          style={isShawn ?
-              {
-                position: "absolute",
-                zIndex: 2000,
-                width: '100%',
-                background: 'rgb(14 14 14 / 65%',
-              } : {
-                display: 'none'
-              }
-          }
-          onClick={() => setIsShawn(!isShawn)}
-      >
-        <div onClick={(e) => e.stopPropagation()} className='save-workspace'>
-          <form className='save-route-form'>
-            <SaveRouteCreator saveForm={saveForm} setSaveForm={setSaveForm}/>
-            <SaveRouteInputs saveForm={saveForm}
-                             setSaveForm={setSaveForm}
-                             routeCat={routeCat}
-                             routeDif={routeDif}
-                             routeTypes={routeTypes}/>
-            <SaveRouteSwitches saveForm={saveForm} setSaveForm={setSaveForm}/>
-            <AreasCheckboxes array={routeDistricts} label={"Выберите область"}/>
-            <CategoriesCheckboxes array={routeCat}/>
-            <TypesCheckboxes saveForm={saveForm} setSaveForm={setSaveForm} array={routeTypes} seter={setRouteTypes}/>
-            <SaveRouteDurations array={routeTypes} saveForm={saveForm} setSaveForm={setSaveForm}/>
-            <div style={{maxWidth: '880px', width: '100%', margin: '0 auto'}} className='images'>
-              <Styled.styledUnderTitleLabel style={{display: 'flex', gap: '10px'}}>Фотографии маршрута
-                <NewPopUp
-                    content={PopUpText.popUp7}
-                    width={'400px'}
-                    height={'420px'}
-                    top={'-120px'}
-                    bottom={'0px'}
-                    right={'0px'}
-                    left={'20px'}
-                />
-              </Styled.styledUnderTitleLabel>
-              {saveForm.images.map((el, index) => {
-                console.log(el, index);
-                return (
+    <div
+      className='save-shadow'
+      style={isShawn ?
+        {
+          position: "absolute",
+          zIndex: 2000,
+          width: '100%',
+          background: 'rgb(14 14 14 / 65%',
+        } : {
+          display: 'none'
+        }
+      }
+      onClick={() => setIsShawn(!isShawn)}
+    >
+      <div onClick={(e) => e.stopPropagation()} className='save-workspace'>
+        <form className='save-route-form'>
+          <SaveRouteCreator saveForm={saveForm} setSaveForm={setSaveForm} />
+          <SaveRouteInputs saveForm={saveForm}
+            setSaveForm={setSaveForm}
+            routeCat={routeCat}
+            routeDif={routeDif}
+            routeTypes={routeTypes} />
+          <SaveRouteSwitches saveForm={saveForm} setSaveForm={setSaveForm} />
+          <AreasCheckboxes array={routeDistricts} label={"Выберите область"} />
+          <CategoriesCheckboxes array={routeCat} />
+          <TypesCheckboxes saveForm={saveForm} setSaveForm={setSaveForm} array={routeTypes} seter={setRouteTypes} />
+          <SaveRouteDurations array={routeTypes} saveForm={saveForm} setSaveForm={setSaveForm} />
+          <div style={{ maxWidth: '880px', width: '100%', margin: '0 auto' }} className='images'>
+            <Styled.styledUnderTitleLabel style={{ display: 'flex', gap: '10px' }}>Фотографии маршрута
+              <NewPopUp
+                content={PopUpText.popUp7}
+                width={'400px'}
+                height={'420px'}
+                top={'-120px'}
+                bottom={'0px'}
+                right={'0px'}
+                left={'20px'}
+              />
+            </Styled.styledUnderTitleLabel>
+            {saveForm.images.map((el, index) => {
+              console.log(el, index);
+              return (
 
-                    <div className='inputs'>
-                      <Styled.styledInput style={{marginBottom: '10px', marginRight: '20px'}} className='image-input'
-                                          type='text' placeholder='Вставьте ссылку на фотографию' value={el}
-                                          onChange={(e) => imagesInputChange(e, index)}/>
-                      <Styled.styledButton style={{marginBottom: '10px'}} type='button' className='add-image'
-                                           onClick={addImageElem}>ДОБАВИТЬ ЕЩЁ ФОТО</Styled.styledButton>
-                    </div>
+                <div className='inputs'>
+                  <Styled.styledInput style={{ marginBottom: '10px', marginRight: '20px' }} className='image-input'
+                    type='text' placeholder='Вставьте ссылку на фотографию' value={el}
+                    onChange={(e) => imagesInputChange(e, index)} />
+                  <Styled.styledButton style={{ marginBottom: '10px' }} type='button' className='add-image'
+                    onClick={addImageElem}>ДОБАВИТЬ ЕЩЁ ФОТО</Styled.styledButton>
+                </div>
 
-                )
-              })}
-            </div>
-            <div style={{display: "flex", justifyContent: 'center', marginTop: '100px'}}>
-              <Styled.styledButton type='button' className='btn pink' onClick={openModal}>ОТПРАВИТЬ НА
-                СЕРВЕР</Styled.styledButton>
-            </div>
-            <div style={{position: 'relative', marginTop: '80px'}}>
-              {isVisible && (<PopUpModal
-                  text={'Убедитесь, что вся информация введена верно. После отправки на сервер внесение изменений невозможно. Маршрут будет направлен на модерацию. После прохождения модерации на ваш email (если он указан) будет направлено информационное письмо о принятии или отклонении маршрута.'}
-                  buttonSuccessText={'ОТПРАВИТЬ'}
-                  buttonRejectText={'НЕ ОТПРАВЛЯТЬ'}
-                  height={'335px'}
-                  img={byguide}
-                  onSuccess={submitRoute}
-                  onReject={closeModal}
-              />)}
+              )
+            })}
+          </div>
+          <div style={{ display: "flex", justifyContent: 'center', marginTop: '100px' }}>
+            <Styled.styledButton type='button' className='btn pink' onClick={openModal}>ОТПРАВИТЬ НА
+              СЕРВЕР</Styled.styledButton>
+          </div>
+          <div style={{ position: 'relative', marginTop: '80px' }}>
+            {isVisible && (<PopUpModal
+              text={'Убедитесь, что вся информация введена верно. После отправки на сервер внесение изменений невозможно. Маршрут будет направлен на модерацию. После прохождения модерации на ваш email (если он указан) будет направлено информационное письмо о принятии или отклонении маршрута.'}
+              buttonSuccessText={'ОТПРАВИТЬ'}
+              buttonRejectText={'НЕ ОТПРАВЛЯТЬ'}
+              img={byguide}
+              onSuccess={submitRoute}
+              onReject={closeModal}
+            />)}
 
-              <img alt="left" style={{width: '250px', height: '120px', position: 'absolute', bottom: '0'}} src={left}/>
-              <img alt="right" style={{width: '250px', height: '120px', position: 'absolute', right: '0', bottom: '0'}}
-                   src={right}/>
-              <img alt="girl" style={{width: '160px', height: '310px', position: 'absolute', bottom: '0', right: '0'}}
-                   src={girl}/>
-            </div>
+            <img alt="left" style={{ width: '250px', height: '120px', position: 'absolute', bottom: '0' }} src={left} />
+            <img alt="right" style={{ width: '250px', height: '120px', position: 'absolute', right: '0', bottom: '0' }}
+              src={right} />
+            <img alt="girl" style={{ width: '160px', height: '310px', position: 'absolute', bottom: '0', right: '0' }}
+              src={girl} />
+          </div>
 
-          </form>
-        </div>
+        </form>
       </div>
+    </div>
   )
 }

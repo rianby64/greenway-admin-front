@@ -38,6 +38,8 @@ export const Text = styled.p`
   text-align: center;
   margin-bottom: 20px;
   word-break: break-all;
+  font-size: 12px;
+  margin-bottom: 16px;
 `;
 
 export const DivText = styled.div`
@@ -49,7 +51,7 @@ export const ButtonWrapper = styled.div`
   justify-content: center;
   gap: 20px;
   width: 100%;
-  margin-top: 20px;
+  margin-bottom: 34px;
 `;
 
 
