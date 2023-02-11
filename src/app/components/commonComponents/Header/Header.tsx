@@ -3,14 +3,15 @@ import Search from "./componentsHeader/Search/Search";
 import * as Styled from "./styledHeader";
 import logo from "../../../images/logo.png";
 import NewDropDawn from "./componentsHeader/DropDawn/NewDropDawn";
+import { NavLink } from 'react-router-dom';
 const Header = (props) => {
 
 
 
     return (
         <Styled.StyledHeader>
-            <img alt="logo" src={logo}/>
-            <Search/>
+            <NavLink to={'/'}><img alt="logo" src={logo} /></NavLink>
+            <Search />
             <NewDropDawn
                 fetchedRoutes={props.fetchedUsersRoutes}
                 isUsers={true}
