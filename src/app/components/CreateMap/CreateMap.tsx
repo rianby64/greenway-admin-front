@@ -8,7 +8,7 @@ import {useEffect} from "react";
 import {useDispatch} from "react-redux";
 import {setDefaultState} from "../../../redux/useEditRouteReducer";
 import {getAllRoutes, getAllUsersRoutes} from "../../../axios/requests";
-import Header from "../Header/Header";
+import Header from "../commonComponents/Header/Header";
 import * as Styled from "./styled";
 
 export const CreateMap: React.FunctionComponent = () => {

@@ -16,7 +16,7 @@ import NewPopUp from "./common-components/NewPopUp";
 import girl from "../../images/Girl.png";
 import left from "../../images/Group 98 (1).png";
 import right from "../../images/Group 97.png";
-import PopUpEnd from "../PopUpComponents/PopUpEnd";
+import PopUpModal from "../PopUpComponents/PopUpModal";
 import byguide from "../../images/ByGuide.png";
 // import PopUpBegin from "../PopUpComponents/PopUpBegin";
 // import PopUp from "./components/PopUp";
@@ -26,9 +26,9 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   const [routeDif, setRouteDif] = useState<Array<any>>([]);
   const [routeCat, setRouteCat] = useState<Array<any>>([]);
   const [routeDistricts, setRouteDistricts] = useState<Array<any>>([]);
-  const { distance, polilines, points } = useTypedSelector(store => store.route);
+  const {distance, polilines, points} = useTypedSelector(store => store.route);
   const editingRoute = useTypedSelector(store => store.editing);
-  const { id, isUsers } = useTypedSelector(store => store.editing);
+  const {id, isUsers} = useTypedSelector(store => store.editing);
   const [isVisible, setisVisible] = useState(false);
   const [saveForm, setSaveForm] = useState<SaveForm>({
     title: '',
@@ -54,12 +54,12 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
     }
   });
 
-  const openModal = () =>{
+  const openModal = () => {
     if (checkRequiredFields()) {
       setisVisible(true);
-    }else alert('form is not filled');
+    } else alert('form is not filled');
   }
-  const closeModal = ()=>{
+  const closeModal = () => {
     setisVisible(false)
   }
 
@@ -83,27 +83,34 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
       });
     })
 
-      if (!isEditing) {
-        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator)
+    if (!isEditing) {
+      postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator)
           .then((response) => {
             postLinesIntoRoute(polilines, response);
             postDotsIntoRoute(points, response);
-          }).then(() => setTimeout(() => {window.location.replace('/')}, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
+          }).then(() => setTimeout(() => {
+        window.location.replace('/')
+      }, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
 
-      }else if (isEditing && isUsers ){
-        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, false, true, id)
-        .then((response) => {
-          postLinesIntoRoute(polilines, response);
-          postDotsIntoRoute(points, response);
-        }).then(() => {deleteFromUsersRoutes(id)}).then(() => setTimeout(() => {window.location.replace('/')}, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
-      }
-      else {
-        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, true, false, id)
+    } else if (isEditing && isUsers) {
+      postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, false, true, id)
+          .then((response) => {
+            postLinesIntoRoute(polilines, response);
+            postDotsIntoRoute(points, response);
+          }).then(() => {
+        deleteFromUsersRoutes(id)
+      }).then(() => setTimeout(() => {
+        window.location.replace('/')
+      }, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
+    } else {
+      postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, true, false, id)
           .then(() => {
             postLinesIntoRoute(polilines, id);
             postDotsIntoRoute(points, id);
-          }).then(() => setTimeout(() => {window.location.replace('/')}, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
-      }
+          }).then(() => setTimeout(() => {
+        window.location.replace('/')
+      }, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
+    }
   }
 
   const mapDistricts = (arr) => {
@@ -215,78 +222,84 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   console.log(submitRoute)
 
   return (
-    <div
-      className='save-shadow'
-      style={isShawn ?
-        {
-          position:"absolute",
-          zIndex: 2000,
-          width: '100%',
-          background: 'rgb(14 14 14 / 65%',
-        } : {
-          display: 'none'
-        }
-      }
-      onClick={() => setIsShawn(!isShawn)}
-    >
-      <div onClick={(e) => e.stopPropagation()} className='save-workspace'>
-        <form className='save-route-form'>
-          <SaveRouteCreator saveForm={saveForm} setSaveForm={setSaveForm}/>
-          <SaveRouteInputs saveForm={saveForm}
-                           setSaveForm={setSaveForm}
-                           routeCat={routeCat}
-                           routeDif={routeDif}
-                           routeTypes={routeTypes} />
-          <SaveRouteSwitches saveForm={saveForm} setSaveForm={setSaveForm} />
-          <AreasCheckboxes array={routeDistricts} label={"Выберите область"} />
-          <CategoriesCheckboxes array={routeCat} />
-          <TypesCheckboxes saveForm={saveForm} setSaveForm={setSaveForm} array={routeTypes} seter={setRouteTypes} />
-          <SaveRouteDurations array={routeTypes} saveForm={saveForm} setSaveForm={setSaveForm} />
-          <div style={{maxWidth:'880px', width:'100%', margin:'0 auto'}} className='images'>
-            <Styled.styledUnderTitleLabel style={{display:'flex', gap:'10px'}}>Фотографии маршрута
-              <NewPopUp
-                  content={PopUpText.popUp7}
-                  width={'400px'}
-                  height={'420px'}
-                  top={'-120px'}
-                  bottom={'0px'}
-                  right={'0px'}
-                  left={'20px'}
-              />
-            </Styled.styledUnderTitleLabel>
-            {saveForm.images.map((el, index) => {
-              console.log(el, index);
-              return (
+      <div
+          className='save-shadow'
+          style={isShawn ?
+              {
+                position: "absolute",
+                zIndex: 2000,
+                width: '100%',
+                background: 'rgb(14 14 14 / 65%',
+              } : {
+                display: 'none'
+              }
+          }
+          onClick={() => setIsShawn(!isShawn)}
+      >
+        <div onClick={(e) => e.stopPropagation()} className='save-workspace'>
+          <form className='save-route-form'>
+            <SaveRouteCreator saveForm={saveForm} setSaveForm={setSaveForm}/>
+            <SaveRouteInputs saveForm={saveForm}
+                             setSaveForm={setSaveForm}
+                             routeCat={routeCat}
+                             routeDif={routeDif}
+                             routeTypes={routeTypes}/>
+            <SaveRouteSwitches saveForm={saveForm} setSaveForm={setSaveForm}/>
+            <AreasCheckboxes array={routeDistricts} label={"Выберите область"}/>
+            <CategoriesCheckboxes array={routeCat}/>
+            <TypesCheckboxes saveForm={saveForm} setSaveForm={setSaveForm} array={routeTypes} seter={setRouteTypes}/>
+            <SaveRouteDurations array={routeTypes} saveForm={saveForm} setSaveForm={setSaveForm}/>
+            <div style={{maxWidth: '880px', width: '100%', margin: '0 auto'}} className='images'>
+              <Styled.styledUnderTitleLabel style={{display: 'flex', gap: '10px'}}>Фотографии маршрута
+                <NewPopUp
+                    content={PopUpText.popUp7}
+                    width={'400px'}
+                    height={'420px'}
+                    top={'-120px'}
+                    bottom={'0px'}
+                    right={'0px'}
+                    left={'20px'}
+                />
+              </Styled.styledUnderTitleLabel>
+              {saveForm.images.map((el, index) => {
+                console.log(el, index);
+                return (
 
-                  <div className='inputs'>
-                    <Styled.styledInput style={{marginBottom:'10px', marginRight:'20px'}}className='image-input' type='text' placeholder='Вставьте ссылку на фотографию' value={el} onChange={(e) => imagesInputChange(e, index)} />
-                    <Styled.styledButton style={{marginBottom:'10px'}} type='button' className='add-image' onClick={addImageElem}>ДОБАВИТЬ ЕЩЁ ФОТО</Styled.styledButton>
-                  </div>
+                    <div className='inputs'>
+                      <Styled.styledInput style={{marginBottom: '10px', marginRight: '20px'}} className='image-input'
+                                          type='text' placeholder='Вставьте ссылку на фотографию' value={el}
+                                          onChange={(e) => imagesInputChange(e, index)}/>
+                      <Styled.styledButton style={{marginBottom: '10px'}} type='button' className='add-image'
+                                           onClick={addImageElem}>ДОБАВИТЬ ЕЩЁ ФОТО</Styled.styledButton>
+                    </div>
 
-              )
-            })}
-          </div>
-          <div style={{display:"flex", justifyContent:'center', marginTop:'100px'}}>
-            <Styled.styledButton type='button' className='btn pink' onClick={openModal}>ОТПРАВИТЬ НА СЕРВЕР</Styled.styledButton>
-          </div>
-          <div style={{position: 'relative', marginTop:'80px'}}>
-            {isVisible && (<PopUpEnd
-                text={'123'}
-                buttonSuccessText={'Privet'}
-                buttonRejectText={'Privet'}
-                height={'335px'}
-                img={byguide}
-                onSuccess={null}
-                onReject={closeModal}
-            />)}
+                )
+              })}
+            </div>
+            <div style={{display: "flex", justifyContent: 'center', marginTop: '100px'}}>
+              <Styled.styledButton type='button' className='btn pink' onClick={openModal}>ОТПРАВИТЬ НА
+                СЕРВЕР</Styled.styledButton>
+            </div>
+            <div style={{position: 'relative', marginTop: '80px'}}>
+              {isVisible && (<PopUpModal
+                  text={'Убедитесь, что вся информация введена верно. После отправки на сервер внесение изменений невозможно. Маршрут будет направлен на модерацию. После прохождения модерации на ваш email (если он указан) будет направлено информационное письмо о принятии или отклонении маршрута.'}
+                  buttonSuccessText={'ОТПРАВИТЬ'}
+                  buttonRejectText={'НЕ ОТПРАВЛЯТЬ'}
+                  height={'335px'}
+                  img={byguide}
+                  onSuccess={submitRoute}
+                  onReject={closeModal}
+              />)}
 
-            <img alt="left" style={{ width: '250px', height: '120px', position: 'absolute', bottom: '0' }} src={left} />
-            <img alt="right" style={{ width: '250px', height: '120px', position: 'absolute', right: '0', bottom: '0' }} src={right} />
-            <img alt="girl" style={{ width: '160px', height: '310px', position: 'absolute', bottom: '0', right: '0' }} src={girl} />
-          </div>
+              <img alt="left" style={{width: '250px', height: '120px', position: 'absolute', bottom: '0'}} src={left}/>
+              <img alt="right" style={{width: '250px', height: '120px', position: 'absolute', right: '0', bottom: '0'}}
+                   src={right}/>
+              <img alt="girl" style={{width: '160px', height: '310px', position: 'absolute', bottom: '0', right: '0'}}
+                   src={girl}/>
+            </div>
 
-        </form>
+          </form>
+        </div>
       </div>
-    </div>
   )
 }

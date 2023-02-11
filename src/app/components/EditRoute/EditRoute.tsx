@@ -5,7 +5,7 @@ import { DescriptionComponent } from '../PointDescriptionComponent/Description'
 import { SaveRoute } from '../SaveRoute/saveRoute'
 import { EditingMapControl } from './components/EditMapControl/EditMapControl';
 import * as Styled from './styled'
-import Header from "../Header/Header";
+import Header from "../commonComponents/Header/Header";
 
 export const CreateEditingMap: React.FunctionComponent = () => {
   const { currentFeature } = useTypedSelector(store => store.route);
