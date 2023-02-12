@@ -6,13 +6,13 @@ import NewDropDawn from "./componentsHeader/DropDawn/NewDropDawn";
 import { NavLink } from 'react-router-dom';
 import { useTypedSelector } from '../../../../redux/useTypedSelector.hook';
 const Header = () => {
-    const { verifiedRoutes, notVerifiedRoutes, usersRoutes } = useTypedSelector(store => store.settings)
+    const { verifiedRoutes, notVerifiedRoutes, usersRoutes, allRoutes } = useTypedSelector(store => store.settings)
 
 
     return (
         <Styled.StyledHeader>
             <NavLink to={'/'}><img alt="logo" src={logo} /></NavLink>
-            <Search />
+            <Search allRoutes={allRoutes} />
             <NewDropDawn
                 fetchedRoutes={usersRoutes}
                 isUsers={true}

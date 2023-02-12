@@ -1,11 +1,14 @@
-import React, {useEffect, useState} from 'react';
-import {useDispatch} from "react-redux";
-import {setEditingRouteToStore, setIsUsers} from "../../../../../../redux/useEditRouteReducer";
+import React, { useEffect, useState } from 'react';
+import { useDispatch } from "react-redux";
+import { setEditingRouteToStore, setIsUsers } from "../../../../../../redux/useEditRouteReducer";
+import { useTypedSelector } from '../../../../../../redux/useTypedSelector.hook';
 import * as Styled from './styledDropDawn.js'
 
 
 const newDropdown = (props) => {
     const dispatch = useDispatch();
+    const { id, title } = useTypedSelector(store => store.editing);
+    const [show, setShow] = useState(false);
 
     const setEditingRoute = (array) => {
         dispatch(setEditingRouteToStore(array));
@@ -13,18 +16,27 @@ const newDropdown = (props) => {
             dispatch(setIsUsers(true));
         }
     };
-    useEffect(()=>{
-        console.log(props.fetchedRoutes, "dr");
+
+    const getDropdownTitle = (): string => {
+        if (!id) {
+            return props.title
+        } else {
+            return props.fetchedRoutes.find(el => el.id === id)?.title || props.title
+        }
+    }
+
+    useEffect(() => {
+        console.log(props.fetchedRoutes, "dr", show);
     }, [props.fetchedRoutes])
-    const [show, setShow] = useState(false);
 
     return (
         <Styled.Container onMouseLeave={() => setShow(false)}>
             <Styled.Button
+                className={title === getDropdownTitle() ? 'active' : ''}
                 onMouseEnter={() => setShow(true)}
             >
-                {props.title}
-                <Styled.Span><i className="material-icons">expand_more</i></Styled.Span>
+                <Styled.StyledTitle>{getDropdownTitle()}</Styled.StyledTitle>
+                <Styled.Span><Styled.StyledIcon className={title === getDropdownTitle() ? 'active material-icons' : 'material-icons'}>expand_more</Styled.StyledIcon></Styled.Span>
             </Styled.Button>
             <Styled.DropdownList show={show}>
                 {props.fetchedRoutes.length ? (
@@ -34,7 +46,7 @@ const newDropdown = (props) => {
                                 key={ind}
                                 onClick={() => setEditingRoute(el)}
                                 to={`/route/${el.id}`}
-                                className="route-list-li-a"
+                                className={title && el === id ? "route-list-li-a active" : "route-list-li-a"}
                             >
                                 {el.title}
                             </Styled.DropdownItem>

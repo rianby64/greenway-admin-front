@@ -2,13 +2,13 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100%;
+  width: 22%;
   z-index: 1000;
   position: relative;
   :hover {
-    Span {
+    /* Span {
       display: none;
-    }
+    } */
   }
 `;
 
@@ -29,6 +29,10 @@ export const Button = styled.button`
   height: 48px;
   :hover {
     cursor: pointer;
+  }
+  &.active {
+    background: #d3dfb9;
+    color: #000000;
   }
 `;
 
@@ -63,5 +67,23 @@ export const DropdownItem = styled(NavLink)`
     background: #d3dfb9;
     color: #000000;
     cursor: pointer;
+  }
+  &.active {
+    background: #d3dfb9;
+    color: #000000;
+  }
+`;
+
+export const StyledTitle = styled.span`
+  text-align: left;
+  width: 90%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+`;
+
+export const StyledIcon = styled.i`
+  &.active {
+    color: #000000;
   }
 `;
