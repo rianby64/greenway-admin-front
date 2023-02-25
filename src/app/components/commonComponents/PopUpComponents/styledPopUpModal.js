@@ -1,4 +1,13 @@
-import styled from 'styled-components';
+import styled from "styled-components";
+
+export const Shadow = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  background: #00000070;
+  top: 0;
+  bottom: 50%;
+`;
 
 export const ModalContent = styled.div`
   position: absolute;
@@ -10,12 +19,13 @@ export const ModalContent = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  bottom: 70px;
-  left: 380px;
+  bottom: 30%;
+  left: 40%;
+  z-index: 5000;
 `;
 
 export const CloseButton = styled.span`
-  color: #F9F9F9;
+  color: #f9f9f9;
   font-family: Roboto;
   font-size: 15px;
   font-weight: 100;
@@ -24,7 +34,7 @@ export const CloseButton = styled.span`
 
 export const TopDiv = styled.div`
   width: 100%;
-  background: #0E7505;
+  background: #0e7505;
   box-shadow: 2px 2px 20px rgba(97, 180, 45, 0.2);
   border-radius: 2px 2px 0px 0px;
   padding: 10px;
@@ -43,7 +53,7 @@ export const Text = styled.p`
 `;
 
 export const DivText = styled.div`
-padding: 0px 30px;
+  padding: 0px 30px;
 `;
 
 export const ButtonWrapper = styled.div`
@@ -54,44 +64,48 @@ export const ButtonWrapper = styled.div`
   margin-bottom: 34px;
 `;
 
-
-
 export const ButtonFirst = styled.button`
-  background: #0E7505;
+  background: #0e7505;
   border-radius: 2px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 22px;
-  color: #F9F9F9;
+  color: #f9f9f9;
   text-transform: uppercase;
   padding: 5px 23px;
   border: none;
   cursor: pointer;
+  :hover {
+    opacity: 0.5;
+  }
 `;
 
 export const ButtonSecond = styled.button`
-  background: #F9F9F9;
+  background: #f9f9f9;
   border-radius: 2px;
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
   font-size: 12px;
   line-height: 22px;
-  color: #0E7505;
+  color: #0e7505;
   text-transform: uppercase;
   padding: 5px 23px;
   border: none;
-  border: 1px solid #91C18D;
+  border: 1px solid #91c18d;
   cursor: pointer;
+  :hover {
+    opacity: 0.5;
+  }
 `;
 
 export const TextButton = styled.p`
-  font-family: 'Roboto';
+  font-family: "Roboto";
   font-style: normal;
   font-weight: 500;
   font-size: 20px;
   line-height: 27px;
-  color: #0E7505;
+  color: #0e7505;
 `;

@@ -276,15 +276,6 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
               СЕРВЕР</Styled.styledButton>
           </div>
           <div style={{ position: 'relative', marginTop: '80px' }}>
-            {isVisible && (<PopUpModal
-              text={'Убедитесь, что вся информация введена верно. После отправки на сервер внесение изменений невозможно. Маршрут будет направлен на модерацию. После прохождения модерации на ваш email (если он указан) будет направлено информационное письмо о принятии или отклонении маршрута.'}
-              buttonSuccessText={'ОТПРАВИТЬ'}
-              buttonRejectText={'НЕ ОТПРАВЛЯТЬ'}
-              img={byguide}
-              onSuccess={submitRoute}
-              onReject={closeModal}
-            />)}
-
             <img alt="left" style={{ width: '250px', height: '120px', position: 'absolute', bottom: '0' }} src={left} />
             <img alt="right" style={{ width: '250px', height: '120px', position: 'absolute', right: '0', bottom: '0' }}
               src={right} />
@@ -294,6 +285,14 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
 
         </form>
       </div>
+      {isVisible && (<PopUpModal
+              text={'Убедитесь, что вся информация введена верно. После отправки на сервер внесение изменений невозможно. Маршрут будет направлен на модерацию. После прохождения модерации на ваш email (если он указан) будет направлено информационное письмо о принятии или отклонении маршрута.'}
+              buttonSuccessText={'ОТПРАВИТЬ'}
+              buttonRejectText={'НЕ ОТПРАВЛЯТЬ'}
+              img={byguide}
+              onSuccess={submitRoute}
+              onReject={closeModal}
+            />)}
     </div>
   )
 }

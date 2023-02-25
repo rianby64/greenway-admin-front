@@ -8,6 +8,12 @@ import L from 'leaflet';
 import { setDistanceZero } from '../../../../redux/useRoutesReducer';
 import { MapLayers } from '../../../../types/Constants';
 import ChangeTypeMap from "./ChangeTypeMap-Button/ChangeTypeMap";
+import markerIcon from '../../../images/marker.png'
+
+const myLMarker = new L.Icon({
+  iconUrl: markerIcon,
+  iconSize: new L.Point(35, 40),
+})
 
 export const MapControl: React.FunctionComponent = () => {
   const map = useMap()
@@ -35,6 +41,7 @@ export const MapControl: React.FunctionComponent = () => {
     const layer = e.layer;
     layer.addEventListener('mousedown', currentFeatureDispatcher)
     if (layer instanceof L.Marker) {
+      layer.setIcon(myLMarker);
       const pointPopup = L.popup();
       pointPopup.setContent('Нажмите на точку и добавьте описание')
       layer.bindPopup(pointPopup)
@@ -58,6 +65,7 @@ export const MapControl: React.FunctionComponent = () => {
     dispatch(hideSettings());
     map.eachLayer((layer) => {
       if (layer instanceof L.Marker) {
+        layer.setIcon(myLMarker);
         layer.removeEventListener('click', showSettingsDispatcher)
       }
     })
@@ -128,6 +136,13 @@ export const MapControl: React.FunctionComponent = () => {
       }
     })
   }
+
+  const _onDrawStart = (e) => {
+    console.log(e);
+
+
+  }
+
   const switchLayer = () => {
     map.eachLayer((layer) => {
       if (layer instanceof L.TileLayer) {
@@ -141,6 +156,11 @@ export const MapControl: React.FunctionComponent = () => {
           map.addLayer(newTileLayer)
           setCurrentMapLayer(MapLayers.OSM.name)
         }
+      }
+      if (layer instanceof L.Polyline) {
+        layer.setStyle({
+          color: currentMapLayer === MapLayers.OSM.name ? "#61B42D" : "#0E7505",
+        })
       }
     })
   }
@@ -165,13 +185,22 @@ export const MapControl: React.FunctionComponent = () => {
           onDeleteStop={_onDeleteStop}
           onEditStop={_onDeleteStop}
           onDrawStop={_onDeleteStop}
+          onDrawStart={_onDrawStart}
           draw={{
             polygon: false,
             rectangle: false,
-            polyline: true,
+            polyline:
+            {
+              shapeOptions: {
+                color: currentMapLayer === MapLayers.OSM.name ? "#0E7505" : "#61B42D",
+                opacity: 1
+              }
+            },
             circle: false,
             circlemarker: false,
-            marker: true
+            marker: {
+              icon: myLMarker,
+            }
           }}
         />
       </FeatureGroup>
@@ -180,7 +209,7 @@ export const MapControl: React.FunctionComponent = () => {
         url={MapLayers.OSM.mapLayersUrl}
       />
       <div>
-        <ChangeTypeMap switchLayer={switchLayer}/>
+        <ChangeTypeMap switchLayer={switchLayer} />
       </div>
 
     </>

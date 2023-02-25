@@ -38,16 +38,17 @@ export const CreateMap: React.FunctionComponent = () => {
             />
             <Styled.styledButton
                 className="waves-effect waves-light btn red"
-                style={{ zIndex: 1999, position: "absolute", bottom: 120, left: "75%" }}
+                style={{ zIndex: 1999, position: "absolute", bottom: 60, left: "75%" }}
                 onClick={() => {
                     setSaveRouteMenu(true);
                 }}
             >
                 СОХРАНИТЬ МАРШРУТ
             </Styled.styledButton>
+            {/* MAKE IN FUTURE VERSION 
             <Styled.styledButton2
                 style={{ zIndex: 1999, position: "absolute", bottom: 60, left: "75%" }}
-            >ОЧИСТИТЬ</Styled.styledButton2>
+            >ОЧИСТИТЬ</Styled.styledButton2> */}
         </>
     );
 };

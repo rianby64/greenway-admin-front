@@ -11,6 +11,12 @@ import { PointRouteObj } from './../../../../../types/Types';
 import { MapLayers } from '../../../../../types/Constants';
 // import * as Styled from './styled';
 import ChangeTypeMap from "../../../commonComponents/MapControl/ChangeTypeMap-Button/ChangeTypeMap";
+import markerIcon from '../../../../images/marker.png'
+
+const myLMarker = new L.Icon({
+  iconUrl: markerIcon,
+  iconSize: new L.Point(35, 40),
+})
 
 export const EditingMapControl: React.FunctionComponent = () => {
   const { lines, dots } = useTypedSelector(store => store.editing)
@@ -159,6 +165,11 @@ export const EditingMapControl: React.FunctionComponent = () => {
           setCurrentMapLayer(MapLayers.OSM.name)
         }
       }
+      if (layer instanceof L.Polyline) {
+        layer.setStyle({
+          color: currentMapLayer === MapLayers.OSM.name ? "#61B42D" : "#0E7505",
+        })
+      }
     })
   }
 
@@ -219,22 +230,30 @@ export const EditingMapControl: React.FunctionComponent = () => {
           draw={{
             polygon: false,
             rectangle: false,
-            polyline: true,
+            polyline:
+            {
+              shapeOptions: {
+                color: currentMapLayer === MapLayers.OSM.name ? "#0E7505" : "#61B42D",
+                opacity: 1
+              }
+            },
             circle: false,
             circlemarker: false,
-            marker: true
+            marker: {
+              icon: myLMarker,
+            }
           }}
         />
-        <Polyline positions={lines} />
+        <Polyline positions={lines} color={currentMapLayer === MapLayers.OSM.name ? "#0E7505" : "#61B42D"} opacity={1} />
         {dots.length != 0 ? dots.map((el, ind) => {
-          return <Marker key={ind} position={el.position} />
+          return <Marker key={ind} position={el.position} icon={myLMarker} />
         }) : null}
       </FeatureGroup>
       <TileLayer
         attribution={MapLayers.OSM.mapAttribution}
         url={MapLayers.OSM.mapLayersUrl}
       />
-      <ChangeTypeMap switchLayer={switchLayer}/>
+      <ChangeTypeMap switchLayer={switchLayer} />
     </>
   )
 }
