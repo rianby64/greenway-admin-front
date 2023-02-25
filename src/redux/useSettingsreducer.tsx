@@ -5,7 +5,12 @@ const intialState: SettingsState = {
   allRoutes: [],
   usersRoutes: [],
   verifiedRoutes: [],
-  notVerifiedRoutes: []
+  notVerifiedRoutes: [],
+  dotTypes: null,
+  districts: null,
+  routeDifficulties: null,
+  routeCategories: null,
+  routeTypes: null
 }
 export const useSettingsReducer = (state = intialState, action: UserAction): SettingsState => {
   switch (action.type) {
@@ -38,6 +43,31 @@ export const useSettingsReducer = (state = intialState, action: UserAction): Set
       return {
         ...state,
         usersRoutes: action.payload
+      }
+    case ACTIONS.SET_DOT_TYPES:
+      return {
+        ...state,
+        dotTypes: action.payload
+      }
+    case ACTIONS.SET_DISTRICTS:
+      return {
+        ...state,
+        districts: action.payload
+      }
+    case ACTIONS.SET_ROUTE_DIFFICULTIES:
+      return {
+        ...state,
+        routeDifficulties: action.payload
+      }
+    case ACTIONS.SET_ROUTE_CATEGORIES:
+      return {
+        ...state,
+        routeCategories: action.payload
+      }
+    case ACTIONS.SET_ROUTE_TYPES:
+      return {
+        ...state,
+        routeTypes: action.payload
       }
     default:
       return state
@@ -75,4 +105,29 @@ export const setAllRoutes = (routes: any[]) => ({
 export const setUsersRoutes = (routes: any[]) => ({
   type: ACTIONS.SET_USERS_ROUTES,
   payload: routes
+})
+
+export const setDotTypes = (data: any[]) => ({
+  type: ACTIONS.SET_DOT_TYPES,
+  payload: data
+})
+
+export const setDistricts = (data: any[]) => ({
+  type: ACTIONS.SET_DISTRICTS,
+  payload: data
+})
+
+export const setRouteDifficulties = (data: any[]) => ({
+  type: ACTIONS.SET_ROUTE_DIFFICULTIES,
+  payload: data
+})
+
+export const setCategories = (data: any[]) => ({
+  type: ACTIONS.SET_ROUTE_CATEGORIES,
+  payload: data
+})
+
+export const setRouteTypes = (data: any[]) => ({
+  type: ACTIONS.SET_ROUTE_TYPES,
+  payload: data
 })

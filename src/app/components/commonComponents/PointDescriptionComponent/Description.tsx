@@ -9,6 +9,7 @@ import { addPoint } from "../../../../redux/useRoutesReducer";
 import {
   hideSettings,
   setCurrentFeature,
+  setDotTypes,
 } from "../../../../redux/useSettingsReducer";
 import { useTypedSelector } from "../../../../redux/useTypedSelector.hook";
 import { getCategories } from "../../../../axios/requests";
@@ -20,6 +21,7 @@ export const DescriptionComponent: React.FunctionComponent<
   DescriptionProps
 > = ({ currentFeature }: DescriptionProps) => {
   const { points } = useTypedSelector((store) => store.route);
+  const { dotTypes } = useTypedSelector((store) => store.settings)
   const dispatch = useDispatch();
   const isSettingsShawn = useTypedSelector(
     (store) => store.settings.isSettingsShawn
@@ -32,7 +34,6 @@ export const DescriptionComponent: React.FunctionComponent<
     categories: "",
     images: [""],
   });
-  const [dotTypes, setDotTypes] = useState<Array<any>>([]);
 
   const editedPointArray = (newPoint: PointRouteObj) => {
     const filteredArrayOfPoints = points.filter((el) => {
@@ -97,8 +98,10 @@ export const DescriptionComponent: React.FunctionComponent<
   };
 
   const fetchDottype = async () => {
-    const fetched = await getCategories();
-    setDotTypes(fetched);
+    if (dotTypes === null) {
+      const fetched = await getCategories();
+      dispatch(setDotTypes(fetched));
+    }
   };
 
   useEffect(() => {
@@ -129,56 +132,56 @@ export const DescriptionComponent: React.FunctionComponent<
   }, [isSettingsShawn]);
 
   return (
-      <Styled.styledDivWrapper>
-        <Styled.Wrapper
-            onClick={() => dispatch(hideSettings())}
-            style={isShawn ? {} : { display: "none"}}
-            className="shadow"
+    <Styled.styledDivWrapper>
+      <Styled.Wrapper
+        onClick={() => dispatch(hideSettings())}
+        style={isShawn ? {} : { display: "none" }}
+        className="shadow"
+      >
+        <Styled.StyledHandlers
+          onClick={(e) => e.stopPropagation()}
+          style={isShawn ? {} : { display: "none" }}
         >
-          <Styled.StyledHandlers
-              onClick={(e) => e.stopPropagation()}
-              style={isShawn ? {} : { display: "none" }}
-          >
-            <Styled.StyledForm className="form save-dot-form ">
-              <DescriptionInputs form={form} setForm={setForm} />
-              <DescriptionsSelect
-                  form={form}
-                  setForm={setForm}
-                  dotTypes={dotTypes}
-              />
-              <Styled.StyledImageHandler className="images-dots">
-                {form.images.map((el, index) => {
-                  console.log(el, index);
-                  return (
+          <Styled.StyledForm className="form save-dot-form ">
+            <DescriptionInputs form={form} setForm={setForm} />
+            <DescriptionsSelect
+              form={form}
+              setForm={setForm}
+              dotTypes={dotTypes || []}
+            />
+            <Styled.StyledImageHandler className="images-dots">
+              {form.images.map((el, index) => {
+                console.log(el, index);
+                return (
 
 
-                      <Styled.styledDiv className="inputs">
-                        <Styled.styledInput
-                            className="image-input"
-                            type="text"
-                            placeholder="Вставьте ссылку на фотографию"
-                            value={el}
-                            onChange={(e) => imagesInputChange(e, index)}
-                        />
+                  <Styled.styledDiv className="inputs">
+                    <Styled.styledInput
+                      className="image-input"
+                      type="text"
+                      placeholder="Вставьте ссылку на фотографию"
+                      value={el}
+                      onChange={(e) => imagesInputChange(e, index)}
+                    />
 
-                          <Styled.styledButton onClick={addImageElem}>ДОБАВИТЬ ЕЩЁ ФОТО</Styled.styledButton>
-                      </Styled.styledDiv>
+                    <Styled.styledButton onClick={addImageElem}>ДОБАВИТЬ ЕЩЁ ФОТО</Styled.styledButton>
+                  </Styled.styledDiv>
 
-                  );
-                })}
-              </Styled.StyledImageHandler>
-              <Styled.styledButton
-                  className="btn red"
-                  type="button"
-                  value="сохранить"
-                  onClick={submitHandler}
-              >
-                Сохранить
-              </Styled.styledButton>
-            </Styled.StyledForm>
-          </Styled.StyledHandlers>
-        </Styled.Wrapper>
-      </Styled.styledDivWrapper>
+                );
+              })}
+            </Styled.StyledImageHandler>
+            <Styled.styledButton
+              className="btn red"
+              type="button"
+              value="сохранить"
+              onClick={submitHandler}
+            >
+              Сохранить
+            </Styled.styledButton>
+          </Styled.StyledForm>
+        </Styled.StyledHandlers>
+      </Styled.Wrapper>
+    </Styled.styledDivWrapper>
 
   );
 };

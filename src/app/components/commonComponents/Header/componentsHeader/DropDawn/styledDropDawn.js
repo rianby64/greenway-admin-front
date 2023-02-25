@@ -2,14 +2,10 @@ import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 22%;
+  width: 20%;
+  max-width:20%
   z-index: 1000;
   position: relative;
-  :hover {
-    /* Span {
-      display: none;
-    } */
-  }
 `;
 
 export const Button = styled.button`
