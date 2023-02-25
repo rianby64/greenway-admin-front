@@ -18,41 +18,24 @@ import left from "../../../images/Group 98 (1).png";
 import right from "../../../images/Group 97.png";
 import PopUpModal from "../PopUpComponents/PopUpModal";
 import byguide from "../../../images/ByGuide.png";
-// import PopUpBegin from "../PopUpComponents/PopUpBegin";
-// import PopUp from "./components/PopUp";
+import { useDispatch } from 'react-redux';
+import { setCategories, setDistricts, setRouteDifficulties, setRouteTypes } from '../../../../redux/useSettingsReducer';
+import { initialSaveForm } from '../../../../constants/sharedConstants';
+import { useHistory } from 'react-router-dom';
+import { removeEditingRoute } from '../../../../redux/useEditRouteReducer';
+import { fetchAllRoutes } from '../../../../utils/utils';
 
 export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, isShawn, setIsShawn }: SaveRouteType) => {
-  const [routeTypes, setRouteTypes] = useState<Array<any>>([]);
-  const [routeDif, setRouteDif] = useState<Array<any>>([]);
-  const [routeCat, setRouteCat] = useState<Array<any>>([]);
-  const [routeDistricts, setRouteDistricts] = useState<Array<any>>([]);
+  const history = useHistory()
+  const { routeCategories, routeTypes, routeDifficulties, districts } = useTypedSelector((store) => store.settings);
+  const dispatch = useDispatch();
+  const [routeTypesState, setRouteTypesState] = useState<Array<any>>([]);
+  const [routeDistrictsState, setRouteDistrictsState] = useState<Array<any>>([]);
   const { distance, polilines, points } = useTypedSelector(store => store.route);
   const editingRoute = useTypedSelector(store => store.editing);
   const { id, isUsers } = useTypedSelector(store => store.editing);
   const [isVisible, setisVisible] = useState(false);
-  const [saveForm, setSaveForm] = useState<SaveForm>({
-    title: '',
-    description: '',
-    difficulty: '',
-    minutes: 0,
-    animals: false,
-    children: false,
-    wheelChair: false,
-    visuallyImpaired: false,
-    approved: false,
-    durations: [],
-    categories: [],
-    districts: [],
-    type: [],
-    images: [''],
-    creator: {
-      email: '',
-      logo: '',
-      name: '',
-      phone: '',
-      url: '',
-    }
-  });
+  const [saveForm, setSaveForm] = useState<SaveForm>(initialSaveForm);
 
   const openModal = () => {
     setisVisible(true);
@@ -61,20 +44,22 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
     setisVisible(false)
   }
 
-  const submitRoute = () => {
+  const submitRoute = async () => {
     const districts: any[] = [];
-    routeDistricts.forEach((el) => {
+    routeDistrictsState.forEach((el) => {
       console.log(el);
       el.district.filter((el) => el.checked).forEach((el) => districts.push(el.id));
     });
     saveForm.districts = districts;
-    saveForm.categories = routeCat.filter((el) => el.checked).map((el) => el.id);
-    saveForm.type = routeTypes.filter((el) => el.checked).map((el) => el.id);
+    if (routeCategories) {
+      saveForm.categories = routeCategories.filter((el) => el.checked).map((el) => el.id);
+    }
+    saveForm.type = routeTypesState.filter((el) => el.checked).map((el) => el.id);
     const durationArr: Array<{
       name: string,
       number: number
     }> = [];
-    routeTypes.filter(el => el.checked).map(el => {
+    routeTypesState.filter(el => el.checked).map(el => {
       durationArr.push({
         name: el.id,
         number: el.duration != '' ? el.duration : 0
@@ -82,14 +67,12 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
     })
     if (checkRequiredFields()) {
       if (!isEditing) {
-        postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator)
+        await postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator)
           .then((response) => {
             postLinesIntoRoute(polilines, response);
             postDotsIntoRoute(points, response);
-          }).then(() => setTimeout(() => {
-            window.location.replace('/')
-          }, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
-
+          }).then(() => { setIsShawn(false); dispatch(removeEditingRoute); }).catch(() => console.log("Что-то пошло не так во время сохранения"));
+        fetchAllRoutes(dispatch)
       } else if (isEditing && isUsers) {
         postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, false, true, id)
           .then((response) => {
@@ -97,17 +80,13 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
             postDotsIntoRoute(points, response);
           }).then(() => {
             deleteFromUsersRoutes(id)
-          }).then(() => setTimeout(() => {
-            window.location.replace('/')
-          }, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
+          }).then(async () => { history.push("/"); setIsShawn(false); dispatch(removeEditingRoute); }).catch(() => console.log("Что-то пошло не так во время сохранения"));
       } else {
         postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, true, false, id)
           .then(() => {
             postLinesIntoRoute(polilines, id);
             postDotsIntoRoute(points, id);
-          }).then(() => setTimeout(() => {
-            window.location.replace('/')
-          }, 2000)).catch(() => console.log("Что-то пошло не так во время сохранения"));
+          }).then(() => { history.push("/"); dispatch(removeEditingRoute); }).catch(() => console.log("Что-то пошло не так во время сохранения"));
       }
     } else {
       alert('form is not filled');
@@ -115,7 +94,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   }
 
   const mapDistricts = (arr) => {
-    setRouteDistricts(arr.map((el) => {
+    const mappedDistricts = arr.map((el) => {
       return {
         title: el.title,
         id: el.id,
@@ -133,11 +112,13 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
           }
         })
       }
-    }));
+    })
+    dispatch(setDistricts(mappedDistricts));
+    setRouteDistrictsState(mappedDistricts || [])
   }
 
   const mapRouteCat = (arr) => {
-    setRouteCat(arr.map((el) => {
+    dispatch(setCategories(arr.map((el) => {
       return {
         title: el.title,
         id: el.id,
@@ -145,7 +126,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
           return elem.id === el.id
         })
       }
-    }))
+    })));
   }
 
   const imagesInputChange = (e, ind) => {
@@ -167,7 +148,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   }
 
   const mapRouteTypes = (arr) => {
-    setRouteTypes(arr.map((el) => {
+    const mappedTypes = arr ? arr.map((el) => {
       return {
         title: el.title,
         id: el.id,
@@ -176,29 +157,41 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
           return elem.id === el.id
         })
       }
-    }));
+    }) : []
+    dispatch(setRouteTypes(mappedTypes));
+    setRouteTypesState(mappedTypes);
   }
 
-  const fetchRouteType = useCallback(async () => {
-    const fetchedTypes = await getRouteTypes();
-    const fetchedDifficulties = await getRouteDifficulty();
-    const fetchedCat = await getRouteCategories();
-    const fetchedDistricts = await getDistricts();
-    mapDistricts(fetchedDistricts);
-    mapRouteCat(fetchedCat);
-    mapRouteTypes(fetchedTypes);
-    setRouteDif(fetchedDifficulties);
-  }, [editingRoute.id])
+  const fetchRouteType = async () => {
+    if (routeTypes === null) {
+      const fetchedTypes = await getRouteTypes();
+      mapRouteTypes(fetchedTypes || []);
+    }
+    if (routeDifficulties === null) {
+      const fetchedDifficulties = await getRouteDifficulty();
+      dispatch(setRouteDifficulties(fetchedDifficulties));
+    }
+    if (routeCategories === null) {
+      const fetchedCat = await getRouteCategories();
+      mapRouteCat(fetchedCat || []);
+    }
+    if (districts === null) {
+      const fetchedDistricts = await getDistricts();
+      mapDistricts(fetchedDistricts || []);
+    }
+  }
 
   const checkRequiredFields = useCallback(() => {
+    console.log(saveForm, 'while checking');
+
     if (saveForm.categories.length === 0 || saveForm.type.length === 0 || saveForm.difficulty === '' || saveForm.districts.length === 0) return false
     else return true
   }, [saveForm])
 
   useEffect(() => {
     fetchRouteType();
-    mapDistricts(routeDistricts);
-    mapRouteCat(routeCat);
+    mapDistricts(districts || []);
+    mapRouteCat(routeCategories || []);
     mapRouteTypes(routeTypes);
     if (editingRoute.id !== '') {
       setSaveForm({
@@ -218,8 +211,10 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
         images: editingRoute.images.length ? editingRoute.images : [''],
         creator: editingRoute.creator
       })
+    } else {
+      setSaveForm(initialSaveForm);
     }
-  }, [editingRoute])
+  }, [editingRoute, isShawn])
 
   return (
     <div
@@ -241,14 +236,14 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
           <SaveRouteCreator saveForm={saveForm} setSaveForm={setSaveForm} />
           <SaveRouteInputs saveForm={saveForm}
             setSaveForm={setSaveForm}
-            routeCat={routeCat}
-            routeDif={routeDif}
+            routeCat={routeCategories}
+            routeDif={routeDifficulties}
             routeTypes={routeTypes} />
           <SaveRouteSwitches saveForm={saveForm} setSaveForm={setSaveForm} />
-          <AreasCheckboxes array={routeDistricts} label={"Выберите область"} />
-          <CategoriesCheckboxes array={routeCat} />
-          <TypesCheckboxes saveForm={saveForm} setSaveForm={setSaveForm} array={routeTypes} seter={setRouteTypes} />
-          <SaveRouteDurations array={routeTypes} saveForm={saveForm} setSaveForm={setSaveForm} />
+          <AreasCheckboxes array={routeDistrictsState || []} label={"Выберите область"} />
+          <CategoriesCheckboxes array={routeCategories || []} />
+          <TypesCheckboxes saveForm={saveForm} setSaveForm={setSaveForm} array={routeTypesState || []} seter={setRouteTypesState} />
+          <SaveRouteDurations array={routeTypes || []} saveForm={saveForm} setSaveForm={setSaveForm} />
           <div style={{ maxWidth: '880px', width: '100%', margin: '0 auto' }} className='images'>
             <Styled.styledUnderTitleLabel style={{ display: 'flex', gap: '10px' }}>Фотографии маршрута
               <NewPopUp

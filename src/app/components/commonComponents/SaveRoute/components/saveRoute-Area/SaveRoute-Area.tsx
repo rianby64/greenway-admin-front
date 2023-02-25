@@ -39,14 +39,21 @@ export const AreasCheckboxes: React.FunctionComponent<Checkboxes> = ({ array, la
       if (array.filter(el => el.checked).length) {
         setDistricts(array.map(el => {
           const checkedElem = array.find(el => el.checked);
-          if (checkedElem.id !== el.id){
+          if (checkedElem.id !== el.id) {
             el.checked = false;
           }
           return el
         }).filter(el => el.checked)[0].district);
+      } else {
+        setDistricts([])
       }
     }
   }, [array])
+
+  useEffect(() => {
+    // console.log(districts, "districts");
+
+  }, [districts])
 
 
   return (
