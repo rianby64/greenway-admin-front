@@ -3,7 +3,7 @@ import { MapContainer } from "react-leaflet";
 import { useDispatch } from "react-redux";
 import { removeEditingRoute } from "../../../redux/useEditRouteReducer";
 import { useTypedSelector } from "../../../redux/useTypedSelector.hook";
-import { fetchAllRoutes } from "../../../utils/utils";
+import { fetchAllRoutes } from "../utils/utils";
 import { MapControl } from "../commonComponents/MapControl/MapControl";
 import { DescriptionComponent } from "../commonComponents/PointDescriptionComponent/Description";
 import { SaveRoute } from "../commonComponents/SaveRoute/saveRoute";

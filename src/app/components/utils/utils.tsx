@@ -1,5 +1,5 @@
-import { getAllRoutes, getAllUsersRoutes } from "../axios/requests";
-import { setAllRoutes, setNotVerifiedRoutes, setUsersRoutes, setVerifiedRoutes } from "../redux/useSettingsReducer";
+import { getAllRoutes, getAllUsersRoutes } from "../../../axios/requests";
+import { setAllRoutes, setNotVerifiedRoutes, setUsersRoutes, setVerifiedRoutes } from "../../../redux/useSettingsReducer";
 
 export const fetchAllRoutes = async (dispatch) => {
     const fetchedData = await getAllRoutes();

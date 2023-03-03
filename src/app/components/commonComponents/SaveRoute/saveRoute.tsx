@@ -23,7 +23,7 @@ import { setCategories, setDistricts, setRouteDifficulties, setRouteTypes } from
 import { initialSaveForm } from '../../../../constants/sharedConstants';
 import { useHistory } from 'react-router-dom';
 import { removeEditingRoute } from '../../../../redux/useEditRouteReducer';
-import { fetchAllRoutes } from '../../../../utils/utils';
+import { fetchAllRoutes } from '../../utils/utils';
 
 export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, isShawn, setIsShawn }: SaveRouteType) => {
   const history = useHistory()

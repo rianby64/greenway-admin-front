@@ -2,7 +2,7 @@ import *  as React from 'react';
 import { useDispatch } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import { setDefaultState } from '../redux/useEditRouteReducer';
-import { fetchAllRoutes } from '../utils/utils';
+import { fetchAllRoutes } from './components/utils/utils';
 import Header from './components/commonComponents/Header/Header';
 import { CreateMap } from './components/CreateMap/CreateMap';
 import { CreateEditingMap } from './components/EditRoute/EditRoute';
