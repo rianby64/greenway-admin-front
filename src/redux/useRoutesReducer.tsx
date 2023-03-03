@@ -49,7 +49,8 @@ export const useRoutesReducer = (state = initialState, action: UserAction): Rout
       return {
         ...state,
         points: [],
-        polilines: []
+        polilines: [],
+        distance: 0
       }
     case ACTIONS.SET_DISTANCE_ZERO:
       return {

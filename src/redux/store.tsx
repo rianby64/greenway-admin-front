@@ -1,7 +1,7 @@
 import {combineReducers, createStore} from 'redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import { useRoutesReducer } from './useRoutesReducer';
-import { useSettingsReducer } from './useSettingsreducer';
+import { useSettingsReducer } from './useSettingsReducer';
 import { useEditReducer } from './useEditRouteReducer';
 
 export const rootReducer = combineReducers({

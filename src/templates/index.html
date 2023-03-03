@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8" />
+    <base href="/">
     <title>Using OpenLayers with Webpack</title>
     <link
       rel="stylesheet"
@@ -9,14 +10,14 @@
       integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
       crossorigin=""
     />
+
     <link
       rel="stylesheet"
       href="//cdnjs.cloudflare.com/ajax/libs/leaflet.draw/1.0.4/leaflet.draw.css"
     />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
-    />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400&display=swap" rel="stylesheet">
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet"
@@ -29,7 +30,7 @@
         height: 100%;
       }
       ::-webkit-scrollbar {
-        width: 4px;
+        width: 8px;
         height: 4px;
       }
       ::-webkit-scrollbar-button {
@@ -37,26 +38,26 @@
         height: 0px;
       }
       ::-webkit-scrollbar-thumb {
-        background: #c5c4c4;
+        background: #BFBDBD;
         border: 0px none #c5c4c4;
         border-radius: 50px;
       }
       ::-webkit-scrollbar-thumb:hover {
-        background: #c5c4c4;
+        background: #91C18D;
       }
       ::-webkit-scrollbar-thumb:active {
-        background: #c5c4c4;
+        background: #0E7505;
       }
       ::-webkit-scrollbar-track {
-        background: #1f1e1e;
+        background: #E2E3DA;
         border: 0px none #c5c4c4;
         border-radius: 35px;
       }
       ::-webkit-scrollbar-track:hover {
-        background: #1f1e1e;
+        background: #E2E3DA;
       }
       ::-webkit-scrollbar-track:active {
-        background: #1f1e1e;
+        background: #E2E3DA;
       }
       ::-webkit-scrollbar-corner {
         background: transparent;
@@ -67,30 +68,16 @@
       }
 
       #root > div {
-        position: absolute;
+        /*position: absolute;*/
         top: 0;
         bottom: 0;
         width: 100%;
       }
 
-      .district__checkBoxes {
-        display: grid;
-        grid-template-columns: 1fr 1fr 1fr;
-        gap: 15px 25px;
-        width: 95%;
-        margin-top: 15px;
-        margin-bottom: 25px;
-        text-align: left;
-        position: relative;
-        padding-left: 55px;
-      }
+
 
       /*--------------------*/
-      .inputs {
-        display: flex;
-        justify-content: space-around;
-        align-items: center;
-      }
+
 
       .add-image {
         color: blue;
@@ -99,20 +86,16 @@
       }
 
       .image-input {
-        width: 70% !important;
+        width: 40% !important;
       }
 
-      .input-field {
-        width: 95% !important;
-      }
+
 
       .save-workspace {
         display: flex;
-        flex-flow: column;
-        align-items: center;
         width: 60%;
         height: 100%;
-        background-color: rgb(156, 154, 154);
+        background-color: #F9F9F9;
         z-index: 2001;
         min-width: 545px;
       }
@@ -125,29 +108,12 @@
         text-align: center;
       }
 
-      .save-dot-form {
-        overflow-y: auto;
-      }
-
       .save-route-form {
+        position: relative;
         width: 100%;
         overflow-y: auto;
-        text-align: center;
       }
 
-      .save-input {
-        width: 80% !important;
-        color: black;
-        margin-bottom: 30px !important;
-      }
-
-      .input-block {
-        width: 100%;
-        display: flex;
-        flex-flow: column;
-        justify-content: center;
-        align-items: center;
-      }
 
       .distance {
         width: 100%;

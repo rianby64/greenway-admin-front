@@ -96,3 +96,7 @@ export const setEditingRouteToStore = (array) => ({
 export const setDefaultState = () => ({
   type: EDIT_ACTIONS.REMOVE_EDITING_ROUTE,
 });
+
+export const removeEditingRoute = () => ({
+  type: EDIT_ACTIONS.REMOVE_EDITING_ROUTE
+})

@@ -17,11 +17,25 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.css']
     },
     module: {
+
         rules: [
             { test: /\.tsx?$/, loader: 'ts-loader' },
             {
                 test: /\.css$/i,
                 use: ["style-loader", "css-loader"],
+            },
+            {
+                test: /\.(png|jpe?g|gif|jp2|webp)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                }
+            },
+            {
+                test: /\.css$/i,
+                use: [
+                    {loader: 'css-loader', options:{url: false}}
+                ]
             },
         ]
     },

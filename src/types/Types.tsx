@@ -48,6 +48,14 @@ export interface DescrInput {
 export interface SaveInputs {
   saveForm: SaveForm;
   setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>;
+  routeCat: any;
+  routeDif: any;
+  routeTypes: any;
+}
+export interface SaveSelector {
+  saveForm: SaveForm;
+  setSaveForm: React.Dispatch<React.SetStateAction<SaveForm>>;
+
 }
 
 export interface SaveDurations {
@@ -145,6 +153,15 @@ export interface CurrFeat {
 
 export interface SettingsState {
   isSettingsShawn: boolean;
+  usersRoutes: any[];
+  verifiedRoutes: any[];
+  notVerifiedRoutes: any[];
+  allRoutes: any[];
+  dotTypes: any[] | null;
+  districts: any[] | null;
+  routeDifficulties: any[] | null;
+  routeCategories: any[] | null;
+  routeTypes: any[] | null
 }
 
 export interface UserAction {
@@ -171,6 +188,15 @@ export enum ACTIONS {
   SET_DISTANCE = "SET_DISTANCE",
   SET_DISTANCE_ZERO = "SET_DISTANCE_ZERO",
   SWITCH_MAP_LAYER = "SWITCH_MAP_LAYER",
+  SET_VERIFIED_ROUTES = "SET_VERIFIED_ROUTES",
+  SET_NOT_VERIFIED_ROUTES = "SET_NOT_VERIFIED_ROUTES",
+  SET_USERS_ROUTES = "SET_USERS_ROUTES",
+  SET_ALL_ROUTES = "SET_All_ROUTES",
+  SET_DOT_TYPES = "SET_DOT_TYPES",
+  SET_DISTRICTS = "SET_DISTRICTS",
+  SET_ROUTE_CATEGORIES = "SET_ROUTE_CATEGORIES",
+  SET_ROUTE_TYPES = "SET_ROUTE_TYPES",
+  SET_ROUTE_DIFFICULTIES = "SET_ROUTE_DIFFICULTIES"
 }
 
 export enum EDIT_ACTIONS {
