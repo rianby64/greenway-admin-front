@@ -11,18 +11,18 @@ const Header = () => {
     return (
         <Styled.StyledHeader>
             <NavLink to={'/'}><img alt="logo" src={logo} /></NavLink>
-            {history.location.pathname === "login" ? <Search allRoutes={allRoutes} /> : null}
-            {history.location.pathname === "login" ? <NewDropDawn
+            {history.location.pathname !== "/login" ? <Search allRoutes={allRoutes} /> : null}
+            {history.location.pathname !== "/login" ? <NewDropDawn
                 fetchedRoutes={usersRoutes}
                 isUsers={true}
                 title={"Пользовательские маршруты"}
             /> : null}
-            {history.location.pathname === "login" ? <NewDropDawn isUsers={false}
+            {history.location.pathname !== "/login" ? <NewDropDawn isUsers={false}
                 fetchedRoutes={verifiedRoutes}
                 title={"Проверенные маршруты"}
             /> : null}
 
-            {history.location.pathname === "login" ? <NewDropDawn
+            {history.location.pathname !== "/login" ? <NewDropDawn
                 isUsers={false}
                 fetchedRoutes={notVerifiedRoutes}
                 title={"Не проверенные маршруты"}
