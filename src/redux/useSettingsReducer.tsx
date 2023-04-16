@@ -1,6 +1,6 @@
 import { ACTIONS, SettingsState, UserAction } from "../types/Types"
 
-const intialState: SettingsState = {
+const initialState: SettingsState = {
   isSettingsShawn: false,
   allRoutes: [],
   usersRoutes: [],
@@ -12,7 +12,7 @@ const intialState: SettingsState = {
   routeCategories: null,
   routeTypes: null
 }
-export const useSettingsReducer = (state = intialState, action: UserAction): SettingsState => {
+export const useSettingsReducer = (state = initialState, action: UserAction): SettingsState => {
   switch (action.type) {
     case ACTIONS.SHAW_SETTINGS:
       return {

@@ -2,10 +2,17 @@ import axios from "axios";
 
 // export const firebase = 'http://localhost:3000/';
 export const firebase = "/api/";
+export const api = axios.create({
+  withCredentials: true,
+})
+api.interceptors.request.use((config) => {
+  config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
+  return config;
+})
 
 export const getAllRoutes = async () => {
   try {
-    return await axios.get(`${firebase}routes`).then((response) => {
+    return await api.get(`${firebase}routes`).then((response) => {
       response.data.forEach((route) => {
         route.dots = route.dots.filter((dot) => {
           return dot != null;
@@ -20,7 +27,7 @@ export const getAllRoutes = async () => {
 
 export const getAllUsersRoutes = async () => {
   try {
-    return await axios.get(`${firebase}routes/users`).then((response) => {
+    return await api.get(`${firebase}routes/users`).then((response) => {
       response.data.forEach((route) => {
         route.dots = route.dots.filter((dot) => {
           return dot != null;
@@ -35,7 +42,7 @@ export const getAllUsersRoutes = async () => {
 
 export const getCategories = async () => {
   try {
-    return await axios.get(`${firebase}dot_types`).then((response) => {
+    return await api.get(`${firebase}dot_types`).then((response) => {
       return response.data;
     });
   } catch (e) {
@@ -45,7 +52,7 @@ export const getCategories = async () => {
 
 export const getDistricts = async () => {
   try {
-    return await axios.get(`${firebase}districts`).then((response) => {
+    return await api.get(`${firebase}districts`).then((response) => {
       return response.data;
     });
   } catch (e) {
@@ -55,7 +62,7 @@ export const getDistricts = async () => {
 
 export const getRouteTypes = async () => {
   try {
-    return await axios.get(`${firebase}route_types`).then((response) => {
+    return await api.get(`${firebase}route_types`).then((response) => {
       return response.data;
     });
   } catch (e) {
@@ -65,7 +72,7 @@ export const getRouteTypes = async () => {
 
 export const getRouteDifficulty = async () => {
   try {
-    return await axios.get(`${firebase}route_difficulties`).then((response) => {
+    return await api.get(`${firebase}route_difficulties`).then((response) => {
       return response.data;
     });
   } catch (e) {
@@ -75,7 +82,7 @@ export const getRouteDifficulty = async () => {
 
 export const getRouteCategories = async () => {
   try {
-    return await axios.get(`${firebase}route_categories`).then((response) => {
+    return await api.get(`${firebase}route_categories`).then((response) => {
       return response.data;
     });
   } catch (e) {
@@ -114,7 +121,7 @@ export const postRoute = async (
   id: string = ""
 ) => {
   if (!update || isUsers) {
-    const responseWithId = await axios.post(`${firebase}routes`, {
+    const responseWithId = await api.post(`${firebase}routes`, {
       approved: approved,
       animals: animals,
       children: children,
@@ -134,7 +141,7 @@ export const postRoute = async (
     });
     return responseWithId.data.id;
   } else {
-    await axios.put(`${firebase}routes/${id}`, {
+    await api.put(`${firebase}routes/${id}`, {
       approved: approved,
       animals: animals,
       children: children,
@@ -185,7 +192,7 @@ export const postUsersRoute = async (
   id: string = ""
 ) => {
   if (!update) {
-    const responseWithId = await axios.post(`${firebase}routes/users`, {
+    const responseWithId = await api.post(`${firebase}routes/users`, {
       approved: approved,
       animals: animals,
       children: children,
@@ -205,7 +212,7 @@ export const postUsersRoute = async (
     });
     return responseWithId.data.id;
   } else {
-    await axios.put(`${firebase}routes/users/${id}`, {
+    await api.put(`${firebase}routes/users/${id}`, {
       approved: approved,
       animals: animals,
       children: children,
@@ -230,14 +237,14 @@ export const postLinesIntoRoute = async (
   arrOfLines: Array<Object>,
   id: string
 ) => {
-  await axios.put(`${firebase}routes/${id}/lines`, arrOfLines);
+  await api.put(`${firebase}routes/${id}/lines`, arrOfLines);
 };
 
 export const postLinesIntoUserRoute = async (
   arrOfLines: Array<Object>,
   id: string
 ) => {
-  await axios.put(`${firebase}routes/users/${id}/lines`, arrOfLines);
+  await api.put(`${firebase}routes/users/${id}/lines`, arrOfLines);
 };
 
 export const deleteDots = async (before, after) => {
@@ -254,7 +261,7 @@ export const deleteDots = async (before, after) => {
       console.log(idToCheck);
 
       if (afterIds.indexOf(idToCheck) === -1)
-        await axios.delete(`${firebase}/dot/${idToCheck}`);
+        await api.delete(`${firebase}/dot/${idToCheck}`);
     });
   }
 };
@@ -263,16 +270,16 @@ export const postDotsIntoRoute = async (
   arrOfPoints: Array<Object>,
   id: string
 ) => {
-  await axios.post(`${firebase}routes/${id}/dots`, arrOfPoints);
+  await api.post(`${firebase}routes/${id}/dots`, arrOfPoints);
 };
 
 export const postDotsIntoUsersRoute = async (
   arrOfPoints: Array<Object>,
   id: string
 ) => {
-  await axios.post(`${firebase}routes/users/${id}/dots`, arrOfPoints);
+  await api.post(`${firebase}routes/users/${id}/dots`, arrOfPoints);
 };
 
 export const deleteFromUsersRoutes = async (id) => {
-  await axios.delete(`${firebase}user/route/${id}`);
+  await api.delete(`${firebase}user/route/${id}`);
 };

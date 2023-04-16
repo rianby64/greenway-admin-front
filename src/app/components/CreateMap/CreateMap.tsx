@@ -8,6 +8,7 @@ import { MapControl } from "../commonComponents/MapControl/MapControl";
 import { DescriptionComponent } from "../commonComponents/PointDescriptionComponent/Description";
 import { SaveRoute } from "../commonComponents/SaveRoute/saveRoute";
 import * as Styled from "./styled";
+import { RequireAuth } from "../../hoc/RequireAuth";
 
 export const CreateMap: React.FunctionComponent = () => {
     const { currentFeature } = useTypedSelector((store) => store.route);
@@ -19,7 +20,7 @@ export const CreateMap: React.FunctionComponent = () => {
     }, [])
 
     return (
-        <>
+        <RequireAuth>
             <div>
                 <DescriptionComponent currentFeature={currentFeature} />
                 <MapContainer
@@ -49,6 +50,6 @@ export const CreateMap: React.FunctionComponent = () => {
             <Styled.styledButton2
                 style={{ zIndex: 1999, position: "absolute", bottom: 60, left: "75%" }}
             >ОЧИСТИТЬ</Styled.styledButton2> */}
-        </>
+        </RequireAuth>
     );
 };

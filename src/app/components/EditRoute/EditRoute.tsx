@@ -5,12 +5,13 @@ import { DescriptionComponent } from '../commonComponents/PointDescriptionCompon
 import { SaveRoute } from '../commonComponents/SaveRoute/saveRoute'
 import { EditingMapControl } from './components/EditMapControl/EditMapControl';
 import * as Styled from './styled'
+import { RequireAuth } from '../../hoc/RequireAuth'
 
 export const CreateEditingMap: React.FunctionComponent = () => {
   const { currentFeature } = useTypedSelector(store => store.route);
   const [saveRouteMenu, setSaveRouteMenu] = React.useState<boolean>(false);
   return (
-    <>
+    <RequireAuth>
       <DescriptionComponent currentFeature={currentFeature} />
       <MapContainer
         style={{ height: "calc(100vh - 100px)" }}
@@ -27,6 +28,6 @@ export const CreateEditingMap: React.FunctionComponent = () => {
         СОХРАНИТЬ МАРШРУТ
       </Styled.styledButton>
       <SaveRoute isEditing={true} isShawn={saveRouteMenu} setIsShawn={setSaveRouteMenu} />
-    </>
+    </RequireAuth>
   )
 }
