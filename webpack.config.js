@@ -11,7 +11,8 @@ module.exports = {
     ],
     output: {
         path: __dirname + '/public',
-        filename: 'build/[name].[contenthash].js'
+        filename: 'build/[name].[contenthash].js',
+        publicPath: '/'
     },
     resolve: {
         extensions: ['.ts', '.tsx', '.js', '.css']
@@ -40,6 +41,7 @@ module.exports = {
         ]
     },
     devServer: {
+      historyApiFallback: true,
       proxy: {
         '/api': {
           target: 'http://localhost:3000'
