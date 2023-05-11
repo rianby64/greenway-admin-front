@@ -8,7 +8,7 @@ const DropDawnSelect: React.FunctionComponent<SaveSelectors> = ({saveForm, setSa
 
     const changeText = () => {
         switch (saveForm.difficulty){
-            case ' proffessional': return "Для проффесионалов";
+            case 'proffessional': return "Для проффесионалов";
             case 'easy': return "Лёгкий";
             case 'hard': return "Сложный";
             case 'medium': return "Средний";
