@@ -3,7 +3,6 @@ import * as Styled from './styledPopUpModal.js'
 
 //вёрстка
 const PopUpModal = ({ text, buttonSuccessText, buttonRejectText, img, onSuccess, onReject }) => {
-    console.log(onSuccess)
     return (
         <Styled.Shadow>
             <Styled.ModalContent>
