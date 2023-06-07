@@ -21,12 +21,12 @@ import byguide from "../../../images/ByGuide.png";
 import { useDispatch } from 'react-redux';
 import { setCategories, setDistricts, setRouteDifficulties, setRouteTypes } from '../../../../redux/useSettingsReducer';
 import { initialSaveForm } from '../../../../constants/sharedConstants';
-import { useHistory } from 'react-router-dom';
+// import { useHistory } from 'react-router-dom';
 import { removeEditingRoute } from '../../../../redux/useEditRouteReducer';
 import { fetchAllRoutes } from '../../utils/utils';
 
 export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, isShawn, setIsShawn }: SaveRouteType) => {
-  const history = useHistory()
+  // const history = useHistory()
   const { routeCategories, routeTypes, routeDifficulties, districts } = useTypedSelector((store) => store.settings);
   const dispatch = useDispatch();
   const [routeTypesState, setRouteTypesState] = useState<Array<any>>([]);
@@ -71,7 +71,7 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
           .then((response) => {
             postLinesIntoRoute(polilines, response);
             postDotsIntoRoute(points, response);
-          }).then(() => { setIsShawn(false); dispatch(removeEditingRoute); }).catch(() => console.log("Что-то пошло не так во время сохранения"));
+          }).then(() => { window.location.replace('/'); setIsShawn(false); dispatch(removeEditingRoute); }).catch(() => console.log("Что-то пошло не так во время сохранения"));
         fetchAllRoutes(dispatch)
       } else if (isEditing && isUsers) {
         postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, false, true, id)
@@ -80,13 +80,13 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
             postDotsIntoRoute(points, response);
           }).then(() => {
             deleteFromUsersRoutes(id)
-          }).then(async () => { history.push("/"); setIsShawn(false); dispatch(removeEditingRoute); }).catch(() => console.log("Что-то пошло не так во время сохранения"));
+          }).then(async () => { window.location.replace('/'); setIsShawn(false); dispatch(removeEditingRoute); }).catch(() => console.log("Что-то пошло не так во время сохранения"));
       } else {
         postRoute(saveForm.approved, saveForm.animals, saveForm.children, saveForm.wheelChair, saveForm.visuallyImpaired, saveForm.minutes, saveForm.title, saveForm.description, saveForm.type, saveForm.categories, saveForm.districts, saveForm.difficulty, durationArr, distance, saveForm.images, saveForm.creator, true, false, id)
           .then(() => {
             postLinesIntoRoute(polilines, id);
             postDotsIntoRoute(points, id);
-          }).then(() => { history.push("/"); dispatch(removeEditingRoute); }).catch(() => console.log("Что-то пошло не так во время сохранения"));
+          }).then(() => { window.location.replace('/'); dispatch(removeEditingRoute); }).catch(() => console.log("Что-то пошло не так во время сохранения"));
       }
     } else {
       alert('form is not filled');
@@ -286,13 +286,13 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
         </form>
       </div>
       {isVisible && (<PopUpModal
-              text={'Убедитесь, что вся информация введена верно. После отправки на сервер внесение изменений невозможно. Маршрут будет направлен на модерацию. После прохождения модерации на ваш email (если он указан) будет направлено информационное письмо о принятии или отклонении маршрута.'}
-              buttonSuccessText={'ОТПРАВИТЬ'}
-              buttonRejectText={'НЕ ОТПРАВЛЯТЬ'}
-              img={byguide}
-              onSuccess={submitRoute}
-              onReject={closeModal}
-            />)}
+        text={'Убедитесь, что вся информация введена верно. После отправки на сервер внесение изменений невозможно. Маршрут будет направлен на модерацию. После прохождения модерации на ваш email (если он указан) будет направлено информационное письмо о принятии или отклонении маршрута.'}
+        buttonSuccessText={'ОТПРАВИТЬ'}
+        buttonRejectText={'НЕ ОТПРАВЛЯТЬ'}
+        img={byguide}
+        onSuccess={submitRoute}
+        onReject={closeModal}
+      />)}
     </div>
   )
 }
