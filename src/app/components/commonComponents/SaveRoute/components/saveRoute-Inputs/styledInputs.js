@@ -25,7 +25,8 @@ export const styledTitleLabel = styled.span`
 export const styledTextArea = styled.textarea`
   padding: 10px 24px;
   box-sizing: border-box;
-  min-width: 905px;
+  min-width: 880px;
+  max-width: 880px;
   min-height: 134px;
   background: rgba(226, 227, 218, 0.5);
   outline:none;
