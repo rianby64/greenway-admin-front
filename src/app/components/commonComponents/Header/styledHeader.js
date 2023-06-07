@@ -9,6 +9,9 @@ export const StyledHeader = styled.div`
   align-items: center;
   height: 100px;
   background: white;
+  .logo {
+    width: 80px;
+  }
 `;
 
 export const styledImg = styled.div`

@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from "react"
-import {Checkboxes} from "../../../../../../types/Types"
+import React, { useEffect, useState } from "react"
+import { Checkboxes } from "../../../../../../types/Types"
 import * as Styled from "./styledCategories.js";
-import {PopUpText} from "../../../../../../constants/Text1";
+import { PopUpText } from "../../../../../../constants/Text1";
 import CheckboxStyled from "../../../checkbox/CheckboxStyled";
 import NewPopUp from "../../../popUp/NewPopUp";
 
-export const CategoriesCheckboxes: React.FunctionComponent<Checkboxes> = ({array}) => {
+export const CategoriesCheckboxes: React.FunctionComponent<Checkboxes> = ({ array }) => {
     const [categoriesArray, setcategoriesArray] = useState<any[]>([]);
     const checkBoxHandler = (elem: any) => {
         setcategoriesArray(categoriesArray.map((el) => {
@@ -22,9 +22,9 @@ export const CategoriesCheckboxes: React.FunctionComponent<Checkboxes> = ({array
 
     return (
         <>
-            <Styled.styledDiv style={{flexDirection: 'column', marginBottom: '60px'}}>
-                <Styled.styledUnderTitleLabel style={{display: 'flex', gap: '10px'}} className='save-label'>Выберите
-                    категорию (категории) <span style={{color: '#0E7505'}}>*</span>
+            <Styled.styledDiv style={{ flexDirection: 'column', marginBottom: '60px' }}>
+                <Styled.styledUnderTitleLabel style={{ display: 'flex', gap: '10px' }} className='save-label'>Выберите
+                    категорию (категории) <span style={{ color: '#0E7505' }}>*</span>
 
                     <NewPopUp
                         content={PopUpText.popUp5}
@@ -36,15 +36,15 @@ export const CategoriesCheckboxes: React.FunctionComponent<Checkboxes> = ({array
                         left={'20px'}
                     />
                 </Styled.styledUnderTitleLabel>
-                <div style={{display: 'flex', gap: '30px'}} className='district__checkBoxes'>
+                <div style={{ display: 'flex', gap: '30px', flexWrap: "wrap" }} className='district__checkBoxes'>
                     {categoriesArray ? categoriesArray.map((el) => {
                         return (
                             <CheckboxStyled isChecked={el.checked} label={el.title}
-                                            onChange={() => checkBoxHandler(el)}/>
+                                onChange={() => checkBoxHandler(el)} />
                             //<Checkbox className={'checkboxes'} checked={el.checked} filledIn id={`district_${el.id}`} label={el.title} onChange={() => checkBoxHandler(el)} value={el.id} />
                         )
                     }) : <CheckboxStyled filledIn id={`district_Nodata`} label={`Нет данных`} disabled={true}
-                                         value={''}/>}
+                        value={''} />}
                 </div>
             </Styled.styledDiv>
 

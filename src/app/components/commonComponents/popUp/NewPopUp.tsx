@@ -15,9 +15,7 @@ const NewPopUp = ({content, top, bottom, right, left, width, height}) => {
     return (
         <Styled.PopUpContainer>
 
-            <Styled.PopUpQuestion type='text' readonly value='?' onBlur={() => {
-                setShowModal(false)
-            }} onClick={click}></Styled.PopUpQuestion>
+            <Styled.PopUpQuestion type='text' readonly value='?' onClick={click}></Styled.PopUpQuestion>
             {showModal && (
                 <Styled.StyledModalContent style={{top:top, bottom:bottom, right:right, left:left, width:width, height:height}} dangerouslySetInnerHTML={{__html: content}}></Styled.StyledModalContent>
             )}

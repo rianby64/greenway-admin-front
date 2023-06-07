@@ -47,7 +47,7 @@ export const TopDiv = styled.div`
 export const Text = styled.p`
   text-align: center;
   margin-bottom: 20px;
-  word-break: break-all;
+  /* word-break: break-all; */
   font-size: 12px;
   margin-bottom: 16px;
 `;

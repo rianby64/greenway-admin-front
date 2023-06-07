@@ -11,7 +11,7 @@ const Header = () => {
 
     return (
         <Styled.StyledHeader>
-            <NavLink to={'/'}><img alt="logo" src={logo} /></NavLink>
+            <NavLink to={'/'}><img className='logo' alt="logo" src={logo} /></NavLink>
             <Search allRoutes={allRoutes} />
             <NewDropDawn
                 fetchedRoutes={usersRoutes}

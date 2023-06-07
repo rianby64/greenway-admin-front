@@ -28,7 +28,7 @@ export const AreasCheckboxes: React.FunctionComponent<Checkboxes> = ({ array, la
       if (dis.id === el.id) {
         dis.checked = !el.checked;
       }
-      return el
+      return dis;
     })))
     // el.checked = !el.checked
   }
@@ -71,8 +71,8 @@ export const AreasCheckboxes: React.FunctionComponent<Checkboxes> = ({ array, la
         {districts.length ?
           <div style={{ marginBottom: '30px' }}>
             <Styled.styledUnderTitleLabel className='save-label'>{label}</Styled.styledUnderTitleLabel>
-            <div style={{ display: 'flex', gap: '30px' }}>
-              {districts ? districts.map((el, ind) => {
+            <div style={{ display: 'flex', gap: '30px', flexWrap: 'wrap' }}>
+              {districts ? districts.map((el, ind) => {                
                 return (
                   <CheckboxStyled key={ind} isChecked={el.checked} label={el.title} onChange={() => districtHandler(el)} />
                 )
