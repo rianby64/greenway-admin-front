@@ -81,7 +81,7 @@ export const SaveRouteCreator: React.FunctionComponent<SaveSelector> = ({ saveFo
                         <Styled.styledPInput>Ваш телефон</Styled.styledPInput>
                         {/* <label className='save-label'>Введите время прохода маршрута в минутах</label> */}
                         <Styled.styledInput
-                            placeholder='+375 (29/33) 000 00 00'
+                            placeholder='+375 (00) 000 00 00'
                             type='text'
                             name='phone'
                             value={saveForm.creator.phone}

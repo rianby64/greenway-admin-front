@@ -8,7 +8,7 @@ const DropDawnSelect: React.FunctionComponent<SaveSelectors> = ({saveForm, setSa
 
     const changeText = () => {
         switch (saveForm.difficulty){
-            case 'proffessional': return "Для проффесионалов";
+            case 'professional': return "Для проффесионалов";
             case 'easy': return "Лёгкий";
             case 'hard': return "Сложный";
             case 'medium': return "Средний";
@@ -17,7 +17,7 @@ const DropDawnSelect: React.FunctionComponent<SaveSelectors> = ({saveForm, setSa
     }
 
      const selectHandler = (e) => {
-         console.log(e.target.id)
+         console.log("dropdawn" + e.target.id)
          setSaveForm({
                             ...saveForm,
                             difficulty: e.target.id

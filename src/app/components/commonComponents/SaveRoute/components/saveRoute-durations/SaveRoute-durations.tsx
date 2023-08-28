@@ -24,7 +24,7 @@ export const SaveRouteDurations: React.FunctionComponent<SaveDurations> = ({ arr
                                                 placeholder={'100'}
                                                 id={el.title} onChange={(ev) => durationsHandler(el, ev)}
                                                 value={el.duration} />
-                    <Styled.styledSpan>Минут</Styled.styledSpan>
+                    <Styled.styledSpan>минут</Styled.styledSpan>
                   </div>
                 </div>
 
