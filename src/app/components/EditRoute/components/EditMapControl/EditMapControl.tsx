@@ -54,15 +54,15 @@ export const EditingMapControl: React.FunctionComponent = () => {
     if (layer instanceof L.Polyline) {
       let counter: number = 0;
       map.eachLayer(layer => {
-        if (counter > 1) {
-          map.removeLayer(layer)
-        }
-        if (layer instanceof L.Polyline) {
+				if (layer instanceof L.Polyline) {
           counter++
           if (counter <= 1) {
             dispatch(addPoliline(layer.getLatLngs()))
             dispatch(setRouteDistance(calculateDistance(layer.getLatLngs())))
           }
+        }
+        if (counter > 1) {
+          map.removeLayer(layer)
         }
       })
     }
