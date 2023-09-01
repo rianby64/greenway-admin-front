@@ -12,13 +12,18 @@ import * as Styled from "./styled";
 
 export const CreateMap: React.FunctionComponent = () => {
     const { currentFeature } = useTypedSelector((store) => store.route);
+		const { distance } = useTypedSelector((store) => store.route);
     const [saveRouteMenu, setSaveRouteMenu] = React.useState<boolean>(false);
     const dispatch = useDispatch();
-    useEffect(() => {
+		useEffect(() => {
         fetchAllRoutes(dispatch);
         dispatch(removeEditingRoute());
 				dispatch(setDistanceZero());
     }, [])
+
+		useEffect(() => {
+			console.log("distance = " + distance)
+		}, [distance])
 
     return (
         <>
@@ -40,7 +45,8 @@ export const CreateMap: React.FunctionComponent = () => {
             />
             <Styled.styledButton
                 className="waves-effect waves-light btn red"
-                style={{ zIndex: 1999, position: "absolute", bottom: 60, left: "75%" }}
+                style={{ zIndex: 1999, position: "absolute", bottom: 60, left: "75%", /*visibility: distance <= 0 ? "hidden" : "visible"*/ background: distance <= 0 ? "#adcfaa" : "#0E7505"  }}
+								disabled={distance <= 0 ? true : false}
                 onClick={() => {
                     setSaveRouteMenu(true);
                 }}
