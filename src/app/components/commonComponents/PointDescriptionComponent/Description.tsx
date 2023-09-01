@@ -151,7 +151,6 @@ export const DescriptionComponent: React.FunctionComponent<
             />
             <Styled.StyledImageHandler className="images-dots">
               {form.images.map((el, index) => {
-                console.log(el, index);
                 return (
 
 

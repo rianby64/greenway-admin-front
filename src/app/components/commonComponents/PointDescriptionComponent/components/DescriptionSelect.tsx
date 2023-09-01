@@ -12,8 +12,6 @@ export const DescriptionsSelect: React.FunctionComponent<DescrSelect> = ({ form,
   }
 
   useEffect(() => {
-    console.log(form, 'dot');
-
   })
 
   return (
@@ -23,7 +21,6 @@ export const DescriptionsSelect: React.FunctionComponent<DescrSelect> = ({ form,
         <Styled.CustomSelect id='categories' style={{ width: '100%' }} multiple={false} onChange={selectHandler}>
           <Styled.styledOption selected={form.categories ? true : false} disabled={false} value={''}>Выберите категорию </Styled.styledOption>
           {dotTypes ? dotTypes.map((el, ind) => {
-            console.log(dotTypes, form.categories);
 
             return <Styled.styledOption selected={form.categories ? form.categories === el.id : false} key={ind} value={el.id}>{el.title}</Styled.styledOption>
           }

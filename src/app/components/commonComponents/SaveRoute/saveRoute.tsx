@@ -47,7 +47,6 @@ export const SaveRoute: React.FunctionComponent<SaveRouteType> = ({ isEditing, i
   const submitRoute = async () => {
     const districts: any[] = [];
     routeDistrictsState.forEach((el) => {
-      console.log(el);
       el.district.filter((el) => el.checked).forEach((el) => districts.push(el.id));
     });
     saveForm.districts = districts;

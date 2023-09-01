@@ -17,12 +17,10 @@ const DropDawnSelect: React.FunctionComponent<SaveSelectors> = ({saveForm, setSa
     }
 
      const selectHandler = (e) => {
-         console.log("dropdawn" + e.target.id)
          setSaveForm({
                             ...saveForm,
                             difficulty: e.target.id
                      })
-         console.log(saveForm)
     }
     return (
         <Styled.Container onMouseLeave={() => setShow(false)}>

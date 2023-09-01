@@ -137,10 +137,7 @@ export const MapControl: React.FunctionComponent = () => {
     })
   }
 
-  const _onDrawStart = (e) => {
-    console.log(e);
-
-
+  const _onDrawStart = (/*e*/) => {
   }
 
   const switchLayer = () => {
